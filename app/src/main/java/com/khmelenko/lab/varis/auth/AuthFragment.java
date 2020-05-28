@@ -105,10 +105,8 @@ public class AuthFragment extends Fragment {
 
     @OnClick(R.id.auth_login_btn)
     public void startAuthorization() {
-        if (areCredentialsValid()) {
-            if (mListener != null) {
-                mListener.onLogin(mUsername.getText().toString(), mPassword.getText().toString());
-            }
+        if ((areCredentialsValid()) && (mListener != null)) {
+            mListener.onLogin(mUsername.getText().toString(), mPassword.getText().toString());
         }
     }
 
