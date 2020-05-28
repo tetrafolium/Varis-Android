@@ -28,7 +28,7 @@ public class SearchResultsPresenter extends MvpPresenter<SearchResultsView> {
     private final CompositeDisposable mSubscriptions;
 
     @Inject
-    public SearchResultsPresenter(TravisRestClient travisRestClient) {
+    public SearchResultsPresenter(final TravisRestClient travisRestClient) {
         mTravisRestClient = travisRestClient;
 
         mSubscriptions = new CompositeDisposable();
@@ -50,7 +50,7 @@ public class SearchResultsPresenter extends MvpPresenter<SearchResultsView> {
      *
      * @param query Query string for search
      */
-    public void startRepoSearch(String query) {
+    public void startRepoSearch(final String query) {
         Single<List<Repo>> reposSingle;
         if (!StringUtils.isEmpty(query)) {
             reposSingle = mTravisRestClient.getApiService().getRepos(query);

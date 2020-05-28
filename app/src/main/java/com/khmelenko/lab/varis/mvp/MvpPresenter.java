@@ -24,7 +24,7 @@ public abstract class MvpPresenter<T extends MvpView> {
     /**
      * Attaches presenter
      */
-    public void attach(@NonNull T view) {
+    public void attach(final @NonNull T view) {
         setView(view);
         onAttach();
     }
@@ -42,7 +42,7 @@ public abstract class MvpPresenter<T extends MvpView> {
      *
      * @param view View
      */
-    protected void setView(@NonNull T view) {
+    protected void setView(final @NonNull T view) {
         mView = view;
     }
 

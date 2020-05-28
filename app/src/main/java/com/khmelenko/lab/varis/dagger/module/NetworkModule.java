@@ -29,19 +29,19 @@ public abstract class NetworkModule {
 
     @Provides
     @Singleton
-    public static TravisRestClient provideTravisRestClientRx(Retrofit retrofit, OkHttpClient okHttpClient, AppSettings appSettings) {
+    public static TravisRestClient provideTravisRestClientRx(final Retrofit retrofit, final OkHttpClient okHttpClient, final AppSettings appSettings) {
         return new TravisRestClient(retrofit, okHttpClient, appSettings);
     }
 
     @Provides
     @Singleton
-    public static GitHubRestClient provideGitHubRestClientRx(Retrofit retrofit) {
+    public static GitHubRestClient provideGitHubRestClientRx(final Retrofit retrofit) {
         return new GitHubRestClient(retrofit);
     }
 
     @Provides
     @Singleton
-    public static RawClient provideRawRestClientRx(Retrofit retrofit, OkHttpClient okHttpClient, AppSettings appSettings) {
+    public static RawClient provideRawRestClientRx(final Retrofit retrofit, final OkHttpClient okHttpClient, final AppSettings appSettings) {
         return new RawClient(retrofit, okHttpClient, appSettings);
     }
 
@@ -59,7 +59,7 @@ public abstract class NetworkModule {
 
     @Provides
     @Singleton
-    public static Retrofit retrofit(OkHttpClient okHttpClient, AppSettings appSettings) {
+    public static Retrofit retrofit(final OkHttpClient okHttpClient, final AppSettings appSettings) {
         return new Retrofit.Builder()
                 .baseUrl(appSettings.getServerUrl())
                 .addConverterFactory(GsonConverterFactory.create(constructGsonConverter()))

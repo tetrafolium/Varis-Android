@@ -50,8 +50,8 @@ public class RawLogFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_raw_log, container, false);
         ButterKnife.bind(this, view);
@@ -61,7 +61,7 @@ public class RawLogFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(final Context context) {
         super.onAttach(context);
         try {
             mListener = (OnRawLogFragmentListener) context;
@@ -82,7 +82,7 @@ public class RawLogFragment extends Fragment {
      *
      * @param inProgress True, if the progress should be shown. False otherwise
      */
-    public void showProgress(boolean inProgress) {
+    public void showProgress(final boolean inProgress) {
         if (inProgress) {
             mProgressBar.setVisibility(View.VISIBLE);
             mWebView.setVisibility(View.GONE);
@@ -97,7 +97,7 @@ public class RawLogFragment extends Fragment {
      *
      * @param isError True, if error text should be shown. False otherwise
      */
-    public void showError(boolean isError) {
+    public void showError(final boolean isError) {
         if (isError) {
             mEmptyText.setVisibility(View.VISIBLE);
             mEmptyText.setText(R.string.build_details_empty);
@@ -111,13 +111,13 @@ public class RawLogFragment extends Fragment {
      *
      * @param log Parsed log data
      */
-    public void showLog(LogEntryComponent log) {
+    public void showLog(final LogEntryComponent log) {
         showError(false);
 
         mWebView.setWebViewClient(new WebViewClient() {
 
             @Override
-            public void onPageFinished(WebView view, String url) {
+            public void onPageFinished(final WebView view, final String url) {
                 super.onPageFinished(view, url);
                 if (mListener != null) {
                     mListener.onLogLoaded();

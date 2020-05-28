@@ -55,7 +55,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setId(long id) {
+    public void setId(final long id) {
         mId = id;
     }
 
@@ -65,7 +65,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setRepositoryId(long repositoryId) {
+    public void setRepositoryId(final long repositoryId) {
         mRepositoryId = repositoryId;
     }
 
@@ -75,7 +75,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setCommitId(long commitId) {
+    public void setCommitId(final long commitId) {
         mCommitId = commitId;
     }
 
@@ -85,7 +85,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setNumber(String number) {
+    public void setNumber(final String number) {
         mNumber = number;
     }
 
@@ -95,7 +95,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setPullRequest(boolean pullRequest) {
+    public void setPullRequest(final boolean pullRequest) {
         mPullRequest = pullRequest;
     }
 
@@ -103,7 +103,7 @@ public final class Build implements IBuildState {
         return mPullRequestNumber;
     }
 
-    public void setPullRequestNumber(String pullRequestNumber) {
+    public void setPullRequestNumber(final String pullRequestNumber) {
         mPullRequestNumber = pullRequestNumber;
     }
 
@@ -111,7 +111,7 @@ public final class Build implements IBuildState {
         return mPullRequestTitle;
     }
 
-    public void setPullRequestTitle(String pullRequestTitle) {
+    public void setPullRequestTitle(final String pullRequestTitle) {
         mPullRequestTitle = pullRequestTitle;
     }
 
@@ -121,7 +121,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setState(String state) {
+    public void setState(final String state) {
         mState = state;
     }
 
@@ -131,7 +131,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setStartedAt(String startedAt) {
+    public void setStartedAt(final String startedAt) {
         mStartedAt = startedAt;
     }
 
@@ -141,7 +141,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setFinishedAt(String finishedAt) {
+    public void setFinishedAt(final String finishedAt) {
         mFinishedAt = finishedAt;
     }
 
@@ -151,7 +151,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setDuration(long duration) {
+    public void setDuration(final long duration) {
         mDuration = duration;
     }
 
@@ -161,7 +161,7 @@ public final class Build implements IBuildState {
     }
 
     @Override
-    public void setJobIds(List<Long> jobIds) {
+    public void setJobIds(final List<Long> jobIds) {
         mJobIds = jobIds;
     }
 }

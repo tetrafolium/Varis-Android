@@ -58,8 +58,8 @@ public class BranchesFragment extends Fragment implements OnListItemListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_refreshable, container, false);
         ButterKnife.bind(this, view);
 
@@ -92,7 +92,7 @@ public class BranchesFragment extends Fragment implements OnListItemListener {
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(final Context activity) {
         super.onAttach(activity);
         try {
             mListener = (BranchesListener) activity;
@@ -109,7 +109,7 @@ public class BranchesFragment extends Fragment implements OnListItemListener {
     }
 
     @Override
-    public void onItemSelected(int position) {
+    public void onItemSelected(final int position) {
         if (mListener != null) {
             Branch branch = mBranches.getBranches().get(position);
             mListener.onBranchSelected(branch.getId());
@@ -121,7 +121,7 @@ public class BranchesFragment extends Fragment implements OnListItemListener {
      *
      * @param branches Branches
      */
-    public void setBranches(Branches branches) {
+    public void setBranches(final Branches branches) {
         mSwipeRefreshLayout.setRefreshing(false);
         mProgressBar.setVisibility(View.GONE);
 

@@ -23,7 +23,7 @@ public final class PresenterKeeper<P extends MvpPresenter> {
      * @param type      Presenter type
      * @param presenter Presenter instance
      */
-    public void put(Class<?> type, P presenter) {
+    public void put(final Class<?> type, final P presenter) {
         mKeeper.put(type, presenter);
     }
 
@@ -33,7 +33,7 @@ public final class PresenterKeeper<P extends MvpPresenter> {
      * @param type Presenter type
      * @return Fetched presenter instance or null
      */
-    public P get(Class<?> type) {
+    public P get(final Class<?> type) {
         return mKeeper.remove(type);
     }
 

@@ -75,7 +75,7 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     private boolean mBuildStateChanged;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_build_details);
@@ -84,7 +84,7 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(final Bundle outState) {
         if (mJobsFragment != null) {
             detachFragment(mJobsFragment);
         }
@@ -95,14 +95,14 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_build_details, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
+    public boolean onPrepareOptionsMenu(final Menu menu) {
         MenuItem itemCancel = menu.findItem(R.id.build_activity_action_cancel);
         MenuItem itemRestart = menu.findItem(R.id.build_activity_action_restart);
         if (mCanContributeToRepo) {
@@ -119,7 +119,7 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.build_activity_action_restart:
                 getPresenter().restartBuild();
@@ -134,7 +134,7 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     }
 
     @Override
-    public void onJobSelected(Job job) {
+    public void onJobSelected(final Job job) {
         if (mRawLogFragment == null) {
             mRawLogFragment = RawLogFragment.newInstance();
         }
@@ -206,7 +206,7 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
      * @param details Build details
      */
     @Override
-    public void showAdditionalActionsForBuild(BuildDetails details) {
+    public void showAdditionalActionsForBuild(final BuildDetails details) {
 
         // check whether the user can contribute to this repo
         mCanContributeToRepo = getPresenter().canUserContributeToRepo();
@@ -227,13 +227,13 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     }
 
     @Override
-    public void showLoadingError(String message) {
+    public void showLoadingError(final String message) {
         String msg = getString(R.string.error_failed_loading_build_details, message);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void updateBuildDetails(BuildDetails buildDetails) {
+    public void updateBuildDetails(final BuildDetails buildDetails) {
         if (buildDetails != null) {
             mBuildDetailsData.setVisibility(View.VISIBLE);
             showBuildDetails(buildDetails);
@@ -250,12 +250,12 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     }
 
     @Override
-    public void setLog(LogEntryComponent log) {
+    public void setLog(final LogEntryComponent log) {
         mRawLogFragment.showLog(log);
     }
 
     @Override
-    public void showBuildJobs(List<Job> jobs) {
+    public void showBuildJobs(final List<Job> jobs) {
         if (mJobsFragment == null) {
             mJobsFragment = JobsFragment.newInstance();
         }
@@ -303,7 +303,7 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
      *
      * @param details Build details
      */
-    private void showBuildDetails(BuildDetails details) {
+    private void showBuildDetails(final BuildDetails details) {
         Build build = details.getBuild();
         Commit commit = details.getCommit();
 
@@ -315,7 +315,7 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     /**
      * Checks whether data existing or not
      */
-    private void checkIfEmpty(BuildDetails details) {
+    private void checkIfEmpty(final BuildDetails details) {
         TextView emptyText = findViewById(R.id.empty_text);
         emptyText.setText(R.string.build_details_empty);
         if (details == null) {

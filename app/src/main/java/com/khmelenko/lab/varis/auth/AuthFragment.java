@@ -44,7 +44,7 @@ public class AuthFragment extends Fragment {
      *
      * @return Fragment instance
      */
-    public static AuthFragment newInstance(String serverUrl) {
+    public static AuthFragment newInstance(final String serverUrl) {
         AuthFragment fragment = new AuthFragment();
         Bundle bundle = new Bundle();
         bundle.putString(SERVER_URL, serverUrl);
@@ -57,8 +57,8 @@ public class AuthFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_auth, container, false);
         ButterKnife.bind(this, view);
@@ -69,7 +69,7 @@ public class AuthFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle args = getArguments();
         mCurrentServer = args.getString(SERVER_URL);
@@ -132,7 +132,7 @@ public class AuthFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(final Context activity) {
         super.onAttach(activity);
         try {
             mListener = (OnLoginActionListener) activity;

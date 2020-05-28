@@ -52,8 +52,8 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
     private int mLoadLogAttempt = 0;
 
     @Inject
-    public BuildsDetailsPresenter(TravisRestClient travisRestClient, RawClient rawClient, CacheStorage cache,
-                                  AppSettings appSettings, LogsParser logsParser) {
+    public BuildsDetailsPresenter(final TravisRestClient travisRestClient, final RawClient rawClient, final CacheStorage cache,
+                                  final AppSettings appSettings, final LogsParser logsParser) {
         mTravisRestClient = travisRestClient;
         mRawClient = rawClient;
         mCache = cache;
@@ -78,7 +78,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
      *
      * @param jobId Job ID
      */
-    public void startLoadingLog(long jobId) {
+    public void startLoadingLog(final long jobId) {
         mJobId = jobId;
         String accessToken = mAppSettings.getAccessToken();
         Single<String> responseSingle;
@@ -93,7 +93,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
                 .map(s -> mRawClient.getLogUrl(mJobId))
                 .onErrorResumeNext(new Function<Throwable, SingleSource<String>>() {
                     @Override
-                    public SingleSource<String> apply(@NonNull Throwable throwable) throws Exception {
+                    public SingleSource<String> apply(final @NonNull Throwable throwable) throws Exception {
                         String redirectUrl = "";
                         if (throwable instanceof HttpException) {
                             HttpException httpException = (HttpException) throwable;
@@ -133,7 +133,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
      * @param repoSlug  Repository slug
      * @param buildId   Build ID
      */
-    public void startLoadingData(String intentUrl, String repoSlug, long buildId) {
+    public void startLoadingData(final String intentUrl, final String repoSlug, final long buildId) {
         mRepoSlug = repoSlug;
         mBuildId = buildId;
 
@@ -150,7 +150,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
                     })
                     .flatMap(new Function<okhttp3.Response, SingleSource<BuildDetails>>() {
                         @Override
-                        public SingleSource<BuildDetails> apply(@NonNull okhttp3.Response response) throws Exception {
+                        public SingleSource<BuildDetails> apply(final @NonNull okhttp3.Response response) throws Exception {
                             return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
                         }
                     });
@@ -178,7 +178,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
      *
      * @param intentUrl Intent URL
      */
-    private void parseIntentUrl(String intentUrl) {
+    private void parseIntentUrl(final String intentUrl) {
         final int ownerIndex = 1;
         final int repoNameIndex = 2;
         final int buildIdIndex = 4;
@@ -207,7 +207,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
                 .onErrorReturn(throwable -> new Object())
                 .flatMap(new Function<Object, SingleSource<BuildDetails>>() {
                     @Override
-                    public SingleSource<BuildDetails> apply(@NonNull Object o) throws Exception {
+                    public SingleSource<BuildDetails> apply(final @NonNull Object o) throws Exception {
                         return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
                     }
                 })
@@ -234,7 +234,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
                 .onErrorReturn(throwable -> new Object())
                 .flatMap(new Function<Object, SingleSource<BuildDetails>>() {
                     @Override
-                    public SingleSource<BuildDetails> apply(@NonNull Object o) throws Exception {
+                    public SingleSource<BuildDetails> apply(final @NonNull Object o) throws Exception {
                         return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
                     }
                 })
@@ -268,7 +268,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
         return canContributeToRepo;
     }
 
-    private void handleBuildDetails(BuildDetails buildDetails) {
+    private void handleBuildDetails(final BuildDetails buildDetails) {
         getView().hideProgress();
         getView().updateBuildDetails(buildDetails);
 
@@ -290,7 +290,7 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
         }
     }
 
-    private void handleLoadingFailed(Throwable throwable) {
+    private void handleLoadingFailed(final Throwable throwable) {
         getView().hideProgress();
         getView().updateBuildDetails(null);
         getView().showLoadingError(throwable.getMessage());

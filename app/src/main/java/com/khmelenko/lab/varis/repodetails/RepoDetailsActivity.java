@@ -55,7 +55,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
         private static final int INDEX_BRANCHES = 1;
         private static final int INDEX_PULL_REQUESTS = 2;
 
-        PagerAdapter(FragmentManager fragmentManager) {
+        PagerAdapter(final FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
@@ -65,7 +65,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public Fragment getItem(final int position) {
             switch (position) {
                 case INDEX_BUILD_HISTORY:
                     return BuildHistoryFragment.newInstance();
@@ -79,7 +79,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
         }
 
         @Override
-        public CharSequence getPageTitle(int position) {
+        public CharSequence getPageTitle(final int position) {
             switch (position) {
                 case INDEX_BUILD_HISTORY:
                     return getString(R.string.repo_details_tab_build_history);
@@ -95,7 +95,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repo_details);
@@ -145,28 +145,28 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     }
 
     @Override
-    public void updateBuildHistory(BuildHistory buildHistory) {
+    public void updateBuildHistory(final BuildHistory buildHistory) {
         BuildHistoryFragment fragment =
                 (BuildHistoryFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BUILD_HISTORY);
         fragment.setBuildHistory(buildHistory);
     }
 
     @Override
-    public void updateBranches(Branches branches) {
+    public void updateBranches(final Branches branches) {
         BranchesFragment fragment =
                 (BranchesFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BRANCHES);
         fragment.setBranches(branches);
     }
 
     @Override
-    public void updatePullRequests(Requests requests) {
+    public void updatePullRequests(final Requests requests) {
         PullRequestsFragment fragment =
                 (PullRequestsFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_PULL_REQUESTS);
         fragment.setPullRequests(requests);
     }
 
     @Override
-    public void showBuildHistoryLoadingError(String message) {
+    public void showBuildHistoryLoadingError(final String message) {
         BuildHistoryFragment fragment =
                 (BuildHistoryFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BUILD_HISTORY);
         fragment.setBuildHistory(null);
@@ -176,7 +176,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     }
 
     @Override
-    public void showBranchesLoadingError(String message) {
+    public void showBranchesLoadingError(final String message) {
         BranchesFragment fragment =
                 (BranchesFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BRANCHES);
         fragment.setBranches(null);
@@ -186,7 +186,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     }
 
     @Override
-    public void showPullRequestsLoadingError(String message) {
+    public void showPullRequestsLoadingError(final String message) {
         PullRequestsFragment fragment =
                 (PullRequestsFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_PULL_REQUESTS);
         fragment.setPullRequests(null);
@@ -211,7 +211,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     }
 
     @Override
-    public void onBuildSelected(long buildId) {
+    public void onBuildSelected(final long buildId) {
         goToBuildDetails(buildId);
     }
 
@@ -221,7 +221,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     }
 
     @Override
-    public void onBranchSelected(long buildId) {
+    public void onBranchSelected(final long buildId) {
         goToBuildDetails(buildId);
     }
 
@@ -231,7 +231,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     }
 
     @Override
-    public void onPullRequestSelected(long buildId) {
+    public void onPullRequestSelected(final long buildId) {
         goToBuildDetails(buildId);
     }
 
@@ -245,7 +245,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
      *
      * @param buildId Build ID
      */
-    private void goToBuildDetails(long buildId) {
+    private void goToBuildDetails(final long buildId) {
         Intent intent = new Intent(this, BuildDetailsActivity.class);
         intent.putExtra(BuildDetailsActivity.EXTRA_BUILD_ID, buildId);
         intent.putExtra(BuildDetailsActivity.EXTRA_REPO_SLUG, getPresenter().getRepoSlug());
@@ -253,7 +253,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == BUILD_DETAILS_REQUEST_CODE) {

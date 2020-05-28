@@ -29,7 +29,7 @@ public final class AboutActivity extends BaseActivity {
     TextView mGithubLink;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         ButterKnife.bind(this);

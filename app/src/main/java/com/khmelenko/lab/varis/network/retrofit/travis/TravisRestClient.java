@@ -28,7 +28,7 @@ public class TravisRestClient {
 
     private TravisApiService mApiService;
 
-    public TravisRestClient(Retrofit retrofit, OkHttpClient okHttpClient, AppSettings appSettings) {
+    public TravisRestClient(final Retrofit retrofit, final OkHttpClient okHttpClient, final AppSettings appSettings) {
         mRetrofit = retrofit;
         mOkHttpClient = okHttpClient;
         mAppSettings = appSettings;
@@ -41,7 +41,7 @@ public class TravisRestClient {
      *
      * @param newEndpoint New endpoint
      */
-    public void updateTravisEndpoint(String newEndpoint) {
+    public void updateTravisEndpoint(final String newEndpoint) {
         Retrofit retrofit = mRetrofit.newBuilder()
                 .baseUrl(newEndpoint)
                 .client(getHttpClient())
@@ -56,7 +56,7 @@ public class TravisRestClient {
         return mOkHttpClient.newBuilder()
                 .addInterceptor(new Interceptor() {
                     @Override
-                    public Response intercept(Chain chain) throws IOException {
+                    public Response intercept(final Chain chain) throws IOException {
                         Request original = chain.request();
 
                         Request.Builder request = original.newBuilder()

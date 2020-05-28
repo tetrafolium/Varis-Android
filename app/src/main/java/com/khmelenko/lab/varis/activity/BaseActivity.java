@@ -20,9 +20,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param fragment        Fragment instance
      * @param fragmentTag     Fragment tag
      */
-    protected void addFragment(@IdRes int containerViewId,
-                               @NonNull Fragment fragment,
-                               @NonNull String fragmentTag) {
+    protected void addFragment(final @IdRes int containerViewId,
+                               final @NonNull Fragment fragment,
+                               final @NonNull String fragmentTag) {
         if (!fragment.isAdded()) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -40,10 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param fragmentTag        Fragment tag
      * @param backStackStateName Name in back stack
      */
-    protected void replaceFragment(@IdRes int containerViewId,
-                                   @NonNull Fragment fragment,
-                                   @NonNull String fragmentTag,
-                                   @Nullable String backStackStateName) {
+    protected void replaceFragment(final @IdRes int containerViewId,
+                                   final @NonNull Fragment fragment,
+                                   final @NonNull String fragmentTag,
+                                   final @Nullable String backStackStateName) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerViewId, fragment, fragmentTag)
@@ -58,9 +58,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param fragment        Fragment instance
      * @param fragmentTag     Fragment tag
      */
-    protected void replaceFragment(@IdRes int containerViewId,
-                                   @NonNull Fragment fragment,
-                                   @NonNull String fragmentTag) {
+    protected void replaceFragment(final @IdRes int containerViewId,
+                                   final @NonNull Fragment fragment,
+                                   final @NonNull String fragmentTag) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerViewId, fragment, fragmentTag)
@@ -72,7 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      *
      * @param fragment Fragment
      */
-    protected void detachFragment(Fragment fragment) {
+    protected void detachFragment(final Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .detach(fragment)

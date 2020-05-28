@@ -16,7 +16,7 @@ final class FormattingOptions {
 
     }
 
-    public static FormattingOptions fromAnsiCodes(String... ansiStates) {
+    public static FormattingOptions fromAnsiCodes(final String... ansiStates) {
         FormattingOptions options = new FormattingOptions();
         for (String ansiCode : ansiStates) {
             AnsiCodes.applyAnsiCode(options, ansiCode);
@@ -28,7 +28,7 @@ final class FormattingOptions {
         return mTextColor;
     }
 
-    public void setTextColor(String textColor) {
+    public void setTextColor(final String textColor) {
         mTextColor = textColor;
     }
 
@@ -36,7 +36,7 @@ final class FormattingOptions {
         return mBackground;
     }
 
-    public void setBackground(String background) {
+    public void setBackground(final String background) {
         mBackground = background;
     }
 
@@ -44,7 +44,7 @@ final class FormattingOptions {
         return mBold;
     }
 
-    public void setBold(boolean bold) {
+    public void setBold(final boolean bold) {
         mBold = bold;
     }
 
@@ -52,7 +52,7 @@ final class FormattingOptions {
         return mItalic;
     }
 
-    public void setItalic(boolean italic) {
+    public void setItalic(final boolean italic) {
         mItalic = italic;
     }
 
@@ -60,18 +60,18 @@ final class FormattingOptions {
         return mUnderline;
     }
 
-    public void setUnderline(boolean underline) {
+    public void setUnderline(final boolean underline) {
         mUnderline = underline;
     }
 
     @Override
     public String toString() {
-        return "FormattingOptions{" +
-                "textColor=" + mTextColor +
-                ", background=" + mBackground +
-                ", bold=" + mBold +
-                ", italic=" + mItalic +
-                ", underline=" + mUnderline +
-                '}';
+        return "FormattingOptions{"
+                + "textColor=" + mTextColor
+                + ", background=" + mBackground
+                + ", bold=" + mBold
+                + ", italic=" + mItalic
+                + ", underline=" + mUnderline
+                + '}';
     }
 }

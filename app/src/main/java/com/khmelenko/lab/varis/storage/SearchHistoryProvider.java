@@ -34,7 +34,7 @@ public class SearchHistoryProvider extends SearchRecentSuggestionsProvider {
      * @param query   Query string
      * @return Cursor with found data or null
      */
-    public static Cursor queryRecentSearch(Context context, String query) {
+    public static Cursor queryRecentSearch(final Context context, final String query) {
         Uri uri = Uri.parse("content://".concat(SearchHistoryProvider.AUTHORITY.concat("/suggestions")));
 
         String[] selection = SearchRecentSuggestions.QUERIES_PROJECTION_1LINE;
@@ -57,7 +57,7 @@ public class SearchHistoryProvider extends SearchRecentSuggestionsProvider {
      * @param cursor Cursor
      * @return List with results
      */
-    public static List<String> transformSearchResultToList(Cursor cursor) {
+    public static List<String> transformSearchResultToList(final Cursor cursor) {
         List<String> resultList = new ArrayList<>();
 
         if (cursor != null) {

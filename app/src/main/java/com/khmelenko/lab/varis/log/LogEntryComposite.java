@@ -8,11 +8,11 @@ final class LogEntryComposite implements LogEntryComponent {
     private String mName;
     private List<LogEntryComponent> mLogEntryComponents = new ArrayList<>();
 
-    public LogEntryComposite(String name) {
+    public LogEntryComposite(final String name) {
         mName = name;
     }
 
-    void append(LogEntryComponent logEntryComponent) {
+    void append(final LogEntryComponent logEntryComponent) {
         mLogEntryComponents.add(logEntryComponent);
     }
 

@@ -31,11 +31,11 @@ public final class Branches {
         return Collections.unmodifiableList(mCommits);
     }
 
-    public void setBranches(List<Branch> branches) {
+    public void setBranches(final List<Branch> branches) {
         mBranches = branches;
     }
 
-    public void setCommits(List<Commit> commits) {
+    public void setCommits(final List<Commit> commits) {
         mCommits = commits;
     }
 }

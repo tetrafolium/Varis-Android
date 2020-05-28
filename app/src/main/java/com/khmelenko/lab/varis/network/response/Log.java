@@ -25,7 +25,7 @@ public final class Log {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         mId = id;
     }
 
@@ -33,7 +33,7 @@ public final class Log {
         return mJobId;
     }
 
-    public void setJobId(long jobId) {
+    public void setJobId(final long jobId) {
         mJobId = jobId;
     }
 
@@ -41,7 +41,7 @@ public final class Log {
         return mType;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         mType = type;
     }
 
@@ -49,7 +49,7 @@ public final class Log {
         return mBody;
     }
 
-    public void setBody(String body) {
+    public void setBody(final String body) {
         mBody = body;
     }
 }

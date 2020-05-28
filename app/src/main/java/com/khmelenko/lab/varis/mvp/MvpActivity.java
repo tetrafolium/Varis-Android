@@ -43,7 +43,7 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
      *
      * @param isLoading True, if loading is in progress. False otherwise
      */
-    protected void showLoadingProgress(boolean isLoading) {
+    protected void showLoadingProgress(final boolean isLoading) {
         if (isLoading) {
             mProgressDialog = ProgressDialog.show(this, "", getString(R.string.loading_msg));
         } else {
@@ -58,7 +58,7 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
      *
      * @param message Message
      */
-    protected void showToast(String message) {
+    protected void showToast(final String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -67,7 +67,7 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
      *
      * @param resId Message
      */
-    protected void showToast(@StringRes int resId) {
+    protected void showToast(final @StringRes int resId) {
         Toast.makeText(this, resId, Toast.LENGTH_SHORT).show();
     }
 
@@ -78,9 +78,9 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
      * @param fragment        Fragment instance
      * @param fragmentTag     Fragment tag
      */
-    protected void addFragment(@IdRes int containerViewId,
-                               @NonNull Fragment fragment,
-                               @NonNull String fragmentTag) {
+    protected void addFragment(final @IdRes int containerViewId,
+                               final @NonNull Fragment fragment,
+                               final @NonNull String fragmentTag) {
         if (!fragment.isAdded()) {
             getSupportFragmentManager()
                     .beginTransaction()
@@ -98,10 +98,10 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
      * @param fragmentTag        Fragment tag
      * @param backStackStateName Name in back stack
      */
-    protected void replaceFragment(@IdRes int containerViewId,
-                                   @NonNull Fragment fragment,
-                                   @NonNull String fragmentTag,
-                                   @Nullable String backStackStateName) {
+    protected void replaceFragment(final @IdRes int containerViewId,
+                                   final @NonNull Fragment fragment,
+                                   final @NonNull String fragmentTag,
+                                   final @Nullable String backStackStateName) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerViewId, fragment, fragmentTag)
@@ -116,9 +116,9 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
      * @param fragment        Fragment instance
      * @param fragmentTag     Fragment tag
      */
-    protected void replaceFragment(@IdRes int containerViewId,
-                                   @NonNull Fragment fragment,
-                                   @NonNull String fragmentTag) {
+    protected void replaceFragment(final @IdRes int containerViewId,
+                                   final @NonNull Fragment fragment,
+                                   final @NonNull String fragmentTag) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(containerViewId, fragment, fragmentTag)
@@ -130,7 +130,7 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
      *
      * @param fragment Fragment
      */
-    protected void detachFragment(Fragment fragment) {
+    protected void detachFragment(final Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .detach(fragment)

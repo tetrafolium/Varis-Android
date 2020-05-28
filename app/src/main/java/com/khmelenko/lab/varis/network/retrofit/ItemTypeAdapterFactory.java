@@ -18,18 +18,18 @@ import java.io.IOException;
  */
 public final class ItemTypeAdapterFactory implements TypeAdapterFactory {
 
-    public <T> TypeAdapter<T> create(Gson gson, final TypeToken<T> type) {
+    public <T> TypeAdapter<T> create(final Gson gson, final TypeToken<T> type) {
 
         final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
         final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
 
         return new TypeAdapter<T>() {
 
-            public void write(JsonWriter out, T value) throws IOException {
+            public void write(final JsonWriter out, final T value) throws IOException {
                 delegate.write(out, value);
             }
 
-            public T read(JsonReader in) throws IOException {
+            public T read(final JsonReader in) throws IOException {
 
                 JsonElement jsonElement = elementAdapter.read(in);
                 if (jsonElement.isJsonObject()) {

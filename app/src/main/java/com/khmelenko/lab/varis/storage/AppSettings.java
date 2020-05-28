@@ -17,7 +17,7 @@ public class AppSettings {
 
     private SharedPreferences mSharedPreferences;
 
-    public AppSettings(Context context) {
+    public AppSettings(final Context context) {
         mSharedPreferences = getPreferences(context);
     }
 
@@ -26,7 +26,7 @@ public class AppSettings {
      *
      * @return Shared preferences
      */
-    private SharedPreferences getPreferences(Context context) {
+    private SharedPreferences getPreferences(final Context context) {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
 
@@ -44,7 +44,7 @@ public class AppSettings {
      *
      * @param accessToken Access token
      */
-    public void putAccessToken(String accessToken) {
+    public void putAccessToken(final String accessToken) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString(ACCESS_TOKEN_KEY, accessToken);
         editor.apply();
@@ -64,7 +64,7 @@ public class AppSettings {
      *
      * @param serverType Server type
      */
-    public void putServerType(int serverType) {
+    public void putServerType(final int serverType) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putInt(SERVER_TYPE_KEY, serverType);
         editor.apply();
@@ -84,7 +84,7 @@ public class AppSettings {
      *
      * @param serverUrl Server type
      */
-    public void putServerUrl(String serverUrl) {
+    public void putServerUrl(final String serverUrl) {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.putString(SERVER_URL_KEY, serverUrl);
         editor.apply();

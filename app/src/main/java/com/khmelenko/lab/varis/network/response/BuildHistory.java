@@ -26,11 +26,11 @@ public class BuildHistory {
         return Collections.unmodifiableList(mCommits);
     }
 
-    public void setBuilds(List<Build> builds) {
+    public void setBuilds(final List<Build> builds) {
         mBuilds = builds;
     }
 
-    public void setCommits(List<Commit> commits) {
+    public void setCommits(final List<Commit> commits) {
         mCommits = commits;
     }
 }

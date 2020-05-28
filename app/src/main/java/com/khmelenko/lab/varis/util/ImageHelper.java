@@ -27,7 +27,7 @@ public final class ImageHelper {
      * @param pixels Picture diameter in pixels
      * @return Rounded picture
      */
-    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+    public static Bitmap getRoundedCornerBitmap(final Bitmap bitmap, final int pixels) {
         Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
                 .getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);

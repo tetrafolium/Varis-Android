@@ -28,7 +28,7 @@ public class RawClient {
 
     private RawApiService mRawApiService;
 
-    public RawClient(Retrofit retrofit, OkHttpClient okHttpClient, AppSettings appSettings) {
+    public RawClient(final Retrofit retrofit, final OkHttpClient okHttpClient, final AppSettings appSettings) {
         mRetrofit = retrofit;
         mHttpClient = okHttpClient;
 
@@ -41,16 +41,16 @@ public class RawClient {
      *
      * @param newEndpoint New endpoint
      */
-    public void updateEndpoint(String newEndpoint) {
+    public void updateEndpoint(final String newEndpoint) {
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(newEndpoint)
                 .addConverterFactory(new Converter.Factory() {
                     @Override
-                    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+                    public Converter<ResponseBody, ?> responseBodyConverter(final Type type, final Annotation[] annotations, final Retrofit retrofit) {
                         if (String.class.equals(type)) {
                             return new Converter<ResponseBody, String>() {
                                 @Override
-                                public String convert(ResponseBody value) throws IOException {
+                                public String convert(final ResponseBody value) throws IOException {
                                     return value.string();
                                 }
                             };
@@ -79,7 +79,7 @@ public class RawClient {
      * @param url URL for request
      * @return Response
      */
-    public Single<Response> singleRequest(String url) {
+    public Single<Response> singleRequest(final String url) {
 
         Request request = new Request.Builder()
                 .url(url)
@@ -97,7 +97,7 @@ public class RawClient {
      * @param url URL for request
      * @return String
      */
-    public Single<String> singleStringRequest(String url) {
+    public Single<String> singleStringRequest(final String url) {
 
         Request request = new Request.Builder()
                 .url(url)
@@ -109,7 +109,7 @@ public class RawClient {
         });
     }
 
-    public String getLogUrl(Long jobId) {
+    public String getLogUrl(final Long jobId) {
         return String.format("%sjobs/%d/log", mRetrofit.baseUrl(), jobId);
     }
 

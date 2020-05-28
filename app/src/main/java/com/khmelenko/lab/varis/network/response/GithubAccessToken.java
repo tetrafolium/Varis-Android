@@ -22,7 +22,7 @@ public final class GithubAccessToken {
         return mAccessToken;
     }
 
-    public void setAccessToken(String accessToken) {
+    public void setAccessToken(final String accessToken) {
         mAccessToken = accessToken;
     }
 
@@ -30,7 +30,7 @@ public final class GithubAccessToken {
         return mScope;
     }
 
-    public void setScope(String scope) {
+    public void setScope(final String scope) {
         mScope = scope;
     }
 
@@ -38,7 +38,7 @@ public final class GithubAccessToken {
         return mTokenType;
     }
 
-    public void setTokenType(String tokenType) {
+    public void setTokenType(final String tokenType) {
         mTokenType = tokenType;
     }
 }

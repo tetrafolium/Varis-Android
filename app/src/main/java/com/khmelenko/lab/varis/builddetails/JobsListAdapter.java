@@ -33,20 +33,20 @@ public final class JobsListAdapter extends RecyclerView.Adapter<JobsListAdapter.
     private List<Job> mJobs;
     private final OnListItemListener mListener;
 
-    public JobsListAdapter(Context context, List<Job> jobs, OnListItemListener listener) {
+    public JobsListAdapter(final Context context, final List<Job> jobs, final OnListItemListener listener) {
         mContext = context;
         mJobs = jobs;
         mListener = listener;
     }
 
     @Override
-    public JobViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public JobViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job, parent, false);
         return new JobViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(JobViewHolder holder, int position) {
+    public void onBindViewHolder(final JobViewHolder holder, final int position) {
         if (mJobs != null) {
             Job job = mJobs.get(position);
 
@@ -109,7 +109,7 @@ public final class JobsListAdapter extends RecyclerView.Adapter<JobsListAdapter.
         @BindView(R.id.item_job_duration)
         TextView mDuration;
 
-        JobViewHolder(View itemView) {
+        JobViewHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setClickable(true);
@@ -117,7 +117,7 @@ public final class JobsListAdapter extends RecyclerView.Adapter<JobsListAdapter.
         }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(final View view) {
             if (mListener != null) {
                 mListener.onItemSelected(getLayoutPosition());
             }

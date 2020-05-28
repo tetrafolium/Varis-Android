@@ -35,9 +35,9 @@ public class AnsiParserTest {
     public void parseTextComplexHeader() throws Exception {
         TextLeaf headerLeaf = new TextLeaf("Build system information");
         headerLeaf.getOptions().setTextColor("#96CBFE");
-        assertEquals(AnsiParser.parseText("\u001B[0Ktravis_fold:start:system_info\n" +
-                        "\u001B[0K\u001B[34mBuild system information\u001B[0m\n" +
-                        "Build language: android\n"), new TextLeaf("travis_fold:start:system_info"),
+        assertEquals(AnsiParser.parseText("\u001B[0Ktravis_fold:start:system_info\n"
+                        + "\u001B[0K\u001B[34mBuild system information\u001B[0m\n"
+                        + "Build language: android\n"), new TextLeaf("travis_fold:start:system_info"),
                 headerLeaf, new TextLeaf("\nBuild language: android\n"));
     }
 
@@ -61,7 +61,7 @@ public class AnsiParserTest {
         assertEquals(AnsiParser.parseText("Hello World\b\b\b\b\b\n\bMars"), new TextLeaf("Hello Mars"));
     }
 
-    private void assertEquals(List<TextLeaf> list, TextLeaf... leafs) {
+    private void assertEquals(final List<TextLeaf> list, final TextLeaf... leafs) {
         Assert.assertEquals(Arrays.asList(leafs).toString(), list.toString());
     }
 }

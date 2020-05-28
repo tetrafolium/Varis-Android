@@ -9,15 +9,15 @@ final class TextLeaf implements LogEntryComponent {
         this("");
     }
 
-    TextLeaf(String text) {
+    TextLeaf(final String text) {
         this(text, FormattingOptions.fromAnsiCodes());
     }
 
-    TextLeaf(FormattingOptions options) {
+    TextLeaf(final FormattingOptions options) {
         this("", options);
     }
 
-    public TextLeaf(String text, FormattingOptions options) {
+    public TextLeaf(final String text, final FormattingOptions options) {
         mText = text;
         mOptions = options;
     }
@@ -26,7 +26,7 @@ final class TextLeaf implements LogEntryComponent {
         return mOptions;
     }
 
-    public void setOptions(FormattingOptions options) {
+    public void setOptions(final FormattingOptions options) {
         mOptions = options;
     }
 
@@ -34,7 +34,7 @@ final class TextLeaf implements LogEntryComponent {
         return mText;
     }
 
-    public void setText(String text) {
+    public void setText(final String text) {
         mText = text;
     }
 
@@ -57,9 +57,9 @@ final class TextLeaf implements LogEntryComponent {
 
     @Override
     public String toString() {
-        return "TextLeaf{" +
-                "options=" + mOptions +
-                ", text='" + mText + '\'' +
-                '}';
+        return "TextLeaf{"
+                + "options=" + mOptions
+                + ", text='" + mText + '\''
+                + '}';
     }
 }

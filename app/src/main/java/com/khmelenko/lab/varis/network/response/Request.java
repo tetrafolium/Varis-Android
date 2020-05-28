@@ -19,7 +19,7 @@ public final class Request {
         return mRequestData;
     }
 
-    public void setRequestData(RequestData request) {
+    public void setRequestData(final RequestData request) {
         mRequestData = request;
     }
 
@@ -27,7 +27,7 @@ public final class Request {
         return mCommit;
     }
 
-    public void setCommit(Commit commit) {
+    public void setCommit(final Commit commit) {
         mCommit = commit;
     }
 }
