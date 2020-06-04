@@ -22,19 +22,19 @@ public final class RepoListAdapter extends RecyclerView.Adapter<BuildViewHolder>
     private final List<Repo> mRepos;
     private final OnListItemListener mListener;
 
-    public RepoListAdapter(List<Repo> repos, OnListItemListener listener) {
+    public RepoListAdapter(final List<Repo> repos, final OnListItemListener listener) {
         mRepos = repos;
         mListener = listener;
     }
 
     @Override
-    public BuildViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public BuildViewHolder onCreateViewHolder(final ViewGroup viewGroup, final int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_build_view, viewGroup, false);
         return new BuildViewHolder(v, mListener);
     }
 
     @Override
-    public void onBindViewHolder(BuildViewHolder repoViewHolder, int i) {
+    public void onBindViewHolder(final BuildViewHolder repoViewHolder, final int i) {
         Repo repo = mRepos.get(i);
         repoViewHolder.mBuildView.setTitle(repo.getSlug());
         repoViewHolder.mBuildView.setStateIndicator(repo.getLastBuildState());

@@ -16,12 +16,12 @@ public final class AccessTokenRequest {
         return mGithubToken;
     }
 
-    public void setGithubToken(String githubToken) {
+    public void setGithubToken(final String githubToken) {
         mGithubToken = githubToken;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (!(o instanceof AccessTokenRequest))
             return false;
         if (o == this)

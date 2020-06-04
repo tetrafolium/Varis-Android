@@ -16,7 +16,7 @@ public final class TimeConverter {
      * @param duration Duration in seconds
      * @return Formatted string
      */
-    public static String durationToString(long duration) {
+    public static String durationToString(final long duration) {
         int hour = (int) (duration / 3600);
         int min = (int) ((duration - hour * 3600) / 60);
         int sec = (int) (duration % 60);
@@ -25,19 +25,19 @@ public final class TimeConverter {
             builder.append(hour).append(" hours");
         }
         if (min != 0) {
-            if(builder.length() > 0) {
+            if (builder.length() > 0) {
                 builder.append(" ");
             }
             builder.append(min).append(" min");
         }
-        if(sec != 0) {
-            if(builder.length() > 0) {
+        if (sec != 0) {
+            if (builder.length() > 0) {
                 builder.append(" ");
             }
             builder.append(sec).append(" sec");
         }
 
-        if(duration == 0) {
+        if (duration == 0) {
             builder.append(sec).append(" sec");
         }
 

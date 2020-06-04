@@ -38,7 +38,7 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView> {
     private final CompositeDisposable mSubscriptions;
 
     @Inject
-    public RepositoriesPresenter(TravisRestClient restClient, CacheStorage storage, AppSettings appSettings) {
+    public RepositoriesPresenter(final TravisRestClient restClient, final CacheStorage storage, final AppSettings appSettings) {
         mTravisRestClient = restClient;
         mCache = storage;
         mAppSettings = appSettings;
@@ -81,7 +81,7 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView> {
                                       .doOnSuccess(this::cacheUserData)
             .flatMap(new Function<User, SingleSource<List<Repo>>>() {
                 @Override
-                public SingleSource<List<Repo>> apply(@NonNull User user) throws Exception {
+                public SingleSource<List<Repo>> apply(final @NonNull User user) throws Exception {
                     String loginName = mUser.getLogin();
                     return mTravisRestClient.getApiService().getUserRepos(loginName);
                 }
@@ -120,21 +120,21 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView> {
         };
     }
 
-    private void cacheUserData(User user) {
+    private void cacheUserData(final User user) {
         mUser = user;
 
         // cache user data
         mCache.saveUser(mUser);
     }
 
-    private void handleReposLoaded(List<Repo> repos) {
+    private void handleReposLoaded(final List<Repo> repos) {
         getView().hideProgress();
         getView().setRepos(repos);
 
         mCache.saveRepos(repos);
     }
 
-    private void handleLoadingFailed(Throwable throwable) {
+    private void handleLoadingFailed(final Throwable throwable) {
         getView().hideProgress();
         getView().showError(throwable.getMessage());
     }

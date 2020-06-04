@@ -48,7 +48,7 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
     private boolean mSecurityCodeInput;
 
     @Inject
-    public AuthPresenter(TravisRestClient travisRestClient, GitHubRestClient gitHubRestClient, AppSettings appSettings) {
+    public AuthPresenter(final TravisRestClient travisRestClient, final GitHubRestClient gitHubRestClient, final AppSettings appSettings) {
         mTravisRestClient = travisRestClient;
         mGitHubRestClient = gitHubRestClient;
         mAppSettings = appSettings;
@@ -71,7 +71,7 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
      *
      * @param newServer New server endpoint
      */
-    public void updateServer(String newServer) {
+    public void updateServer(final String newServer) {
         mAppSettings.putServerUrl(newServer);
         mTravisRestClient.updateTravisEndpoint(newServer);
     }
@@ -82,7 +82,7 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
      * @param userName Username
      * @param password Password
      */
-    public void login(String userName, String password) {
+    public void login(final String userName, final String password) {
         mBasicAuth = EncryptionUtils.generateBasicAuthorization(userName, password);
 
         doLogin(getAuthorizationJob(false));
@@ -93,7 +93,7 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
      *
      * @param securityCode Security code
      */
-    public void twoFactorAuth(String securityCode) {
+    public void twoFactorAuth(final String securityCode) {
         mSecurityCode = securityCode;
         doLogin(getAuthorizationJob(true));
     }
@@ -107,7 +107,7 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
         return mAppSettings.getServerUrl();
     }
 
-    private Single<Authorization> getAuthorizationJob(boolean twoFactorAuth) {
+    private Single<Authorization> getAuthorizationJob(final boolean twoFactorAuth) {
         if (twoFactorAuth) {
             return mGitHubRestClient.getApiService()
                    .createNewAuthorization(mBasicAuth, mSecurityCode, prepareAuthorizationRequest());
@@ -117,7 +117,7 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
         }
     }
 
-    private void doLogin(Single<Authorization> authorizationJob) {
+    private void doLogin(final Single<Authorization> authorizationJob) {
         Disposable subscription = authorizationJob
                                   .flatMap(this::doAuthorization)
                                   .doOnSuccess(this::saveAccessToken)
@@ -160,20 +160,20 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
         mSubscriptions.add(task);
     }
 
-    private void saveAccessToken(AccessToken accessToken) {
+    private void saveAccessToken(final AccessToken accessToken) {
         // save access token to settings
         String token = accessToken.getAccessToken();
         mAppSettings.putAccessToken(token);
     }
 
-    private Single<AccessToken> doAuthorization(Authorization authorization) {
+    private Single<AccessToken> doAuthorization(final Authorization authorization) {
         mAuthorization = authorization;
         AccessTokenRequest request = new AccessTokenRequest();
         request.setGithubToken(authorization.getToken());
         return mTravisRestClient.getApiService().auth(request);
     }
 
-    private boolean isTwoFactorAuthRequired(HttpException exception) {
+    private boolean isTwoFactorAuthRequired(final HttpException exception) {
         Response response = exception.response();
 
         boolean twoFactorAuthRequired = false;

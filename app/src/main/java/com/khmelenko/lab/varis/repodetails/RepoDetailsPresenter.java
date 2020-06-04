@@ -25,7 +25,7 @@ public class RepoDetailsPresenter extends MvpPresenter<RepoDetailsView> {
     private CompositeDisposable mSubscriptions;
 
     @Inject
-    public RepoDetailsPresenter(TravisRestClient travisRestClient) {
+    public RepoDetailsPresenter(final TravisRestClient travisRestClient) {
         mTravisRestClient = travisRestClient;
 
         mSubscriptions = new CompositeDisposable();
@@ -104,7 +104,7 @@ public class RepoDetailsPresenter extends MvpPresenter<RepoDetailsView> {
      *
      * @param repoSlug Repository slug
      */
-    public void setRepoSlug(String repoSlug) {
+    public void setRepoSlug(final String repoSlug) {
         mRepoSlug = repoSlug;
     }
 

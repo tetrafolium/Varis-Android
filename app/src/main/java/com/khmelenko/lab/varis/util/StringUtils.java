@@ -30,7 +30,7 @@ public final class StringUtils {
      * @param length String length
      * @return Random string
      */
-    public static String getRandomString(int length) {
+    public static String getRandomString(final int length) {
         char[] chars = "ABCDEFGHIJKLMONPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz".toCharArray();
         StringBuilder builder = new StringBuilder();
         Random random = new Random();
@@ -47,7 +47,7 @@ public final class StringUtils {
      * @param string String for checking
      * @return True if string is empty. False otherwise
      */
-    public static boolean isEmpty(String string) {
+    public static boolean isEmpty(final String string) {
         return string == null || string.isEmpty();
     }
 }

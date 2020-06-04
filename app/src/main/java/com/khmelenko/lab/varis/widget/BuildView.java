@@ -51,17 +51,17 @@ public class BuildView extends LinearLayout {
     @BindView(R.id.build_finished)
     TextView mFinished;
 
-    public BuildView(Context context) {
+    public BuildView(final Context context) {
         super(context);
         initializeViews(context);
     }
 
-    public BuildView(Context context, AttributeSet attrs) {
+    public BuildView(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         initializeViews(context);
     }
 
-    public BuildView(Context context, AttributeSet attrs, int defStyle) {
+    public BuildView(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         initializeViews(context);
     }
@@ -71,7 +71,7 @@ public class BuildView extends LinearLayout {
      *
      * @param context the current context for the view.
      */
-    private void initializeViews(Context context) {
+    private void initializeViews(final Context context) {
         LayoutInflater inflater = (LayoutInflater) context
                                   .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.view_build, this);
@@ -83,7 +83,7 @@ public class BuildView extends LinearLayout {
      *
      * @param durationInMillis Duration
      */
-    public void setDuration(long durationInMillis) {
+    public void setDuration(final long durationInMillis) {
         if (durationInMillis != 0) {
             String duration = TimeConverter.durationToString(durationInMillis);
             duration = getContext().getString(R.string.build_duration, duration);
@@ -99,7 +99,7 @@ public class BuildView extends LinearLayout {
      *
      * @param finishedAt String with the message when the build was finished
      */
-    public void setFinishedAt(String finishedAt) {
+    public void setFinishedAt(final String finishedAt) {
         if (!TextUtils.isEmpty(finishedAt)) {
             String formattedDate = DateTimeUtils.parseAndFormatDateTime(finishedAt);
             formattedDate = getContext().getString(R.string.build_finished_at, formattedDate);
@@ -115,7 +115,7 @@ public class BuildView extends LinearLayout {
      *
      * @param buildState Build state
      */
-    public void setState(IBuildState buildState) {
+    public void setState(final IBuildState buildState) {
         if (buildState != null) {
             setTitle(getContext()
                      .getString(R.string.build_build_number, buildState.getNumber(), buildState.getState()));
@@ -130,7 +130,7 @@ public class BuildView extends LinearLayout {
      *
      * @param commit Last commit
      */
-    public void setCommit(Commit commit) {
+    public void setCommit(final Commit commit) {
         if (commit != null) {
             mBranch.setVisibility(VISIBLE);
             mBranch.setText(commit.getBranch());
@@ -146,7 +146,7 @@ public class BuildView extends LinearLayout {
      *
      * @param title Title
      */
-    public void setTitle(String title) {
+    public void setTitle(final String title) {
         mTitle.setText(title);
     }
 
@@ -155,7 +155,7 @@ public class BuildView extends LinearLayout {
      *
      * @param state Build state
      */
-    public void setStateIndicator(String state) {
+    public void setStateIndicator(final String state) {
         if (!TextUtils.isEmpty(state)) {
             int buildColor = BuildStateHelper.getBuildColor(state);
             mIndicator.setBackgroundColor(buildColor);
@@ -173,7 +173,7 @@ public class BuildView extends LinearLayout {
      *
      * @param title Title for Pull Request
      */
-    public void setPullRequestTitle(RequestData title) {
+    public void setPullRequestTitle(final RequestData title) {
         mPullRequest.setVisibility(VISIBLE);
         mPullRequest.setText(title.getPullRequestTitle());
     }

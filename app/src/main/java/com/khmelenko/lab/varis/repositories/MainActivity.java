@@ -72,7 +72,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -95,7 +95,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mSearchView != null) {
             outState.putString(SAVED_QUERY, mSearchView.getQuery().toString());
@@ -103,7 +103,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mSavedQuery = savedInstanceState.getString(SAVED_QUERY);
     }
@@ -162,7 +162,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
             case AUTH_ACTIVITY_CODE:
@@ -183,7 +183,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
         case android.R.id.home:
             mDrawerLayout.openDrawer(GravityCompat.START);
@@ -193,7 +193,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(final Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.menu_main, menu);
 
@@ -209,7 +209,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
             mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
                 @Override
-                public boolean onQueryTextSubmit(String query) {
+                public boolean onQueryTextSubmit(final String query) {
                     boolean submitProhibited = true;
                     if (query.length() > SEARCH_LIMIT) {
                         // save search query to history
@@ -222,7 +222,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
                 }
 
                 @Override
-                public boolean onQueryTextChange(String newText) {
+                public boolean onQueryTextChange(final String newText) {
                     reloadSearchHistoryAdapter(newText);
                     return true;
                 }
@@ -230,13 +230,13 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
             });
             mSearchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
                 @Override
-                public boolean onSuggestionClick(int position) {
+                public boolean onSuggestionClick(final int position) {
                     mSearchView.setQuery(mQueryItems.get(position), true);
                     return true;
                 }
 
                 @Override
-                public boolean onSuggestionSelect(int position) {
+                public boolean onSuggestionSelect(final int position) {
                     return true;
                 }
             });
@@ -267,7 +267,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
      *
      * @param query Query
      */
-    private void reloadSearchHistoryAdapter(String query) {
+    private void reloadSearchHistoryAdapter(final String query) {
         Cursor cursor = SearchHistoryProvider.queryRecentSearch(this, query);
         mQueryItems = SearchHistoryProvider.transformSearchResultToList(cursor);
 
@@ -275,7 +275,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    public void onRepositorySelected(Repo repo) {
+    public void onRepositorySelected(final Repo repo) {
         Intent intent = new Intent(MainActivity.this, RepoDetailsActivity.class);
         intent.putExtra(RepoDetailsActivity.REPO_SLUG_KEY, repo.getSlug());
         startActivityForResult(intent, REPO_DETAILS_CODE);
@@ -287,7 +287,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    public void updateUserData(User user) {
+    public void updateUserData(final User user) {
         final NavigationView view = findViewById(R.id.navigation_view);
         View header = view.getHeaderView(0);
         TextView usernameView = header.findViewById(R.id.drawer_header_username);
@@ -309,12 +309,12 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    public void setRepos(List<Repo> repos) {
+    public void setRepos(final List<Repo> repos) {
         mFragment.setRepos(repos);
     }
 
     @Override
-    public void updateMenuState(@Nullable String accessToken) {
+    public void updateMenuState(final @Nullable String accessToken) {
         NavigationView view = findViewById(R.id.navigation_view);
         Menu menu = view.getMenu();
         if (TextUtils.isEmpty(accessToken)) {
@@ -327,7 +327,7 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     }
 
     @Override
-    public void showError(String message) {
+    public void showError(final String message) {
         mFragment.handleLoadingFailed(message);
     }
 

@@ -22,19 +22,19 @@ public final class BranchesListAdapter extends RecyclerView.Adapter<BuildViewHol
     private Branches mBranches;
     private final OnListItemListener mListener;
 
-    public BranchesListAdapter(Branches branches, OnListItemListener listener) {
+    public BranchesListAdapter(final Branches branches, final OnListItemListener listener) {
         mBranches = branches;
         mListener = listener;
     }
 
     @Override
-    public BuildViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BuildViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_build_view, parent, false);
         return new BuildViewHolder(v, mListener);
     }
 
     @Override
-    public void onBindViewHolder(BuildViewHolder holder, int position) {
+    public void onBindViewHolder(final BuildViewHolder holder, final int position) {
         if (mBranches != null) {
             Branch branch = mBranches.getBranches().get(position);
             Commit relatedCommit = null;
@@ -60,7 +60,7 @@ public final class BranchesListAdapter extends RecyclerView.Adapter<BuildViewHol
      *
      * @param branches Branches
      */
-    public void setBranches(Branches branches) {
+    public void setBranches(final Branches branches) {
         mBranches = branches;
     }
 

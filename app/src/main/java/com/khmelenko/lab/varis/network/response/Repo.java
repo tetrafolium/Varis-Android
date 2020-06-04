@@ -43,7 +43,7 @@ public final class Repo {
         return mId;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         mId = id;
     }
 
@@ -51,7 +51,7 @@ public final class Repo {
         return mSlug;
     }
 
-    public void setSlug(String slug) {
+    public void setSlug(final String slug) {
         mSlug = slug;
     }
 
@@ -59,7 +59,7 @@ public final class Repo {
         return mDescription;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         mDescription = description;
     }
 
@@ -67,7 +67,7 @@ public final class Repo {
         return mLastBuildId;
     }
 
-    public void setLastBuildId(String lastBuildId) {
+    public void setLastBuildId(final String lastBuildId) {
         mLastBuildId = lastBuildId;
     }
 
@@ -75,7 +75,7 @@ public final class Repo {
         return mLastBuildNumber;
     }
 
-    public void setLastBuildNumber(String lastBuildNumber) {
+    public void setLastBuildNumber(final String lastBuildNumber) {
         mLastBuildNumber = lastBuildNumber;
     }
 
@@ -83,7 +83,7 @@ public final class Repo {
         return mLastBuildState;
     }
 
-    public void setLastBuildState(String lastBuildState) {
+    public void setLastBuildState(final String lastBuildState) {
         mLastBuildState = lastBuildState;
     }
 
@@ -91,7 +91,7 @@ public final class Repo {
         return mLastBuildDuration;
     }
 
-    public void setLastBuildDuration(long lastBuildDuration) {
+    public void setLastBuildDuration(final long lastBuildDuration) {
         mLastBuildDuration = lastBuildDuration;
     }
 
@@ -99,7 +99,7 @@ public final class Repo {
         return mLastBuildStartedAt;
     }
 
-    public void setLastBuildStartedAt(String lastBuildStartedAt) {
+    public void setLastBuildStartedAt(final String lastBuildStartedAt) {
         mLastBuildStartedAt = lastBuildStartedAt;
     }
 
@@ -107,7 +107,7 @@ public final class Repo {
         return mLastBuildFinishedAt;
     }
 
-    public void setLastBuildFinishedAt(String lastBuildFinishedAt) {
+    public void setLastBuildFinishedAt(final String lastBuildFinishedAt) {
         mLastBuildFinishedAt = lastBuildFinishedAt;
     }
 
@@ -115,7 +115,7 @@ public final class Repo {
         return mGithubLanguage;
     }
 
-    public void setGithubLanguage(String githubLanguage) {
+    public void setGithubLanguage(final String githubLanguage) {
         mGithubLanguage = githubLanguage;
     }
 }

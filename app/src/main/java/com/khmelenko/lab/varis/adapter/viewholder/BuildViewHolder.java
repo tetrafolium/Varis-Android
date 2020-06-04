@@ -25,7 +25,7 @@ public final class BuildViewHolder extends RecyclerView.ViewHolder implements Vi
 
     private final OnListItemListener mListener;
 
-    public BuildViewHolder(View itemView, OnListItemListener listener) {
+    public BuildViewHolder(final View itemView, final OnListItemListener listener) {
         super(itemView);
         mListener = listener;
         ButterKnife.bind(this, itemView);
@@ -34,7 +34,7 @@ public final class BuildViewHolder extends RecyclerView.ViewHolder implements Vi
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(final View view) {
         if (mListener != null) {
             mListener.onItemSelected(getLayoutPosition());
         }

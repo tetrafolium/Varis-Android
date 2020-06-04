@@ -64,7 +64,7 @@ public final class RequestData {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         mId = id;
     }
 
@@ -72,7 +72,7 @@ public final class RequestData {
         return mRepositoryId;
     }
 
-    public void setRepositoryId(long repositoryId) {
+    public void setRepositoryId(final long repositoryId) {
         mRepositoryId = repositoryId;
     }
 
@@ -80,7 +80,7 @@ public final class RequestData {
         return mCommitId;
     }
 
-    public void setCommitId(long commitId) {
+    public void setCommitId(final long commitId) {
         mCommitId = commitId;
     }
 
@@ -88,7 +88,7 @@ public final class RequestData {
         return mCreated;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(final String created) {
         mCreated = created;
     }
 
@@ -96,7 +96,7 @@ public final class RequestData {
         return mOwnerId;
     }
 
-    public void setOwnerId(long ownerId) {
+    public void setOwnerId(final long ownerId) {
         mOwnerId = ownerId;
     }
 
@@ -104,7 +104,7 @@ public final class RequestData {
         return mOwnerType;
     }
 
-    public void setOwnerType(String ownerType) {
+    public void setOwnerType(final String ownerType) {
         mOwnerType = ownerType;
     }
 
@@ -112,7 +112,7 @@ public final class RequestData {
         return mEventType;
     }
 
-    public void setEventType(String eventType) {
+    public void setEventType(final String eventType) {
         mEventType = eventType;
     }
 
@@ -120,7 +120,7 @@ public final class RequestData {
         return mResult;
     }
 
-    public void setResult(String result) {
+    public void setResult(final String result) {
         mResult = result;
     }
 
@@ -128,7 +128,7 @@ public final class RequestData {
         return mMessage;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         mMessage = message;
     }
 
@@ -136,7 +136,7 @@ public final class RequestData {
         return mPullRequest;
     }
 
-    public void setPullRequest(boolean pullRequest) {
+    public void setPullRequest(final boolean pullRequest) {
         mPullRequest = pullRequest;
     }
 
@@ -144,7 +144,7 @@ public final class RequestData {
         return mPullRequestNumber;
     }
 
-    public void setPullRequestNumber(String pullRequestNumber) {
+    public void setPullRequestNumber(final String pullRequestNumber) {
         mPullRequestNumber = pullRequestNumber;
     }
 
@@ -152,7 +152,7 @@ public final class RequestData {
         return mPullRequestTitle;
     }
 
-    public void setPullRequestTitle(String pullRequestTitle) {
+    public void setPullRequestTitle(final String pullRequestTitle) {
         mPullRequestTitle = pullRequestTitle;
     }
 
@@ -160,7 +160,7 @@ public final class RequestData {
         return mBranch;
     }
 
-    public void setBranch(String branch) {
+    public void setBranch(final String branch) {
         mBranch = branch;
     }
 
@@ -168,7 +168,7 @@ public final class RequestData {
         return mTag;
     }
 
-    public void setTag(String tag) {
+    public void setTag(final String tag) {
         mTag = tag;
     }
 
@@ -176,7 +176,7 @@ public final class RequestData {
         return mBaseCommit;
     }
 
-    public void setBaseCommit(String baseCommit) {
+    public void setBaseCommit(final String baseCommit) {
         mBaseCommit = baseCommit;
     }
 
@@ -184,7 +184,7 @@ public final class RequestData {
         return mHeadCommit;
     }
 
-    public void setHeadCommit(String headCommit) {
+    public void setHeadCommit(final String headCommit) {
         mHeadCommit = headCommit;
     }
 
@@ -192,12 +192,12 @@ public final class RequestData {
         return mBuildId;
     }
 
-    public void setBuildId(long buildId) {
+    public void setBuildId(final long buildId) {
         mBuildId = buildId;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (!(o instanceof RequestData)) return false;
         RequestData that = (RequestData) o;

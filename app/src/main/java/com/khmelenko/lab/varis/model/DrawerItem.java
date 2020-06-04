@@ -10,7 +10,7 @@ public final class DrawerItem {
     private final int mIcon;
     private final String mTitle;
 
-    public DrawerItem(int icon, String text) {
+    public DrawerItem(final int icon, final String text) {
         mIcon = icon;
         mTitle = text;
     }

@@ -30,7 +30,7 @@ public class CacheStorage {
      *
      * @param user User
      */
-    public void saveUser(User user) {
+    public void saveUser(final User user) {
         Gson gson = new Gson();
         String dataToStore = gson.toJson(user);
         FileUtils.writeInternalFile(USER_FILE, dataToStore);
@@ -60,7 +60,7 @@ public class CacheStorage {
      *
      * @param repos Repositories to cache
      */
-    public void saveRepos(List<Repo> repos) {
+    public void saveRepos(final List<Repo> repos) {
         StringBuilder builder = new StringBuilder();
         for (Repo repo : repos) {
             builder.append(repo.getSlug());

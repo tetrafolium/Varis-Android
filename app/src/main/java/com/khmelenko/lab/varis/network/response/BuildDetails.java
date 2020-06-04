@@ -24,7 +24,7 @@ public final class BuildDetails {
         return mBuild;
     }
 
-    public void setBuild(Build build) {
+    public void setBuild(final Build build) {
         mBuild = build;
     }
 
@@ -32,7 +32,7 @@ public final class BuildDetails {
         return mCommit;
     }
 
-    public void setCommit(Commit commit) {
+    public void setCommit(final Commit commit) {
         mCommit = commit;
     }
 
@@ -40,7 +40,7 @@ public final class BuildDetails {
         return mJobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(final List<Job> jobs) {
         mJobs = jobs;
     }
 }

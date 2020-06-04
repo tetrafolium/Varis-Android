@@ -16,7 +16,7 @@ public class AccessToken {
         return mAccessToken;
     }
 
-    public void setAccessToken(String accessToken) {
+    public void setAccessToken(final String accessToken) {
         mAccessToken = accessToken;
     }
 }

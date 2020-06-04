@@ -27,7 +27,7 @@ public final class PullRequestsListAdapter extends RecyclerView.Adapter<BuildVie
     private List<RequestData> mPullRequests;
     private final OnListItemListener mListener;
 
-    public PullRequestsListAdapter(Requests requests, OnListItemListener listener) {
+    public PullRequestsListAdapter(final Requests requests, final OnListItemListener listener) {
         mRequests = requests;
         mPullRequests = new ArrayList<>();
         mListener = listener;
@@ -38,26 +38,26 @@ public final class PullRequestsListAdapter extends RecyclerView.Adapter<BuildVie
      *
      * @param requests Requests
      */
-    public void setRequests(Requests requests, List<RequestData> pullRequests) {
+    public void setRequests(final Requests requests, final List<RequestData> pullRequests) {
         mRequests = requests;
         mPullRequests = pullRequests;
     }
 
     @Override
-    public BuildViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BuildViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_build_view, parent, false);
         return new BuildViewHolder(v, mListener);
     }
 
     @Override
-    public void onBindViewHolder(BuildViewHolder holder, int position) {
+    public void onBindViewHolder(final BuildViewHolder holder, final int position) {
         if (mRequests != null) {
             RequestData request = mPullRequests.get(position);
             bindPullRequest(holder, request);
         }
     }
 
-    private void bindPullRequest(BuildViewHolder holder, RequestData request) {
+    private void bindPullRequest(final BuildViewHolder holder, final RequestData request) {
         Commit relatedCommit = null;
         for (Commit commit : mRequests.getCommits()) {
             if (request.getCommitId() == commit.getId()) {

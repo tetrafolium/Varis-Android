@@ -25,7 +25,7 @@ final class AnsiCodes {
 
     }
 
-    static void applyAnsiCode(FormattingOptions options, String code) {
+    static void applyAnsiCode(final FormattingOptions options, final String code) {
         switch (code) {
         case "1":
             options.setBold(true);

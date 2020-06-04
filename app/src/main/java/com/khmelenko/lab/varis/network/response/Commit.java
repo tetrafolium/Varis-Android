@@ -43,7 +43,7 @@ public final class Commit {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         mId = id;
     }
 
@@ -51,7 +51,7 @@ public final class Commit {
         return mSha;
     }
 
-    public void setSha(String sha) {
+    public void setSha(final String sha) {
         mSha = sha;
     }
 
@@ -59,7 +59,7 @@ public final class Commit {
         return mBranch;
     }
 
-    public void setBranch(String branch) {
+    public void setBranch(final String branch) {
         mBranch = branch;
     }
 
@@ -67,7 +67,7 @@ public final class Commit {
         return mMessage;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
         mMessage = message;
     }
 
@@ -75,7 +75,7 @@ public final class Commit {
         return mCommitedAt;
     }
 
-    public void setCommitedAt(String commitedAt) {
+    public void setCommitedAt(final String commitedAt) {
         mCommitedAt = commitedAt;
     }
 
@@ -83,7 +83,7 @@ public final class Commit {
         return mAuthorName;
     }
 
-    public void setAuthorName(String authorName) {
+    public void setAuthorName(final String authorName) {
         mAuthorName = authorName;
     }
 
@@ -91,7 +91,7 @@ public final class Commit {
         return mAuthorEmail;
     }
 
-    public void setAuthorEmail(String authorEmail) {
+    public void setAuthorEmail(final String authorEmail) {
         mAuthorEmail = authorEmail;
     }
 
@@ -99,7 +99,7 @@ public final class Commit {
         return mCommitterName;
     }
 
-    public void setCommitterName(String committerName) {
+    public void setCommitterName(final String committerName) {
         mCommitterName = committerName;
     }
 
@@ -107,7 +107,7 @@ public final class Commit {
         return mCommitterEmail;
     }
 
-    public void setCommitterEmail(String committerEmail) {
+    public void setCommitterEmail(final String committerEmail) {
         mCommitterEmail = committerEmail;
     }
 
@@ -115,7 +115,7 @@ public final class Commit {
         return mCompareUrl;
     }
 
-    public void setCompareUrl(String compareUrl) {
+    public void setCompareUrl(final String compareUrl) {
         mCompareUrl = compareUrl;
     }
 }

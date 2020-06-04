@@ -18,19 +18,19 @@ public abstract class SmartFragmentStatePagerAdapter extends FragmentStatePagerA
     // Sparse array to keep track of registered fragments in memory
     private SparseArray<Fragment> mRegisteredFragments = new SparseArray<>();
 
-    public SmartFragmentStatePagerAdapter(FragmentManager fragmentManager) {
+    public SmartFragmentStatePagerAdapter(final FragmentManager fragmentManager) {
         super(fragmentManager);
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(final ViewGroup container, final int position) {
         Fragment fragment = (Fragment) super.instantiateItem(container, position);
         mRegisteredFragments.put(position, fragment);
         return fragment;
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(final ViewGroup container, final int position, final Object object) {
         mRegisteredFragments.remove(position);
         super.destroyItem(container, position, object);
     }
@@ -38,7 +38,7 @@ public abstract class SmartFragmentStatePagerAdapter extends FragmentStatePagerA
     /**
      * Returns the fragment for the position (if instantiated)
      */
-    public Fragment getRegisteredFragment(int position) {
+    public Fragment getRegisteredFragment(final int position) {
         return mRegisteredFragments.get(position);
     }
 }

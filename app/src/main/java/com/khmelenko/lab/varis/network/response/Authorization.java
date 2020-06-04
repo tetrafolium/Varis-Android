@@ -52,7 +52,7 @@ public final class Authorization {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         mId = id;
     }
 
@@ -60,7 +60,7 @@ public final class Authorization {
         return mUrl;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         mUrl = url;
     }
 
@@ -68,7 +68,7 @@ public final class Authorization {
         return mScopes;
     }
 
-    public void setScopes(List<String> scopes) {
+    public void setScopes(final List<String> scopes) {
         mScopes = scopes;
     }
 
@@ -76,7 +76,7 @@ public final class Authorization {
         return mToken;
     }
 
-    public void setToken(String token) {
+    public void setToken(final String token) {
         mToken = token;
     }
 
@@ -84,7 +84,7 @@ public final class Authorization {
         return mTokenLastEight;
     }
 
-    public void setTokenLastEight(String tokenLastEight) {
+    public void setTokenLastEight(final String tokenLastEight) {
         mTokenLastEight = tokenLastEight;
     }
 
@@ -92,7 +92,7 @@ public final class Authorization {
         return mHashedToken;
     }
 
-    public void setHashedToken(String hashedToken) {
+    public void setHashedToken(final String hashedToken) {
         mHashedToken = hashedToken;
     }
 
@@ -100,7 +100,7 @@ public final class Authorization {
         return mApp;
     }
 
-    public void setApp(App app) {
+    public void setApp(final App app) {
         mApp = app;
     }
 
@@ -108,7 +108,7 @@ public final class Authorization {
         return mNote;
     }
 
-    public void setNote(String note) {
+    public void setNote(final String note) {
         mNote = note;
     }
 
@@ -116,7 +116,7 @@ public final class Authorization {
         return mNoteUrl;
     }
 
-    public void setNoteUrl(String noteUrl) {
+    public void setNoteUrl(final String noteUrl) {
         mNoteUrl = noteUrl;
     }
 
@@ -124,7 +124,7 @@ public final class Authorization {
         return mUpdatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(final String updatedAt) {
         mUpdatedAt = updatedAt;
     }
 
@@ -132,7 +132,7 @@ public final class Authorization {
         return mCreatedAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(final String createdAt) {
         mCreatedAt = createdAt;
     }
 
@@ -140,7 +140,7 @@ public final class Authorization {
         return mFingerprint;
     }
 
-    public void setFingerprint(String fingerprint) {
+    public void setFingerprint(final String fingerprint) {
         mFingerprint = fingerprint;
     }
 
@@ -159,7 +159,7 @@ public final class Authorization {
             return mUrl;
         }
 
-        public void setUrl(String url) {
+        public void setUrl(final String url) {
             mUrl = url;
         }
 
@@ -167,7 +167,7 @@ public final class Authorization {
             return mName;
         }
 
-        public void setName(String name) {
+        public void setName(final String name) {
             mName = name;
         }
 
@@ -175,7 +175,7 @@ public final class Authorization {
             return mClientId;
         }
 
-        public void setClientId(String clientId) {
+        public void setClientId(final String clientId) {
             mClientId = clientId;
         }
     }

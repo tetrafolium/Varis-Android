@@ -16,14 +16,14 @@ class AnsiParser {
      * Parses the given log for ANSI escape sequences and builds a list of text chunks, which
      * share the same color and text formatting.
      */
-    public static Stack<TextLeaf> parseText(String text) {
+    public static Stack<TextLeaf> parseText(final String text) {
         return new AnsiParser().parse(text);
     }
 
     /**
      * @see #parseText(String)
      */
-    private Stack<TextLeaf> parse(String text) {
+    private Stack<TextLeaf> parse(final String text) {
         // Remove character when followed by a BACKSPACE character
         while (text.contains("\b")) {
             text = text.replaceAll("^\b+|[^\b]\b", "");
@@ -65,7 +65,7 @@ class AnsiParser {
         return mResult;
     }
 
-    private void emitText(String text) {
+    private void emitText(final String text) {
         if (!text.isEmpty()) {
             mResult.push(new TextLeaf(text, mOptions));
         }
@@ -99,7 +99,7 @@ class AnsiParser {
         }
     }
 
-    private boolean isResetLineEscape(String str, int controlStartPosition) {
+    private boolean isResetLineEscape(final String str, final int controlStartPosition) {
         final String substring = str.substring(controlStartPosition);
         return substring.startsWith("\033[0K") || substring.startsWith("\033[K");
     }

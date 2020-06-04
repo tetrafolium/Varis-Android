@@ -26,7 +26,7 @@ public final class AssetsUtils {
      * @param context Context
      * @return Properties
      */
-    public static Properties getProperties(String name, Context context) {
+    public static Properties getProperties(final String name, final Context context) {
         Resources resources = context.getResources();
         AssetManager assetManager = resources.getAssets();
         Properties properties = null;

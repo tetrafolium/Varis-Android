@@ -58,8 +58,8 @@ public class BuildHistoryFragment extends Fragment implements OnListItemListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_refreshable, container, false);
         ButterKnife.bind(this, view);
 
@@ -93,7 +93,7 @@ public class BuildHistoryFragment extends Fragment implements OnListItemListener
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(final Context activity) {
         super.onAttach(activity);
         try {
             mListener = (BuildHistoryListener) activity;
@@ -110,7 +110,7 @@ public class BuildHistoryFragment extends Fragment implements OnListItemListener
     }
 
     @Override
-    public void onItemSelected(int position) {
+    public void onItemSelected(final int position) {
         if (mListener != null) {
             Build build = mBuildHistory.getBuilds().get(position);
             mListener.onBuildSelected(build.getId());
@@ -122,7 +122,7 @@ public class BuildHistoryFragment extends Fragment implements OnListItemListener
      *
      * @param buildHistory Build history
      */
-    public void setBuildHistory(BuildHistory buildHistory) {
+    public void setBuildHistory(final BuildHistory buildHistory) {
         mSwipeRefreshLayout.setRefreshing(false);
         mProgressBar.setVisibility(View.GONE);
 

@@ -6,7 +6,7 @@ final class TravisCommandLeaf implements LogEntryComponent {
     private final String mType;
     private final String mName;
 
-    TravisCommandLeaf(String command, String type, String name) {
+    TravisCommandLeaf(final String command, final String type, final String name) {
         mCommand = command;
         mType = type;
         mName = name;
