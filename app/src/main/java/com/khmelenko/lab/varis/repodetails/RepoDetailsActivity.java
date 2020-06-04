@@ -261,11 +261,9 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
   protected void onActivityResult(final int requestCode, final int resultCode,
                                   final Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if (resultCode == RESULT_OK) {
-      if (requestCode == BUILD_DETAILS_REQUEST_CODE) {
-        mReloadRequired |= data.getBooleanExtra(
-            BuildDetailsActivity.BUILD_STATE_CHANGED, false);
-      }
+    if ((resultCode == RESULT_OK) && (requestCode == BUILD_DETAILS_REQUEST_CODE)) {
+      mReloadRequired |= data.getBooleanExtra(
+          BuildDetailsActivity.BUILD_STATE_CHANGED, false);
     }
   }
 
