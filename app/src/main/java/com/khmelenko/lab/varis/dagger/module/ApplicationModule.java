@@ -16,15 +16,15 @@ import javax.inject.Singleton;
 @Module
 public abstract class ApplicationModule {
 
-  @Provides
-  @Singleton
-  public static PresenterKeeper<MvpPresenter> providePresenterKeeper() {
-    return new PresenterKeeper<>();
-  }
+@Provides
+@Singleton
+public static PresenterKeeper<MvpPresenter> providePresenterKeeper() {
+	return new PresenterKeeper<>();
+}
 
-  @Provides
-  @Singleton
-  public static Context provideAppContext() {
-    return TravisApp.getAppContext();
-  }
+@Provides
+@Singleton
+public static Context provideAppContext() {
+	return TravisApp.getAppContext();
+}
 }

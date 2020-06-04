@@ -15,15 +15,15 @@ import javax.inject.Singleton;
 @Module
 public abstract class StorageModule {
 
-  @Provides
-  @Singleton
-  public static CacheStorage provideCache() {
-    return CacheStorage.newInstance();
-  }
+@Provides
+@Singleton
+public static CacheStorage provideCache() {
+	return CacheStorage.newInstance();
+}
 
-  @Provides
-  @Singleton
-  public static AppSettings provideAppSettings(final Context context) {
-    return new AppSettings(context);
-  }
+@Provides
+@Singleton
+public static AppSettings provideAppSettings(final Context context) {
+	return new AppSettings(context);
+}
 }

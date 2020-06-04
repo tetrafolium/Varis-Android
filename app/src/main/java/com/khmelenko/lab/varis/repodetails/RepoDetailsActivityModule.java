@@ -12,10 +12,10 @@ import dagger.multibindings.IntoMap;
  */
 @Module(subcomponents = RepoDetailsActivitySubcomponent.class)
 public abstract class RepoDetailsActivityModule {
-  @Binds
-  @IntoMap
-  @ActivityKey(RepoDetailsActivity.class)
-  abstract AndroidInjector.Factory<? extends Activity>
-  bindRepoDetailsActivityInjectorFactory(
-      RepoDetailsActivitySubcomponent.Builder builder);
+@Binds
+@IntoMap
+@ActivityKey(RepoDetailsActivity.class)
+abstract AndroidInjector.Factory<? extends Activity>
+bindRepoDetailsActivityInjectorFactory(
+	RepoDetailsActivitySubcomponent.Builder builder);
 }

@@ -17,111 +17,112 @@ import java.io.OutputStreamWriter;
  */
 public final class FileUtils {
 
-  private FileUtils() {}
+private FileUtils() {
+}
 
-  /**
-   * Writes data to the file in internal memory
-   *
-   * @param fileName Filename
-   * @param data     Data for saving
-   */
-  public static void writeInternalFile(final String fileName,
-                                       final String data) {
-    Context context = TravisApp.getAppContext();
-    writeInternalFile(fileName, data, context);
-  }
+/**
+ * Writes data to the file in internal memory
+ *
+ * @param fileName Filename
+ * @param data     Data for saving
+ */
+public static void writeInternalFile(final String fileName,
+                                     final String data) {
+	Context context = TravisApp.getAppContext();
+	writeInternalFile(fileName, data, context);
+}
 
-  /**
-   * Writes data to the file in internal memory
-   *
-   * @param fileName File name
-   * @param data     Data for saving
-   * @param context  Context
-   */
-  public static void writeInternalFile(final String fileName, final String data,
-                                       final Context context) {
-    try {
-      FileOutputStream stream =
-          context.openFileOutput(fileName, Context.MODE_PRIVATE);
-      OutputStreamWriter outputWriter = new OutputStreamWriter(stream);
-      outputWriter.write(data);
-      outputWriter.close();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+/**
+ * Writes data to the file in internal memory
+ *
+ * @param fileName File name
+ * @param data     Data for saving
+ * @param context  Context
+ */
+public static void writeInternalFile(final String fileName, final String data,
+                                     final Context context) {
+	try {
+		FileOutputStream stream =
+			context.openFileOutput(fileName, Context.MODE_PRIVATE);
+		OutputStreamWriter outputWriter = new OutputStreamWriter(stream);
+		outputWriter.write(data);
+		outputWriter.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
 
-  /**
-   * Reads data from the file in internal memory
-   *
-   * @param fileName Filename
-   * @return File content
-   */
-  public static String readInternalFile(final String fileName) {
-    Context context = TravisApp.getAppContext();
-    return readInternalFile(fileName, context);
-  }
+/**
+ * Reads data from the file in internal memory
+ *
+ * @param fileName Filename
+ * @return File content
+ */
+public static String readInternalFile(final String fileName) {
+	Context context = TravisApp.getAppContext();
+	return readInternalFile(fileName, context);
+}
 
-  /**
-   * Reads data from the file in internal memory
-   *
-   * @param fileName File name
-   * @param context  Context
-   * @return Read data
-   */
-  public static String readInternalFile(final String fileName,
-                                        final Context context) {
-    String dataFromFile = "";
+/**
+ * Reads data from the file in internal memory
+ *
+ * @param fileName File name
+ * @param context  Context
+ * @return Read data
+ */
+public static String readInternalFile(final String fileName,
+                                      final Context context) {
+	String dataFromFile = "";
 
-    File file = context.getFileStreamPath(fileName);
-    if (file.exists()) {
+	File file = context.getFileStreamPath(fileName);
+	if (file.exists()) {
 
-      try {
-        InputStream inputStream = context.openFileInput(fileName);
-        if (inputStream != null) {
-          InputStreamReader inputStreamReader =
-              new InputStreamReader(inputStream);
-          BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-          String receiveString = "";
-          StringBuilder stringBuilder = new StringBuilder();
+		try {
+			InputStream inputStream = context.openFileInput(fileName);
+			if (inputStream != null) {
+				InputStreamReader inputStreamReader =
+					new InputStreamReader(inputStream);
+				BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+				String receiveString = "";
+				StringBuilder stringBuilder = new StringBuilder();
 
-          while ((receiveString = bufferedReader.readLine()) != null) {
-            stringBuilder.append(receiveString);
-          }
+				while ((receiveString = bufferedReader.readLine()) != null) {
+					stringBuilder.append(receiveString);
+				}
 
-          inputStream.close();
-          dataFromFile = stringBuilder.toString();
-        }
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
+				inputStream.close();
+				dataFromFile = stringBuilder.toString();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    return dataFromFile;
-  }
+	return dataFromFile;
+}
 
-  /**
-   * Deletes the file in internal memory
-   *
-   * @param fileName Filename
-   */
-  public static void deleteInternalFile(final String fileName) {
-    Context context = TravisApp.getAppContext();
-    deleteInternalFile(fileName, context);
-  }
+/**
+ * Deletes the file in internal memory
+ *
+ * @param fileName Filename
+ */
+public static void deleteInternalFile(final String fileName) {
+	Context context = TravisApp.getAppContext();
+	deleteInternalFile(fileName, context);
+}
 
-  /**
-   * Deletes the file in internal memory
-   *
-   * @param fileName File name
-   * @param context  Context
-   */
-  public static void deleteInternalFile(final String fileName,
-                                        final Context context) {
-    try {
-      context.deleteFile(fileName);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
+/**
+ * Deletes the file in internal memory
+ *
+ * @param fileName File name
+ * @param context  Context
+ */
+public static void deleteInternalFile(final String fileName,
+                                      final Context context) {
+	try {
+		context.deleteFile(fileName);
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
 }

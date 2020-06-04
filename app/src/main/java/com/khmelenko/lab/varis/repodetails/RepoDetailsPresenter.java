@@ -16,112 +16,116 @@ import javax.inject.Inject;
  */
 public class RepoDetailsPresenter extends MvpPresenter<RepoDetailsView> {
 
-  private final TravisRestClient mTravisRestClient;
+private final TravisRestClient mTravisRestClient;
 
-  private String mRepoSlug;
+private String mRepoSlug;
 
-  private CompositeDisposable mSubscriptions;
+private CompositeDisposable mSubscriptions;
 
-  @Inject
-  public RepoDetailsPresenter(final TravisRestClient travisRestClient) {
-    mTravisRestClient = travisRestClient;
+@Inject
+public RepoDetailsPresenter(final TravisRestClient travisRestClient) {
+	mTravisRestClient = travisRestClient;
 
-    mSubscriptions = new CompositeDisposable();
-  }
+	mSubscriptions = new CompositeDisposable();
+}
 
-  @Override
-  public void onAttach() {
-    // do nothing
-  }
+@Override
+public void onAttach() {
+	// do nothing
+}
 
-  @Override
-  public void onDetach() {
-    mSubscriptions.clear();
-  }
+@Override
+public void onDetach() {
+	mSubscriptions.clear();
+}
 
-  /**
-   * Starts loading build history
-   */
-  public void loadBuildsHistory() {
-    Disposable subscription =
-        mTravisRestClient.getApiService()
-            .getBuilds(mRepoSlug)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe((buildHistory, throwable) -> {
-              if (throwable == null) {
-                getView().updateBuildHistory(buildHistory);
-              } else {
-                getView().showBuildHistoryLoadingError(throwable.getMessage());
-              }
-            });
-    mSubscriptions.add(subscription);
-  }
+/**
+ * Starts loading build history
+ */
+public void loadBuildsHistory() {
+	Disposable subscription =
+		mTravisRestClient.getApiService()
+		.getBuilds(mRepoSlug)
+		.subscribeOn(Schedulers.io())
+		.observeOn(AndroidSchedulers.mainThread())
+		.subscribe((buildHistory, throwable)->{
+			if (throwable == null) {
+			        getView().updateBuildHistory(buildHistory);
+			} else {
+			        getView().showBuildHistoryLoadingError(throwable.getMessage());
+			}
+		});
+	mSubscriptions.add(subscription);
+}
 
-  /**
-   * Starts loading branches
-   */
-  public void loadBranches() {
-    Disposable subscription =
-        mTravisRestClient.getApiService()
-            .getBranches(mRepoSlug)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe((branches, throwable) -> {
-              if (throwable == null) {
-                getView().updateBranches(branches);
-              } else {
-                getView().showBranchesLoadingError(throwable.getMessage());
-              }
-            });
-    mSubscriptions.add(subscription);
-  }
+/**
+ * Starts loading branches
+ */
+public void loadBranches() {
+	Disposable subscription =
+		mTravisRestClient.getApiService()
+		.getBranches(mRepoSlug)
+		.subscribeOn(Schedulers.io())
+		.observeOn(AndroidSchedulers.mainThread())
+		.subscribe((branches, throwable)->{
+			if (throwable == null) {
+			        getView().updateBranches(branches);
+			} else {
+			        getView().showBranchesLoadingError(throwable.getMessage());
+			}
+		});
+	mSubscriptions.add(subscription);
+}
 
-  /**
-   * Starts loading requests
-   */
-  public void loadRequests() {
-    Disposable subscription =
-        Single
-            .zip(mTravisRestClient.getApiService().getRequests(mRepoSlug),
-                 mTravisRestClient.getApiService().getPullRequestBuilds(
-                     mRepoSlug),
-                 (requests, buildHistory) -> {
-                   requests.setBuilds(buildHistory.getBuilds());
-                   return requests;
-                 })
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe((requests, throwable) -> {
-              if (throwable == null) {
-                getView().updatePullRequests(requests);
-              } else {
-                getView().showPullRequestsLoadingError(throwable.getMessage());
-              }
-            });
-    mSubscriptions.add(subscription);
-  }
+/**
+ * Starts loading requests
+ */
+public void loadRequests() {
+	Disposable subscription =
+		Single
+		.zip(mTravisRestClient.getApiService().getRequests(mRepoSlug),
+		     mTravisRestClient.getApiService().getPullRequestBuilds(
+			     mRepoSlug),
+		     (requests, buildHistory)->{
+			requests.setBuilds(buildHistory.getBuilds());
+			return requests;
+		})
+		.subscribeOn(Schedulers.io())
+		.observeOn(AndroidSchedulers.mainThread())
+		.subscribe((requests, throwable)->{
+			if (throwable == null) {
+			        getView().updatePullRequests(requests);
+			} else {
+			        getView().showPullRequestsLoadingError(throwable.getMessage());
+			}
+		});
+	mSubscriptions.add(subscription);
+}
 
-  /**
-   * Sets repository slug
-   *
-   * @param repoSlug Repository slug
-   */
-  public void setRepoSlug(final String repoSlug) { mRepoSlug = repoSlug; }
+/**
+ * Sets repository slug
+ *
+ * @param repoSlug Repository slug
+ */
+public void setRepoSlug(final String repoSlug) {
+	mRepoSlug = repoSlug;
+}
 
-  /**
-   * Gets repository slug
-   *
-   * @return Repository slug
-   */
-  public String getRepoSlug() { return mRepoSlug; }
+/**
+ * Gets repository slug
+ *
+ * @return Repository slug
+ */
+public String getRepoSlug() {
+	return mRepoSlug;
+}
 
-  /**
-   * Loads repository details data
-   */
-  public void loadData() {
-    loadBuildsHistory();
-    loadBranches();
-    loadRequests();
-  }
+/**
+ * Loads repository details data
+ */
+public void loadData() {
+	loadBuildsHistory();
+	loadBranches();
+	loadRequests();
+}
 }

@@ -11,17 +11,17 @@ import java.util.List;
  */
 public interface SearchResultsView extends MvpView {
 
-  /**
-   * Set the results with the list of repositories
-   *
-   * @param repos Found repositories
-   */
-  void setSearchResults(List<Repo> repos);
+/**
+ * Set the results with the list of repositories
+ *
+ * @param repos Found repositories
+ */
+void setSearchResults(List<Repo> repos);
 
-  /**
-   * Shows loading error
-   *
-   * @param message Error message
-   */
-  void showLoadingError(String message);
+/**
+ * Shows loading error
+ *
+ * @param message Error message
+ */
+void showLoadingError(String message);
 }

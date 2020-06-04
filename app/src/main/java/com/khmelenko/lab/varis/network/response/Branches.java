@@ -11,23 +11,27 @@ import java.util.List;
  */
 public final class Branches {
 
-  @SerializedName("branches") private List<Branch> mBranches;
+@SerializedName("branches") private List<Branch> mBranches;
 
-  @SerializedName("commits") private List<Commit> mCommits;
+@SerializedName("commits") private List<Commit> mCommits;
 
-  // TODO
-  //    @SerializedName("jobs")
-  //    private List<Job> mJobs;
+// TODO
+//    @SerializedName("jobs")
+//    private List<Job> mJobs;
 
-  public List<Branch> getBranches() {
-    return Collections.unmodifiableList(mBranches);
-  }
+public List<Branch> getBranches() {
+	return Collections.unmodifiableList(mBranches);
+}
 
-  public List<Commit> getCommits() {
-    return Collections.unmodifiableList(mCommits);
-  }
+public List<Commit> getCommits() {
+	return Collections.unmodifiableList(mCommits);
+}
 
-  public void setBranches(final List<Branch> branches) { mBranches = branches; }
+public void setBranches(final List<Branch> branches) {
+	mBranches = branches;
+}
 
-  public void setCommits(final List<Commit> commits) { mCommits = commits; }
+public void setCommits(final List<Commit> commits) {
+	mCommits = commits;
+}
 }

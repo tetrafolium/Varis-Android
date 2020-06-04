@@ -28,48 +28,48 @@ import org.junit.Test;
  */
 public class TestSearchResultsPresenter {
 
-  @Rule public RxJavaRules mRxJavaRules = new RxJavaRules();
+@Rule public RxJavaRules mRxJavaRules = new RxJavaRules();
 
-  @Inject TravisRestClient mTravisRestClient;
+@Inject TravisRestClient mTravisRestClient;
 
-  private SearchResultsPresenter mSearchResultsPresenter;
+private SearchResultsPresenter mSearchResultsPresenter;
 
-  private SearchResultsView mSearchResultsView;
+private SearchResultsView mSearchResultsView;
 
-  @Before
-  public void setup() {
-    TestComponent component = DaggerTestComponent.builder().build();
-    component.inject(this);
+@Before
+public void setup() {
+	TestComponent component = DaggerTestComponent.builder().build();
+	component.inject(this);
 
-    mSearchResultsPresenter =
-        spy(new SearchResultsPresenter(mTravisRestClient));
-    mSearchResultsView = mock(SearchResultsView.class);
-    mSearchResultsPresenter.attach(mSearchResultsView);
-  }
+	mSearchResultsPresenter =
+		spy(new SearchResultsPresenter(mTravisRestClient));
+	mSearchResultsView = mock(SearchResultsView.class);
+	mSearchResultsPresenter.attach(mSearchResultsView);
+}
 
-  @Test
-  public void testStartRepoSearch() {
-    final String searchQuery = "test";
-    final List<Repo> responseData = new ArrayList<>();
-    when(mTravisRestClient.getApiService().getRepos(searchQuery))
-        .thenReturn(Single.just(responseData));
+@Test
+public void testStartRepoSearch() {
+	final String searchQuery = "test";
+	final List<Repo> responseData = new ArrayList<>();
+	when(mTravisRestClient.getApiService().getRepos(searchQuery))
+	.thenReturn(Single.just(responseData));
 
-    mSearchResultsPresenter.startRepoSearch(searchQuery);
-    verify(mSearchResultsView).hideProgress();
-    verify(mSearchResultsView).setSearchResults(eq(responseData));
-  }
+	mSearchResultsPresenter.startRepoSearch(searchQuery);
+	verify(mSearchResultsView).hideProgress();
+	verify(mSearchResultsView).setSearchResults(eq(responseData));
+}
 
-  @Test
-  public void testStartRepoSearchFailed() {
-    final String searchQuery = "test";
+@Test
+public void testStartRepoSearchFailed() {
+	final String searchQuery = "test";
 
-    final String errorMsg = "error";
-    Exception exception = new Exception(errorMsg);
-    when(mTravisRestClient.getApiService().getRepos(searchQuery))
-        .thenReturn(Single.error(exception));
+	final String errorMsg = "error";
+	Exception exception = new Exception(errorMsg);
+	when(mTravisRestClient.getApiService().getRepos(searchQuery))
+	.thenReturn(Single.error(exception));
 
-    mSearchResultsPresenter.startRepoSearch(searchQuery);
-    verify(mSearchResultsView).hideProgress();
-    verify(mSearchResultsView).showLoadingError(eq(exception.getMessage()));
-  }
+	mSearchResultsPresenter.startRepoSearch(searchQuery);
+	verify(mSearchResultsView).hideProgress();
+	verify(mSearchResultsView).showLoadingError(eq(exception.getMessage()));
+}
 }

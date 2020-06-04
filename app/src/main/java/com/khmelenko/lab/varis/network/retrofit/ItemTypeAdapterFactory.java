@@ -17,39 +17,39 @@ import java.io.IOException;
  */
 public final class ItemTypeAdapterFactory implements TypeAdapterFactory {
 
-  public <T> TypeAdapter<T> create(final Gson gson, final TypeToken<T> type) {
+public <T> TypeAdapter<T> create(final Gson gson, final TypeToken<T> type) {
 
-    final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
-    final TypeAdapter<JsonElement> elementAdapter =
-        gson.getAdapter(JsonElement.class);
+	final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
+	final TypeAdapter<JsonElement> elementAdapter =
+		gson.getAdapter(JsonElement.class);
 
-    return new TypeAdapter<T>() {
-      public void write(final JsonWriter out, final T value)
-          throws IOException {
-        delegate.write(out, value);
-      }
+	return new TypeAdapter<T>() {
+		       public void write(final JsonWriter out, final T value)
+		       throws IOException {
+			       delegate.write(out, value);
+		       }
 
-      public T read(final JsonReader in) throws IOException {
+		       public T read(final JsonReader in) throws IOException {
 
-        JsonElement jsonElement = elementAdapter.read(in);
-        if (jsonElement.isJsonObject()) {
-          JsonObject jsonObject = jsonElement.getAsJsonObject();
-          // fetch repositories
-          if (jsonObject.has("repos") &&
-              jsonObject.get("repos").isJsonArray()) {
-            jsonElement = jsonObject.get("repos");
-          }
+			       JsonElement jsonElement = elementAdapter.read(in);
+			       if (jsonElement.isJsonObject()) {
+				       JsonObject jsonObject = jsonElement.getAsJsonObject();
+				       // fetch repositories
+				       if (jsonObject.has("repos") &&
+				           jsonObject.get("repos").isJsonArray()) {
+					       jsonElement = jsonObject.get("repos");
+				       }
 
-          // fetch user
-          if (jsonObject.has("user") && jsonObject.get("user").isJsonObject()) {
-            jsonElement = jsonObject.get("user");
-          }
+				       // fetch user
+				       if (jsonObject.has("user") && jsonObject.get("user").isJsonObject()) {
+					       jsonElement = jsonObject.get("user");
+				       }
 
-          // NOTE Add more objects here, if needed
-        }
+				       // NOTE Add more objects here, if needed
+			       }
 
-        return delegate.fromJsonTree(jsonElement);
-      }
-    }.nullSafe();
-  }
+			       return delegate.fromJsonTree(jsonElement);
+		       }
+	}.nullSafe();
+}
 }

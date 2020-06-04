@@ -17,53 +17,53 @@ import com.khmelenko.lab.varis.network.response.Commit;
  * @author Dmytro Khmelenko
  */
 public final class BuildListAdapter
-    extends RecyclerView.Adapter<BuildViewHolder> {
+	extends RecyclerView.Adapter<BuildViewHolder> {
 
-  private BuildHistory mBuildHistory;
-  private final OnListItemListener mListener;
+private BuildHistory mBuildHistory;
+private final OnListItemListener mListener;
 
-  public BuildListAdapter(final BuildHistory buildHistory,
-                          final OnListItemListener listener) {
-    mBuildHistory = buildHistory;
-    mListener = listener;
-  }
+public BuildListAdapter(final BuildHistory buildHistory,
+                        final OnListItemListener listener) {
+	mBuildHistory = buildHistory;
+	mListener = listener;
+}
 
-  @Override
-  public BuildViewHolder onCreateViewHolder(final ViewGroup parent,
-                                            final int viewType) {
-    View v = LayoutInflater.from(parent.getContext())
-                 .inflate(R.layout.item_build_view, parent, false);
-    return new BuildViewHolder(v, mListener);
-  }
+@Override
+public BuildViewHolder onCreateViewHolder(final ViewGroup parent,
+                                          final int viewType) {
+	View v = LayoutInflater.from(parent.getContext())
+	         .inflate(R.layout.item_build_view, parent, false);
+	return new BuildViewHolder(v, mListener);
+}
 
-  @Override
-  public void onBindViewHolder(final BuildViewHolder holder,
-                               final int position) {
-    if (mBuildHistory != null) {
-      Build build = mBuildHistory.getBuilds().get(position);
-      Commit relatedCommit = null;
-      for (Commit commit : mBuildHistory.getCommits()) {
-        if (build.getCommitId() == commit.getId()) {
-          relatedCommit = commit;
-          break;
-        }
-      }
-      holder.mBuildView.setState(build);
-      holder.mBuildView.setCommit(relatedCommit);
-    }
-  }
+@Override
+public void onBindViewHolder(final BuildViewHolder holder,
+                             final int position) {
+	if (mBuildHistory != null) {
+		Build build = mBuildHistory.getBuilds().get(position);
+		Commit relatedCommit = null;
+		for (Commit commit : mBuildHistory.getCommits()) {
+			if (build.getCommitId() == commit.getId()) {
+				relatedCommit = commit;
+				break;
+			}
+		}
+		holder.mBuildView.setState(build);
+		holder.mBuildView.setCommit(relatedCommit);
+	}
+}
 
-  @Override
-  public int getItemCount() {
-    return mBuildHistory != null ? mBuildHistory.getBuilds().size() : 0;
-  }
+@Override
+public int getItemCount() {
+	return mBuildHistory != null ? mBuildHistory.getBuilds().size() : 0;
+}
 
-  /**
-   * Sets build history
-   *
-   * @param buildHistory Build history
-   */
-  public void setBuildHistory(final BuildHistory buildHistory) {
-    mBuildHistory = buildHistory;
-  }
+/**
+ * Sets build history
+ *
+ * @param buildHistory Build history
+ */
+public void setBuildHistory(final BuildHistory buildHistory) {
+	mBuildHistory = buildHistory;
+}
 }

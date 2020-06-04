@@ -12,9 +12,9 @@ import dagger.multibindings.IntoMap;
  */
 @Module(subcomponents = AuthActivitySubcomponent.class)
 public abstract class AuthActivityModule {
-  @Binds
-  @IntoMap
-  @ActivityKey(AuthActivity.class)
-  abstract AndroidInjector.Factory<? extends Activity>
-  bindAuthActivityInjectorFactory(AuthActivitySubcomponent.Builder builder);
+@Binds
+@IntoMap
+@ActivityKey(AuthActivity.class)
+abstract AndroidInjector.Factory<? extends Activity>
+bindAuthActivityInjectorFactory(AuthActivitySubcomponent.Builder builder);
 }

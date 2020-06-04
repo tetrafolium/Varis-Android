@@ -7,15 +7,19 @@ package com.khmelenko.lab.varis.model;
  */
 public final class DrawerItem {
 
-  private final int mIcon;
-  private final String mTitle;
+private final int mIcon;
+private final String mTitle;
 
-  public DrawerItem(final int icon, final String text) {
-    mIcon = icon;
-    mTitle = text;
-  }
+public DrawerItem(final int icon, final String text) {
+	mIcon = icon;
+	mTitle = text;
+}
 
-  public int getIcon() { return mIcon; }
+public int getIcon() {
+	return mIcon;
+}
 
-  public String getTitle() { return mTitle; }
+public String getTitle() {
+	return mTitle;
+}
 }

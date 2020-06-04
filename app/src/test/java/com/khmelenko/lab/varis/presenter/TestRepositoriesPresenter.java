@@ -36,71 +36,71 @@ import org.mockito.ArgumentCaptor;
  */
 public class TestRepositoriesPresenter {
 
-  @Rule public RxJavaRules mRxJavaRules = new RxJavaRules();
+@Rule public RxJavaRules mRxJavaRules = new RxJavaRules();
 
-  @Inject TravisRestClient mTravisRestClient;
+@Inject TravisRestClient mTravisRestClient;
 
-  @Inject CacheStorage mCacheStorage;
+@Inject CacheStorage mCacheStorage;
 
-  @Inject AppSettings mAppSettings;
+@Inject AppSettings mAppSettings;
 
-  private RepositoriesPresenter mRepositoriesPresenter;
+private RepositoriesPresenter mRepositoriesPresenter;
 
-  private RepositoriesView mRepositoriesView;
+private RepositoriesView mRepositoriesView;
 
-  @Before
-  public void setup() {
-    TestComponent component = DaggerTestComponent.builder().build();
-    component.inject(this);
+@Before
+public void setup() {
+	TestComponent component = DaggerTestComponent.builder().build();
+	component.inject(this);
 
-    final List<Repo> responseData = new ArrayList<>();
-    when(mTravisRestClient.getApiService().getRepos(""))
-        .thenReturn(Single.just(responseData));
+	final List<Repo> responseData = new ArrayList<>();
+	when(mTravisRestClient.getApiService().getRepos(""))
+	.thenReturn(Single.just(responseData));
 
-    mRepositoriesPresenter = spy(new RepositoriesPresenter(
-        mTravisRestClient, mCacheStorage, mAppSettings));
-    mRepositoriesView = mock(RepositoriesView.class);
-    mRepositoriesPresenter.attach(mRepositoriesView);
-  }
+	mRepositoriesPresenter = spy(new RepositoriesPresenter(
+					     mTravisRestClient, mCacheStorage, mAppSettings));
+	mRepositoriesView = mock(RepositoriesView.class);
+	mRepositoriesPresenter.attach(mRepositoriesView);
+}
 
-  @Test
-  public void testReloadRepos() {
-    final List<Repo> responseData = new ArrayList<>();
-    when(mTravisRestClient.getApiService().getRepos())
-        .thenReturn(Single.just(responseData));
+@Test
+public void testReloadRepos() {
+	final List<Repo> responseData = new ArrayList<>();
+	when(mTravisRestClient.getApiService().getRepos())
+	.thenReturn(Single.just(responseData));
 
-    mRepositoriesPresenter.reloadRepos();
-    verify(mRepositoriesView, times(2)).hideProgress();
-    verify(mRepositoriesView, times(2)).setRepos(eq(responseData));
-  }
+	mRepositoriesPresenter.reloadRepos();
+	verify(mRepositoriesView, times(2)).hideProgress();
+	verify(mRepositoriesView, times(2)).setRepos(eq(responseData));
+}
 
-  @Test
-  public void testReloadReposWithToken() {
-    User user = new User();
-    user.setLogin("login");
-    when(mTravisRestClient.getApiService().getUser())
-        .thenReturn(Single.just(user));
-    when(mAppSettings.getAccessToken()).thenReturn("token");
+@Test
+public void testReloadReposWithToken() {
+	User user = new User();
+	user.setLogin("login");
+	when(mTravisRestClient.getApiService().getUser())
+	.thenReturn(Single.just(user));
+	when(mAppSettings.getAccessToken()).thenReturn("token");
 
-    mRepositoriesPresenter.reloadRepos();
+	mRepositoriesPresenter.reloadRepos();
 
-    ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
-    verify(mRepositoriesView, times(2)).updateUserData(userCaptor.capture());
-    assertNotNull(userCaptor.getValue());
-    assertEquals(user.getLogin(), userCaptor.getValue().getLogin());
+	ArgumentCaptor<User> userCaptor = ArgumentCaptor.forClass(User.class);
+	verify(mRepositoriesView, times(2)).updateUserData(userCaptor.capture());
+	assertNotNull(userCaptor.getValue());
+	assertEquals(user.getLogin(), userCaptor.getValue().getLogin());
 
-    verify(mCacheStorage).saveUser(eq(user));
-  }
+	verify(mCacheStorage).saveUser(eq(user));
+}
 
-  @Test
-  public void testUserLogout() {
-    when(mAppSettings.getServerUrl())
-        .thenReturn(Constants.OPEN_SOURCE_TRAVIS_URL);
+@Test
+public void testUserLogout() {
+	when(mAppSettings.getServerUrl())
+	.thenReturn(Constants.OPEN_SOURCE_TRAVIS_URL);
 
-    mRepositoriesPresenter.userLogout();
-    verify(mCacheStorage).deleteUser();
-    verify(mCacheStorage).deleteRepos();
-    verify(mTravisRestClient)
-        .updateTravisEndpoint(eq(Constants.OPEN_SOURCE_TRAVIS_URL));
-  }
+	mRepositoriesPresenter.userLogout();
+	verify(mCacheStorage).deleteUser();
+	verify(mCacheStorage).deleteRepos();
+	verify(mTravisRestClient)
+	.updateTravisEndpoint(eq(Constants.OPEN_SOURCE_TRAVIS_URL));
+}
 }

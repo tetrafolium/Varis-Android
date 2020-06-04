@@ -17,69 +17,71 @@ import retrofit2.Retrofit;
  */
 public class TravisRestClient {
 
-  private final Retrofit mRetrofit;
+private final Retrofit mRetrofit;
 
-  private final OkHttpClient mOkHttpClient;
+private final OkHttpClient mOkHttpClient;
 
-  private final AppSettings mAppSettings;
+private final AppSettings mAppSettings;
 
-  private TravisApiService mApiService;
+private TravisApiService mApiService;
 
-  public TravisRestClient(final Retrofit retrofit,
-                          final OkHttpClient okHttpClient,
-                          final AppSettings appSettings) {
-    mRetrofit = retrofit;
-    mOkHttpClient = okHttpClient;
-    mAppSettings = appSettings;
-    final String travisUrl = appSettings.getServerUrl();
-    updateTravisEndpoint(travisUrl);
-  }
+public TravisRestClient(final Retrofit retrofit,
+                        final OkHttpClient okHttpClient,
+                        final AppSettings appSettings) {
+	mRetrofit = retrofit;
+	mOkHttpClient = okHttpClient;
+	mAppSettings = appSettings;
+	final String travisUrl = appSettings.getServerUrl();
+	updateTravisEndpoint(travisUrl);
+}
 
-  /**
-   * Updates Travis endpoint
-   *
-   * @param newEndpoint New endpoint
-   */
-  public void updateTravisEndpoint(final String newEndpoint) {
-    Retrofit retrofit = mRetrofit.newBuilder()
-                            .baseUrl(newEndpoint)
-                            .client(getHttpClient())
-                            .build();
+/**
+ * Updates Travis endpoint
+ *
+ * @param newEndpoint New endpoint
+ */
+public void updateTravisEndpoint(final String newEndpoint) {
+	Retrofit retrofit = mRetrofit.newBuilder()
+	                    .baseUrl(newEndpoint)
+	                    .client(getHttpClient())
+	                    .build();
 
-    mApiService = retrofit.create(TravisApiService.class);
-  }
+	mApiService = retrofit.create(TravisApiService.class);
+}
 
-  private OkHttpClient getHttpClient() {
-    final String userAgent =
-        String.format("TravisClient/%1$s", PackageUtils.getAppVersion());
+private OkHttpClient getHttpClient() {
+	final String userAgent =
+		String.format("TravisClient/%1$s", PackageUtils.getAppVersion());
 
-    return mOkHttpClient.newBuilder()
-        .addInterceptor(new Interceptor() {
-          @Override
-          public Response intercept(final Chain chain) throws IOException {
-            Request original = chain.request();
+	return mOkHttpClient.newBuilder()
+	       .addInterceptor(new Interceptor() {
+			@Override
+			public Response intercept(final Chain chain) throws IOException {
+			        Request original = chain.request();
 
-            Request.Builder request =
-                original.newBuilder()
-                    .header("User-Agent", userAgent)
-                    .header("Accept", "application/vnd.travis-ci.2+json");
+			        Request.Builder request =
+					original.newBuilder()
+					.header("User-Agent", userAgent)
+					.header("Accept", "application/vnd.travis-ci.2+json");
 
-            String accessToken = mAppSettings.getAccessToken();
-            if (!TextUtils.isEmpty(accessToken)) {
-              String headerValue = String.format("token %1$s", accessToken);
-              request.addHeader("Authorization", headerValue);
-            }
+			        String accessToken = mAppSettings.getAccessToken();
+			        if (!TextUtils.isEmpty(accessToken)) {
+			                String headerValue = String.format("token %1$s", accessToken);
+			                request.addHeader("Authorization", headerValue);
+				}
 
-            return chain.proceed(request.build());
-          }
-        })
-        .build();
-  }
+			        return chain.proceed(request.build());
+			}
+		})
+	       .build();
+}
 
-  /**
-   * Gets travis API service
-   *
-   * @return Travis API service
-   */
-  public TravisApiService getApiService() { return mApiService; }
+/**
+ * Gets travis API service
+ *
+ * @return Travis API service
+ */
+public TravisApiService getApiService() {
+	return mApiService;
+}
 }

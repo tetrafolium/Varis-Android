@@ -22,115 +22,117 @@ import com.khmelenko.lab.varis.log.LogEntryComponent;
  */
 public class RawLogFragment extends Fragment {
 
-  @BindView(R.id.raw_log_webview) WebView mWebView;
+@BindView(R.id.raw_log_webview) WebView mWebView;
 
-  @BindView(R.id.progressbar) ProgressBar mProgressBar;
+@BindView(R.id.progressbar) ProgressBar mProgressBar;
 
-  @BindView(R.id.empty_text) TextView mEmptyText;
+@BindView(R.id.empty_text) TextView mEmptyText;
 
-  private OnRawLogFragmentListener mListener;
+private OnRawLogFragmentListener mListener;
 
-  public RawLogFragment() {
+public RawLogFragment() {
 
-    // Required empty public constructor
-  }
+	// Required empty public constructor
+}
 
-  /**
-   * Creates an instance of the fragment
-   *
-   * @return Fragment instance
-   */
-  public static RawLogFragment newInstance() { return new RawLogFragment(); }
+/**
+ * Creates an instance of the fragment
+ *
+ * @return Fragment instance
+ */
+public static RawLogFragment newInstance() {
+	return new RawLogFragment();
+}
 
-  @Override
-  public View onCreateView(final LayoutInflater inflater,
-                           final ViewGroup container,
-                           final Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    View view = inflater.inflate(R.layout.fragment_raw_log, container, false);
-    ButterKnife.bind(this, view);
-    showProgress(true);
-    showError(false);
-    return view;
-  }
+@Override
+public View onCreateView(final LayoutInflater inflater,
+                         final ViewGroup container,
+                         final Bundle savedInstanceState) {
+	// Inflate the layout for this fragment
+	View view = inflater.inflate(R.layout.fragment_raw_log, container, false);
+	ButterKnife.bind(this, view);
+	showProgress(true);
+	showError(false);
+	return view;
+}
 
-  @Override
-  public void onAttach(final Context context) {
-    super.onAttach(context);
-    try {
-      mListener = (OnRawLogFragmentListener)context;
-    } catch (ClassCastException e) {
-      throw new ClassCastException(context.toString() +
-                                   " must implement OnRawLogFragmentListener");
-    }
-  }
+@Override
+public void onAttach(final Context context) {
+	super.onAttach(context);
+	try {
+		mListener = (OnRawLogFragmentListener)context;
+	} catch (ClassCastException e) {
+		throw new ClassCastException(context.toString() +
+		                             " must implement OnRawLogFragmentListener");
+	}
+}
 
-  @Override
-  public void onDetach() {
-    super.onDetach();
-    mListener = null;
-  }
+@Override
+public void onDetach() {
+	super.onDetach();
+	mListener = null;
+}
 
-  /**
-   * Shows the loading progress of the fragment
-   *
-   * @param inProgress True, if the progress should be shown. False otherwise
-   */
-  public void showProgress(final boolean inProgress) {
-    if (inProgress) {
-      mProgressBar.setVisibility(View.VISIBLE);
-      mWebView.setVisibility(View.GONE);
-    } else {
-      mProgressBar.setVisibility(View.GONE);
-      mWebView.setVisibility(View.VISIBLE);
-    }
-  }
+/**
+ * Shows the loading progress of the fragment
+ *
+ * @param inProgress True, if the progress should be shown. False otherwise
+ */
+public void showProgress(final boolean inProgress) {
+	if (inProgress) {
+		mProgressBar.setVisibility(View.VISIBLE);
+		mWebView.setVisibility(View.GONE);
+	} else {
+		mProgressBar.setVisibility(View.GONE);
+		mWebView.setVisibility(View.VISIBLE);
+	}
+}
 
-  /**
-   * Shows the error message
-   *
-   * @param isError True, if error text should be shown. False otherwise
-   */
-  public void showError(final boolean isError) {
-    if (isError) {
-      mEmptyText.setVisibility(View.VISIBLE);
-      mEmptyText.setText(R.string.build_details_empty);
-    } else {
-      mEmptyText.setVisibility(View.GONE);
-    }
-  }
+/**
+ * Shows the error message
+ *
+ * @param isError True, if error text should be shown. False otherwise
+ */
+public void showError(final boolean isError) {
+	if (isError) {
+		mEmptyText.setVisibility(View.VISIBLE);
+		mEmptyText.setText(R.string.build_details_empty);
+	} else {
+		mEmptyText.setVisibility(View.GONE);
+	}
+}
 
-  /**
-   * Shows the log in the web view
-   *
-   * @param log Parsed log data
-   */
-  public void showLog(final LogEntryComponent log) {
-    showError(false);
+/**
+ * Shows the log in the web view
+ *
+ * @param log Parsed log data
+ */
+public void showLog(final LogEntryComponent log) {
+	showError(false);
 
-    mWebView.setWebViewClient(new WebViewClient() {
-      @Override
-      public void onPageFinished(final WebView view, final String url) {
-        super.onPageFinished(view, url);
-        if (mListener != null) {
-          mListener.onLogLoaded();
-        }
+	mWebView.setWebViewClient(new WebViewClient() {
+			@Override
+			public void onPageFinished(final WebView view, final String url) {
+			        super.onPageFinished(view, url);
+			        if (mListener != null) {
+			                mListener.onLogLoaded();
+				}
 
-        showProgress(false);
-      }
-    });
+			        showProgress(false);
+			}
+		});
 
-    mWebView.loadData(log.toHtml(), "text/html", "utf-8");
-  }
+	mWebView.loadData(log.toHtml(), "text/html", "utf-8");
+}
 
-  /**
-   * Interface for communication with this fragment
-   */
-  public interface OnRawLogFragmentListener {
+/**
+ * Interface for communication with this fragment
+ */
+public interface OnRawLogFragmentListener {
 
-    /**
-     * Raised when raw log loaded
-     */
-    void onLogLoaded();
-  }
+/**
+ * Raised when raw log loaded
+ */
+void onLogLoaded();
+}
 }
