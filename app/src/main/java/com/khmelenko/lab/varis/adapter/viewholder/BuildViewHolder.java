@@ -14,27 +14,27 @@ import com.khmelenko.lab.varis.widget.BuildView;
  * @author Dmytro Khmelenko
  */
 public final class BuildViewHolder
-    extends RecyclerView.ViewHolder implements View.OnClickListener {
+	extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-  @BindView(R.id.item_build_card_view) View mParent;
+@BindView(R.id.item_build_card_view) View mParent;
 
-  @BindView(R.id.item_build_data) public BuildView mBuildView;
+@BindView(R.id.item_build_data) public BuildView mBuildView;
 
-  private final OnListItemListener mListener;
+private final OnListItemListener mListener;
 
-  public BuildViewHolder(final View itemView,
-                         final OnListItemListener listener) {
-    super(itemView);
-    mListener = listener;
-    ButterKnife.bind(this, itemView);
-    itemView.setClickable(true);
-    mParent.setOnClickListener(this);
-  }
+public BuildViewHolder(final View itemView,
+                       final OnListItemListener listener) {
+	super(itemView);
+	mListener = listener;
+	ButterKnife.bind(this, itemView);
+	itemView.setClickable(true);
+	mParent.setOnClickListener(this);
+}
 
-  @Override
-  public void onClick(final View view) {
-    if (mListener != null) {
-      mListener.onItemSelected(getLayoutPosition());
-    }
-  }
+@Override
+public void onClick(final View view) {
+	if (mListener != null) {
+		mListener.onItemSelected(getLayoutPosition());
+	}
+}
 }

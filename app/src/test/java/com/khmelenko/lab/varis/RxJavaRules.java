@@ -14,36 +14,38 @@ import org.junit.runners.model.Statement;
  */
 public final class RxJavaRules implements TestRule {
 
-  @Override
-  public Statement apply(final Statement base, final Description description) {
-    return new SchedulerStatement(base);
-  }
+@Override
+public Statement apply(final Statement base, final Description description) {
+	return new SchedulerStatement(base);
+}
 
-  private static final class SchedulerStatement extends Statement {
+private static final class SchedulerStatement extends Statement {
 
-    private final Statement mStatement;
+private final Statement mStatement;
 
-    SchedulerStatement(final Statement statement) { mStatement = statement; }
+SchedulerStatement(final Statement statement) {
+	mStatement = statement;
+}
 
-    @Override
-    public void evaluate() throws Throwable {
-      try {
-        setSchedulers();
-        mStatement.evaluate();
-      } finally {
-        resetSchedulers();
-      }
-    }
+@Override
+public void evaluate() throws Throwable {
+	try {
+		setSchedulers();
+		mStatement.evaluate();
+	} finally {
+		resetSchedulers();
+	}
+}
 
-    private void resetSchedulers() {
-      RxAndroidPlugins.reset();
-      RxJavaPlugins.reset();
-    }
+private void resetSchedulers() {
+	RxAndroidPlugins.reset();
+	RxJavaPlugins.reset();
+}
 
-    private void setSchedulers() {
-      RxAndroidPlugins.setInitMainThreadSchedulerHandler(
-          scheduler -> Schedulers.trampoline());
-      RxJavaPlugins.setIoSchedulerHandler(scheduler -> Schedulers.trampoline());
-    }
-  }
+private void setSchedulers() {
+	RxAndroidPlugins.setInitMainThreadSchedulerHandler(
+		scheduler->Schedulers.trampoline());
+	RxJavaPlugins.setIoSchedulerHandler(scheduler->Schedulers.trampoline());
+}
+}
 }

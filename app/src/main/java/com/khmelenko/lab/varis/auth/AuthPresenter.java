@@ -31,172 +31,174 @@ import retrofit2.Response;
  */
 public class AuthPresenter extends MvpPresenter<AuthView> {
 
-  private final TravisRestClient mTravisRestClient;
-  private final GitHubRestClient mGitHubRestClient;
-  private final AppSettings mAppSettings;
+private final TravisRestClient mTravisRestClient;
+private final GitHubRestClient mGitHubRestClient;
+private final AppSettings mAppSettings;
 
-  private final CompositeDisposable mSubscriptions;
+private final CompositeDisposable mSubscriptions;
 
-  private String mBasicAuth;
-  private String mSecurityCode;
-  private Authorization mAuthorization;
+private String mBasicAuth;
+private String mSecurityCode;
+private Authorization mAuthorization;
 
-  private boolean mSecurityCodeInput;
+private boolean mSecurityCodeInput;
 
-  @Inject
-  public AuthPresenter(final TravisRestClient travisRestClient,
-                       final GitHubRestClient gitHubRestClient,
-                       final AppSettings appSettings) {
-    mTravisRestClient = travisRestClient;
-    mGitHubRestClient = gitHubRestClient;
-    mAppSettings = appSettings;
+@Inject
+public AuthPresenter(final TravisRestClient travisRestClient,
+                     final GitHubRestClient gitHubRestClient,
+                     final AppSettings appSettings) {
+	mTravisRestClient = travisRestClient;
+	mGitHubRestClient = gitHubRestClient;
+	mAppSettings = appSettings;
 
-    mSubscriptions = new CompositeDisposable();
-  }
+	mSubscriptions = new CompositeDisposable();
+}
 
-  @Override
-  public void onAttach() {
-    getView().setInputView(mSecurityCodeInput);
-  }
+@Override
+public void onAttach() {
+	getView().setInputView(mSecurityCodeInput);
+}
 
-  @Override
-  public void onDetach() {
-    mSubscriptions.clear();
-  }
+@Override
+public void onDetach() {
+	mSubscriptions.clear();
+}
 
-  /**
-   * Updates server endpoint
-   *
-   * @param newServer New server endpoint
-   */
-  public void updateServer(final String newServer) {
-    mAppSettings.putServerUrl(newServer);
-    mTravisRestClient.updateTravisEndpoint(newServer);
-  }
+/**
+ * Updates server endpoint
+ *
+ * @param newServer New server endpoint
+ */
+public void updateServer(final String newServer) {
+	mAppSettings.putServerUrl(newServer);
+	mTravisRestClient.updateTravisEndpoint(newServer);
+}
 
-  /**
-   * Executes login action
-   *
-   * @param userName Username
-   * @param password Password
-   */
-  public void login(final String userName, final String password) {
-    mBasicAuth = EncryptionUtils.generateBasicAuthorization(userName, password);
+/**
+ * Executes login action
+ *
+ * @param userName Username
+ * @param password Password
+ */
+public void login(final String userName, final String password) {
+	mBasicAuth = EncryptionUtils.generateBasicAuthorization(userName, password);
 
-    doLogin(getAuthorizationJob(false));
-  }
+	doLogin(getAuthorizationJob(false));
+}
 
-  /**
-   * Executes two-factor auth call
-   *
-   * @param securityCode Security code
-   */
-  public void twoFactorAuth(final String securityCode) {
-    mSecurityCode = securityCode;
-    doLogin(getAuthorizationJob(true));
-  }
+/**
+ * Executes two-factor auth call
+ *
+ * @param securityCode Security code
+ */
+public void twoFactorAuth(final String securityCode) {
+	mSecurityCode = securityCode;
+	doLogin(getAuthorizationJob(true));
+}
 
-  /**
-   * Returns server URL
-   *
-   * @return Server URL
-   */
-  public String getServerUrl() { return mAppSettings.getServerUrl(); }
+/**
+ * Returns server URL
+ *
+ * @return Server URL
+ */
+public String getServerUrl() {
+	return mAppSettings.getServerUrl();
+}
 
-  private Single<Authorization>
-  getAuthorizationJob(final boolean twoFactorAuth) {
-    if (twoFactorAuth) {
-      return mGitHubRestClient.getApiService().createNewAuthorization(
-          mBasicAuth, mSecurityCode, prepareAuthorizationRequest());
-    } else {
-      return mGitHubRestClient.getApiService().createNewAuthorization(
-          mBasicAuth, prepareAuthorizationRequest());
-    }
-  }
+private Single<Authorization>
+getAuthorizationJob(final boolean twoFactorAuth) {
+	if (twoFactorAuth) {
+		return mGitHubRestClient.getApiService().createNewAuthorization(
+			mBasicAuth, mSecurityCode, prepareAuthorizationRequest());
+	} else {
+		return mGitHubRestClient.getApiService().createNewAuthorization(
+			mBasicAuth, prepareAuthorizationRequest());
+	}
+}
 
-  private void doLogin(final Single<Authorization> authorizationJob) {
-    Disposable subscription =
-        authorizationJob.flatMap(this::doAuthorization)
-            .doOnSuccess(this::saveAccessToken)
-            .doAfterSuccess(accessToken -> cleanUpAfterAuthorization())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe((authorization, throwable) -> {
-              getView().hideProgress();
+private void doLogin(final Single<Authorization> authorizationJob) {
+	Disposable subscription =
+		authorizationJob.flatMap(this::doAuthorization)
+		.doOnSuccess(this::saveAccessToken)
+		.doAfterSuccess(accessToken->cleanUpAfterAuthorization())
+		.subscribeOn(Schedulers.io())
+		.observeOn(AndroidSchedulers.mainThread())
+		.subscribe((authorization, throwable)->{
+			getView().hideProgress();
 
-              if (throwable == null) {
-                getView().finishView();
-              } else {
-                if (throwable instanceof HttpException &&
-                    isTwoFactorAuthRequired((HttpException)throwable)) {
-                  mSecurityCodeInput = true;
-                  getView().showTwoFactorAuth();
-                } else {
-                  getView().showErrorMessage(throwable.getMessage());
-                }
-              }
-            });
+			if (throwable == null) {
+			        getView().finishView();
+			} else {
+			        if (throwable instanceof HttpException &&
+			            isTwoFactorAuthRequired((HttpException)throwable)) {
+			                mSecurityCodeInput = true;
+			                getView().showTwoFactorAuth();
+				} else {
+			                getView().showErrorMessage(throwable.getMessage());
+				}
+			}
+		});
 
-    mSubscriptions.add(subscription);
-  }
+	mSubscriptions.add(subscription);
+}
 
-  private void cleanUpAfterAuthorization() {
-    // start deletion authorization on Github, because we don't need it anymore
-    Single<Object> cleanUpJob;
-    if (!TextUtils.isEmpty(mSecurityCode)) {
-      cleanUpJob = mGitHubRestClient.getApiService().deleteAuthorization(
-          mBasicAuth, mSecurityCode, String.valueOf(mAuthorization.getId()));
-    } else {
-      cleanUpJob = mGitHubRestClient.getApiService().deleteAuthorization(
-          mBasicAuth, String.valueOf(mAuthorization.getId()));
-    }
-    Disposable task = cleanUpJob.onErrorReturn(throwable -> new Object())
-                          .subscribeOn(Schedulers.io())
-                          .observeOn(AndroidSchedulers.mainThread())
-                          .subscribe();
-    mSubscriptions.add(task);
-  }
+private void cleanUpAfterAuthorization() {
+	// start deletion authorization on Github, because we don't need it anymore
+	Single<Object> cleanUpJob;
+	if (!TextUtils.isEmpty(mSecurityCode)) {
+		cleanUpJob = mGitHubRestClient.getApiService().deleteAuthorization(
+			mBasicAuth, mSecurityCode, String.valueOf(mAuthorization.getId()));
+	} else {
+		cleanUpJob = mGitHubRestClient.getApiService().deleteAuthorization(
+			mBasicAuth, String.valueOf(mAuthorization.getId()));
+	}
+	Disposable task = cleanUpJob.onErrorReturn(throwable->new Object())
+	                  .subscribeOn(Schedulers.io())
+	                  .observeOn(AndroidSchedulers.mainThread())
+	                  .subscribe();
+	mSubscriptions.add(task);
+}
 
-  private void saveAccessToken(final AccessToken accessToken) {
-    // save access token to settings
-    String token = accessToken.getAccessToken();
-    mAppSettings.putAccessToken(token);
-  }
+private void saveAccessToken(final AccessToken accessToken) {
+	// save access token to settings
+	String token = accessToken.getAccessToken();
+	mAppSettings.putAccessToken(token);
+}
 
-  private Single<AccessToken>
-  doAuthorization(final Authorization authorization) {
-    mAuthorization = authorization;
-    AccessTokenRequest request = new AccessTokenRequest();
-    request.setGithubToken(authorization.getToken());
-    return mTravisRestClient.getApiService().auth(request);
-  }
+private Single<AccessToken>
+doAuthorization(final Authorization authorization) {
+	mAuthorization = authorization;
+	AccessTokenRequest request = new AccessTokenRequest();
+	request.setGithubToken(authorization.getToken());
+	return mTravisRestClient.getApiService().auth(request);
+}
 
-  private boolean isTwoFactorAuthRequired(final HttpException exception) {
-    Response response = exception.response();
+private boolean isTwoFactorAuthRequired(final HttpException exception) {
+	Response response = exception.response();
 
-    boolean twoFactorAuthRequired = false;
-    for (String header : response.headers().names()) {
-      if (GithubApiService.TWO_FACTOR_HEADER.equals(header)) {
-        twoFactorAuthRequired = true;
-        break;
-      }
-    }
+	boolean twoFactorAuthRequired = false;
+	for (String header : response.headers().names()) {
+		if (GithubApiService.TWO_FACTOR_HEADER.equals(header)) {
+			twoFactorAuthRequired = true;
+			break;
+		}
+	}
 
-    return response.code() == HttpURLConnection.HTTP_UNAUTHORIZED &&
-        twoFactorAuthRequired;
-  }
+	return response.code() == HttpURLConnection.HTTP_UNAUTHORIZED &&
+	       twoFactorAuthRequired;
+}
 
-  /**
-   * Prepares authorization request
-   *
-   * @return Authorization request
-   */
-  private AuthorizationRequest prepareAuthorizationRequest() {
-    List<String> scopes =
-        Arrays.asList("read:org", "user:email", "repo_deployment",
-                      "repo:status", "write:repo_hook", "repo");
-    String note =
-        String.format("varis_client_%1$s", StringUtils.getRandomString());
-    return new AuthorizationRequest(scopes, note);
-  }
+/**
+ * Prepares authorization request
+ *
+ * @return Authorization request
+ */
+private AuthorizationRequest prepareAuthorizationRequest() {
+	List<String> scopes =
+		Arrays.asList("read:org", "user:email", "repo_deployment",
+		              "repo:status", "write:repo_hook", "repo");
+	String note =
+		String.format("varis_client_%1$s", StringUtils.getRandomString());
+	return new AuthorizationRequest(scopes, note);
+}
 }

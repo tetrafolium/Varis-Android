@@ -25,129 +25,129 @@ import com.khmelenko.lab.varis.network.response.Branches;
  */
 public class BranchesFragment extends Fragment implements OnListItemListener {
 
-  @BindView(R.id.list_refreshable_swipe_view)
-  SwipeRefreshLayout mSwipeRefreshLayout;
+@BindView(R.id.list_refreshable_swipe_view)
+SwipeRefreshLayout mSwipeRefreshLayout;
 
-  @BindView(R.id.list_refreshable_recycler_view)
-  RecyclerView mBranchesRecyclerView;
+@BindView(R.id.list_refreshable_recycler_view)
+RecyclerView mBranchesRecyclerView;
 
-  @BindView(R.id.progressbar) ProgressBar mProgressBar;
+@BindView(R.id.progressbar) ProgressBar mProgressBar;
 
-  @BindView(R.id.empty_text) TextView mEmptyText;
+@BindView(R.id.empty_text) TextView mEmptyText;
 
-  private BranchesListAdapter mBranchesListAdapter;
-  private Branches mBranches;
+private BranchesListAdapter mBranchesListAdapter;
+private Branches mBranches;
 
-  private BranchesListener mListener;
+private BranchesListener mListener;
 
-  /**
-   * Creates new instance of the fragment
-   *
-   * @return Fragment instance
-   */
-  public static BranchesFragment newInstance() {
-    return new BranchesFragment();
-  }
+/**
+ * Creates new instance of the fragment
+ *
+ * @return Fragment instance
+ */
+public static BranchesFragment newInstance() {
+	return new BranchesFragment();
+}
 
-  public BranchesFragment() {
-    // Required empty public constructor
-  }
+public BranchesFragment() {
+	// Required empty public constructor
+}
 
-  @Override
-  public View onCreateView(final LayoutInflater inflater,
-                           final ViewGroup container,
-                           final Bundle savedInstanceState) {
-    View view =
-        inflater.inflate(R.layout.fragment_list_refreshable, container, false);
-    ButterKnife.bind(this, view);
+@Override
+public View onCreateView(final LayoutInflater inflater,
+                         final ViewGroup container,
+                         final Bundle savedInstanceState) {
+	View view =
+		inflater.inflate(R.layout.fragment_list_refreshable, container, false);
+	ButterKnife.bind(this, view);
 
-    mBranchesRecyclerView.setHasFixedSize(true);
+	mBranchesRecyclerView.setHasFixedSize(true);
 
-    LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-    mBranchesRecyclerView.setLayoutManager(layoutManager);
+	LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+	mBranchesRecyclerView.setLayoutManager(layoutManager);
 
-    mBranchesListAdapter = new BranchesListAdapter(mBranches, this);
-    mBranchesRecyclerView.setAdapter(mBranchesListAdapter);
+	mBranchesListAdapter = new BranchesListAdapter(mBranches, this);
+	mBranchesRecyclerView.setAdapter(mBranchesListAdapter);
 
-    mSwipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh_progress);
-    mSwipeRefreshLayout.setOnRefreshListener(
-        () -> mListener.onReloadBranches());
+	mSwipeRefreshLayout.setColorSchemeResources(R.color.swipe_refresh_progress);
+	mSwipeRefreshLayout.setOnRefreshListener(
+		()->mListener.onReloadBranches());
 
-    mProgressBar.setVisibility(View.VISIBLE);
+	mProgressBar.setVisibility(View.VISIBLE);
 
-    return view;
-  }
+	return view;
+}
 
-  /**
-   * Checks whether data existing or not
-   */
-  private void checkIfEmpty() {
-    mEmptyText.setText(R.string.repo_details_branches_empty);
-    if (mBranches == null || mBranches.getBranches().isEmpty()) {
-      mEmptyText.setVisibility(View.VISIBLE);
-    } else {
-      mEmptyText.setVisibility(View.GONE);
-    }
-  }
+/**
+ * Checks whether data existing or not
+ */
+private void checkIfEmpty() {
+	mEmptyText.setText(R.string.repo_details_branches_empty);
+	if (mBranches == null || mBranches.getBranches().isEmpty()) {
+		mEmptyText.setVisibility(View.VISIBLE);
+	} else {
+		mEmptyText.setVisibility(View.GONE);
+	}
+}
 
-  @Override
-  public void onAttach(final Context activity) {
-    super.onAttach(activity);
-    try {
-      mListener = (BranchesListener)activity;
-    } catch (ClassCastException e) {
-      throw new ClassCastException(activity.toString() +
-                                   " must implement BranchesListener");
-    }
-  }
+@Override
+public void onAttach(final Context activity) {
+	super.onAttach(activity);
+	try {
+		mListener = (BranchesListener)activity;
+	} catch (ClassCastException e) {
+		throw new ClassCastException(activity.toString() +
+		                             " must implement BranchesListener");
+	}
+}
 
-  @Override
-  public void onDetach() {
-    super.onDetach();
-    mListener = null;
-  }
+@Override
+public void onDetach() {
+	super.onDetach();
+	mListener = null;
+}
 
-  @Override
-  public void onItemSelected(final int position) {
-    if (mListener != null) {
-      Branch branch = mBranches.getBranches().get(position);
-      mListener.onBranchSelected(branch.getId());
-    }
-  }
+@Override
+public void onItemSelected(final int position) {
+	if (mListener != null) {
+		Branch branch = mBranches.getBranches().get(position);
+		mListener.onBranchSelected(branch.getId());
+	}
+}
 
-  /**
-   * Sets branches data
-   *
-   * @param branches Branches
-   */
-  public void setBranches(final Branches branches) {
-    mSwipeRefreshLayout.setRefreshing(false);
-    mProgressBar.setVisibility(View.GONE);
+/**
+ * Sets branches data
+ *
+ * @param branches Branches
+ */
+public void setBranches(final Branches branches) {
+	mSwipeRefreshLayout.setRefreshing(false);
+	mProgressBar.setVisibility(View.GONE);
 
-    if (branches != null) {
-      mBranches = branches;
-      mBranchesListAdapter.setBranches(mBranches);
-      mBranchesListAdapter.notifyDataSetChanged();
-    }
+	if (branches != null) {
+		mBranches = branches;
+		mBranchesListAdapter.setBranches(mBranches);
+		mBranchesListAdapter.notifyDataSetChanged();
+	}
 
-    checkIfEmpty();
-  }
+	checkIfEmpty();
+}
 
-  /**
-   * Interface for communication with this fragment
-   */
-  public interface BranchesListener {
+/**
+ * Interface for communication with this fragment
+ */
+public interface BranchesListener {
 
-    /**
-     * Handles selection of the branch
-     *
-     * @param buildId Id of the last build in branch
-     */
-    void onBranchSelected(long buildId);
+/**
+ * Handles selection of the branch
+ *
+ * @param buildId Id of the last build in branch
+ */
+void onBranchSelected(long buildId);
 
-    /**
-     * Handles request for reloading branches data
-     */
-    void onReloadBranches();
-  }
+/**
+ * Handles request for reloading branches data
+ */
+void onReloadBranches();
+}
 }

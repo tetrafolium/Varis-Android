@@ -9,7 +9,7 @@ import dagger.android.AndroidInjector;
  */
 @Subcomponent
 public interface RepoDetailsActivitySubcomponent
-    extends AndroidInjector<RepoDetailsActivity> {
-  @Subcomponent.Builder
-  abstract class Builder extends AndroidInjector.Builder<RepoDetailsActivity> {}
+	extends AndroidInjector<RepoDetailsActivity> {
+@Subcomponent.Builder
+abstract class Builder extends AndroidInjector.Builder<RepoDetailsActivity> {}
 }

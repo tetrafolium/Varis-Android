@@ -19,43 +19,47 @@ import javax.inject.Inject;
  * @author Dmytro Khmelenko
  */
 public final class TravisApp
-    extends Application implements HasActivityInjector {
+	extends Application implements HasActivityInjector {
 
-  @Inject DispatchingAndroidInjector<Activity> mDispatchingActivityInjector;
+@Inject DispatchingAndroidInjector<Activity> mDispatchingActivityInjector;
 
-  private static Context sContext;
+private static Context sContext;
 
-  public void onCreate() {
-    super.onCreate();
-    sContext = getApplicationContext();
+public void onCreate() {
+	super.onCreate();
+	sContext = getApplicationContext();
 
-    BaseComponent baseComponent = DaggerBaseComponent.create();
-    baseComponent.inject(this);
+	BaseComponent baseComponent = DaggerBaseComponent.create();
+	baseComponent.inject(this);
 
-    AppSettings appSettings = baseComponent.appSettings();
-    String server = appSettings.getServerUrl();
-    if (TextUtils.isEmpty(server)) {
-      appSettings.putServerType(0);
-      appSettings.putServerUrl(Constants.OPEN_SOURCE_TRAVIS_URL);
-    }
-  }
+	AppSettings appSettings = baseComponent.appSettings();
+	String server = appSettings.getServerUrl();
+	if (TextUtils.isEmpty(server)) {
+		appSettings.putServerType(0);
+		appSettings.putServerUrl(Constants.OPEN_SOURCE_TRAVIS_URL);
+	}
+}
 
-  /**
-   * Gets application context
-   *
-   * @return Application context
-   */
-  public static Context getAppContext() { return sContext; }
+/**
+ * Gets application context
+ *
+ * @return Application context
+ */
+public static Context getAppContext() {
+	return sContext;
+}
 
-  /**
-   * Gets application instance
-   *
-   * @return Application instance
-   */
-  public static TravisApp instance() { return (TravisApp)sContext; }
+/**
+ * Gets application instance
+ *
+ * @return Application instance
+ */
+public static TravisApp instance() {
+	return (TravisApp)sContext;
+}
 
-  @Override
-  public AndroidInjector<Activity> activityInjector() {
-    return mDispatchingActivityInjector;
-  }
+@Override
+public AndroidInjector<Activity> activityInjector() {
+	return mDispatchingActivityInjector;
+}
 }

@@ -20,73 +20,73 @@ import com.khmelenko.lab.varis.R;
  */
 public class SecurityCodeFragment extends Fragment {
 
-  @BindView(R.id.auth_security_code) EditText mSecurityCode;
+@BindView(R.id.auth_security_code) EditText mSecurityCode;
 
-  private OnSecurityCodeAction mListener;
+private OnSecurityCodeAction mListener;
 
-  /**
-   * Creates new instance of the fragment
-   *
-   * @return Fragment instance
-   */
-  public static SecurityCodeFragment newInstance() {
-    return new SecurityCodeFragment();
-  }
+/**
+ * Creates new instance of the fragment
+ *
+ * @return Fragment instance
+ */
+public static SecurityCodeFragment newInstance() {
+	return new SecurityCodeFragment();
+}
 
-  public SecurityCodeFragment() {
-    // Required empty public constructor
-  }
+public SecurityCodeFragment() {
+	// Required empty public constructor
+}
 
-  @Override
-  public View onCreateView(final LayoutInflater inflater,
-                           final ViewGroup container,
-                           final Bundle savedInstanceState) {
-    // Inflate the layout for this fragment
-    View view =
-        inflater.inflate(R.layout.fragment_security_code, container, false);
-    ButterKnife.bind(this, view);
-    return view;
-  }
+@Override
+public View onCreateView(final LayoutInflater inflater,
+                         final ViewGroup container,
+                         final Bundle savedInstanceState) {
+	// Inflate the layout for this fragment
+	View view =
+		inflater.inflate(R.layout.fragment_security_code, container, false);
+	ButterKnife.bind(this, view);
+	return view;
+}
 
-  @OnClick(R.id.auth_confirm_btn)
-  public void startConfirmation() {
-    if (TextUtils.isEmpty(mSecurityCode.getText())) {
-      mSecurityCode.setError(getString(R.string.auth_invalid_security_code));
-    } else {
-      if (mListener != null) {
-        mListener.onSecurityCodeInput(mSecurityCode.getText().toString());
-      }
-    }
-  }
+@OnClick(R.id.auth_confirm_btn)
+public void startConfirmation() {
+	if (TextUtils.isEmpty(mSecurityCode.getText())) {
+		mSecurityCode.setError(getString(R.string.auth_invalid_security_code));
+	} else {
+		if (mListener != null) {
+			mListener.onSecurityCodeInput(mSecurityCode.getText().toString());
+		}
+	}
+}
 
-  @Override
-  public void onAttach(final Context activity) {
-    super.onAttach(activity);
-    try {
-      mListener = (OnSecurityCodeAction)activity;
-    } catch (ClassCastException e) {
-      throw new ClassCastException(
-          activity.toString() +
-          " must implement OnFragmentInteractionListener");
-    }
-  }
+@Override
+public void onAttach(final Context activity) {
+	super.onAttach(activity);
+	try {
+		mListener = (OnSecurityCodeAction)activity;
+	} catch (ClassCastException e) {
+		throw new ClassCastException(
+			      activity.toString() +
+			      " must implement OnFragmentInteractionListener");
+	}
+}
 
-  @Override
-  public void onDetach() {
-    super.onDetach();
-    mListener = null;
-  }
+@Override
+public void onDetach() {
+	super.onDetach();
+	mListener = null;
+}
 
-  /**
-   * Listener on security code
-   */
-  public interface OnSecurityCodeAction {
+/**
+ * Listener on security code
+ */
+public interface OnSecurityCodeAction {
 
-    /**
-     * Calles on inputted security code
-     *
-     * @param securityCode Security code
-     */
-    void onSecurityCodeInput(String securityCode);
-  }
+/**
+ * Calles on inputted security code
+ *
+ * @param securityCode Security code
+ */
+void onSecurityCodeInput(String securityCode);
+}
 }

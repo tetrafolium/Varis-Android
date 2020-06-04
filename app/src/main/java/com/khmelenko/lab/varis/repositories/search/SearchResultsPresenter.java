@@ -19,51 +19,51 @@ import javax.inject.Inject;
  */
 public class SearchResultsPresenter extends MvpPresenter<SearchResultsView> {
 
-  private final TravisRestClient mTravisRestClient;
+private final TravisRestClient mTravisRestClient;
 
-  private final CompositeDisposable mSubscriptions;
+private final CompositeDisposable mSubscriptions;
 
-  @Inject
-  public SearchResultsPresenter(final TravisRestClient travisRestClient) {
-    mTravisRestClient = travisRestClient;
+@Inject
+public SearchResultsPresenter(final TravisRestClient travisRestClient) {
+	mTravisRestClient = travisRestClient;
 
-    mSubscriptions = new CompositeDisposable();
-  }
+	mSubscriptions = new CompositeDisposable();
+}
 
-  @Override
-  public void onAttach() {
-    // do nothing
-  }
+@Override
+public void onAttach() {
+	// do nothing
+}
 
-  @Override
-  public void onDetach() {
-    getView().hideProgress();
-    mSubscriptions.clear();
-  }
+@Override
+public void onDetach() {
+	getView().hideProgress();
+	mSubscriptions.clear();
+}
 
-  /**
-   * Starts repository search
-   *
-   * @param query Query string for search
-   */
-  public void startRepoSearch(final String query) {
-    Single<List<Repo>> reposSingle;
-    if (!StringUtils.isEmpty(query)) {
-      reposSingle = mTravisRestClient.getApiService().getRepos(query);
-    } else {
-      reposSingle = mTravisRestClient.getApiService().getRepos();
-    }
-    Disposable subscription =
-        reposSingle.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe((repos, throwable) -> {
-              getView().hideProgress();
-              if (throwable == null) {
-                getView().setSearchResults(repos);
-              } else {
-                getView().showLoadingError(throwable.getMessage());
-              }
-            });
-    mSubscriptions.add(subscription);
-  }
+/**
+ * Starts repository search
+ *
+ * @param query Query string for search
+ */
+public void startRepoSearch(final String query) {
+	Single<List<Repo> > reposSingle;
+	if (!StringUtils.isEmpty(query)) {
+		reposSingle = mTravisRestClient.getApiService().getRepos(query);
+	} else {
+		reposSingle = mTravisRestClient.getApiService().getRepos();
+	}
+	Disposable subscription =
+		reposSingle.subscribeOn(Schedulers.io())
+		.observeOn(AndroidSchedulers.mainThread())
+		.subscribe((repos, throwable)->{
+			getView().hideProgress();
+			if (throwable == null) {
+			        getView().setSearchResults(repos);
+			} else {
+			        getView().showLoadingError(throwable.getMessage());
+			}
+		});
+	mSubscriptions.add(subscription);
+}
 }

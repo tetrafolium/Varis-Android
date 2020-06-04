@@ -11,19 +11,23 @@ import java.util.List;
  */
 public class BuildHistory {
 
-  @SerializedName("builds") private List<Build> mBuilds;
+@SerializedName("builds") private List<Build> mBuilds;
 
-  @SerializedName("commits") private List<Commit> mCommits;
+@SerializedName("commits") private List<Commit> mCommits;
 
-  public List<Build> getBuilds() {
-    return Collections.unmodifiableList(mBuilds);
-  }
+public List<Build> getBuilds() {
+	return Collections.unmodifiableList(mBuilds);
+}
 
-  public List<Commit> getCommits() {
-    return Collections.unmodifiableList(mCommits);
-  }
+public List<Commit> getCommits() {
+	return Collections.unmodifiableList(mCommits);
+}
 
-  public void setBuilds(final List<Build> builds) { mBuilds = builds; }
+public void setBuilds(final List<Build> builds) {
+	mBuilds = builds;
+}
 
-  public void setCommits(final List<Commit> commits) { mCommits = commits; }
+public void setCommits(final List<Commit> commits) {
+	mCommits = commits;
+}
 }

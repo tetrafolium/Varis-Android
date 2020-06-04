@@ -35,19 +35,19 @@ import javax.inject.Singleton;
                       AndroidSupportInjectionModule.class})
 public interface BaseComponent {
 
-  void inject(TravisApp app);
+void inject(TravisApp app);
 
-  TravisRestClient restClient();
+TravisRestClient restClient();
 
-  RawClient rawClient();
+RawClient rawClient();
 
-  GitHubRestClient gitHubClient();
+GitHubRestClient gitHubClient();
 
-  CacheStorage cache();
+CacheStorage cache();
 
-  AppSettings appSettings();
+AppSettings appSettings();
 
-  PresenterKeeper<MvpPresenter> presenterKeeper();
+PresenterKeeper<MvpPresenter> presenterKeeper();
 
-  LogsParser logsParser();
+LogsParser logsParser();
 }

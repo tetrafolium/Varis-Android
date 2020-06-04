@@ -12,45 +12,45 @@ import com.khmelenko.lab.varis.network.response.Requests;
  */
 public interface RepoDetailsView extends MvpView {
 
-  /**
-   * Updates build history
-   *
-   * @param buildHistory Build history
-   */
-  void updateBuildHistory(BuildHistory buildHistory);
+/**
+ * Updates build history
+ *
+ * @param buildHistory Build history
+ */
+void updateBuildHistory(BuildHistory buildHistory);
 
-  /**
-   * Updates branches
-   *
-   * @param branches New branches
-   */
-  void updateBranches(Branches branches);
+/**
+ * Updates branches
+ *
+ * @param branches New branches
+ */
+void updateBranches(Branches branches);
 
-  /**
-   * Updates pull requests
-   *
-   * @param requests New pull requests
-   */
-  void updatePullRequests(Requests requests);
+/**
+ * Updates pull requests
+ *
+ * @param requests New pull requests
+ */
+void updatePullRequests(Requests requests);
 
-  /**
-   * Shows an error on loading Build history
-   *
-   * @param message Error message
-   */
-  void showBuildHistoryLoadingError(String message);
+/**
+ * Shows an error on loading Build history
+ *
+ * @param message Error message
+ */
+void showBuildHistoryLoadingError(String message);
 
-  /**
-   * Shows an error on loading Branches
-   *
-   * @param message Error message
-   */
-  void showBranchesLoadingError(String message);
+/**
+ * Shows an error on loading Branches
+ *
+ * @param message Error message
+ */
+void showBranchesLoadingError(String message);
 
-  /**
-   * Shows an error on loading Pull Requests
-   *
-   * @param message Error message
-   */
-  void showPullRequestsLoadingError(String message);
+/**
+ * Shows an error on loading Pull Requests
+ *
+ * @param message Error message
+ */
+void showPullRequestsLoadingError(String message);
 }

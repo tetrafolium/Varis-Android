@@ -9,27 +9,29 @@ import com.google.gson.annotations.SerializedName;
  */
 public final class AccessTokenRequest {
 
-  @SerializedName("github_token") private String mGithubToken;
+@SerializedName("github_token") private String mGithubToken;
 
-  public String getGithubToken() { return mGithubToken; }
+public String getGithubToken() {
+	return mGithubToken;
+}
 
-  public void setGithubToken(final String githubToken) {
-    mGithubToken = githubToken;
-  }
+public void setGithubToken(final String githubToken) {
+	mGithubToken = githubToken;
+}
 
-  @Override
-  public boolean equals(final Object o) {
-    if (!(o instanceof AccessTokenRequest))
-      return false;
-    if (o == this)
-      return true;
+@Override
+public boolean equals(final Object o) {
+	if (!(o instanceof AccessTokenRequest))
+		return false;
+	if (o == this)
+		return true;
 
-    AccessTokenRequest that = (AccessTokenRequest)o;
-    return mGithubToken.equals(that.mGithubToken);
-  }
+	AccessTokenRequest that = (AccessTokenRequest)o;
+	return mGithubToken.equals(that.mGithubToken);
+}
 
-  @Override
-  public int hashCode() {
-    return mGithubToken.hashCode();
-  }
+@Override
+public int hashCode() {
+	return mGithubToken.hashCode();
+}
 }

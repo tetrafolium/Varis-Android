@@ -19,14 +19,14 @@ import org.junit.Test;
  */
 public class TestDateTimeUtils {
 
-  @Test
-  public void testParseXmlDateTime() throws ParseException {
-    Calendar expected = new GregorianCalendar();
-    DateFormat formatter =
-        new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());
-    String xmlDate = formatter.format(expected.getTime());
-    Date actual = DateTimeUtils.parseXmlDateTime(xmlDate);
+@Test
+public void testParseXmlDateTime() throws ParseException {
+	Calendar expected = new GregorianCalendar();
+	DateFormat formatter =
+		new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault());
+	String xmlDate = formatter.format(expected.getTime());
+	Date actual = DateTimeUtils.parseXmlDateTime(xmlDate);
 
-    assertEquals(expected.getTime().getTime() / 1000, actual.getTime() / 1000);
-  }
+	assertEquals(expected.getTime().getTime() / 1000, actual.getTime() / 1000);
+}
 }

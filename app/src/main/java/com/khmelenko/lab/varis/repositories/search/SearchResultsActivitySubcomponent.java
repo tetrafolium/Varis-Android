@@ -8,8 +8,8 @@ import dagger.android.AndroidInjector;
  */
 @Subcomponent
 public interface SearchResultsActivitySubcomponent
-    extends AndroidInjector<SearchResultsActivity> {
-  @Subcomponent.Builder
-  abstract class Builder
-      extends AndroidInjector.Builder<SearchResultsActivity> {}
+	extends AndroidInjector<SearchResultsActivity> {
+@Subcomponent.Builder
+abstract class Builder
+	extends AndroidInjector.Builder<SearchResultsActivity> {}
 }

@@ -21,15 +21,15 @@ import javax.inject.Singleton;
 @Module
 public class TestStorageModule {
 
-  @Provides
-  @Singleton
-  public CacheStorage provideCache() {
-    return mock(CacheStorage.class);
-  }
+@Provides
+@Singleton
+public CacheStorage provideCache() {
+	return mock(CacheStorage.class);
+}
 
-  @Provides
-  @Singleton
-  public AppSettings provideAppSettings() {
-    return mock(AppSettings.class);
-  }
+@Provides
+@Singleton
+public AppSettings provideAppSettings() {
+	return mock(AppSettings.class);
+}
 }

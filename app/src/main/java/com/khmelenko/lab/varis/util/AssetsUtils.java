@@ -14,30 +14,31 @@ import java.util.Properties;
  */
 public final class AssetsUtils {
 
-  // denied constructor
-  private AssetsUtils() {}
+// denied constructor
+private AssetsUtils() {
+}
 
-  /**
-   * Gets properties from Assets
-   *
-   * @param name    Properties file
-   * @param context Context
-   * @return Properties
-   */
-  public static Properties getProperties(final String name,
-                                         final Context context) {
-    Resources resources = context.getResources();
-    AssetManager assetManager = resources.getAssets();
-    Properties properties = null;
+/**
+ * Gets properties from Assets
+ *
+ * @param name    Properties file
+ * @param context Context
+ * @return Properties
+ */
+public static Properties getProperties(final String name,
+                                       final Context context) {
+	Resources resources = context.getResources();
+	AssetManager assetManager = resources.getAssets();
+	Properties properties = null;
 
-    // Read from the /assets directory
-    try {
-      InputStream inputStream = assetManager.open(name);
-      properties = new Properties();
-      properties.load(inputStream);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return properties;
-  }
+	// Read from the /assets directory
+	try {
+		InputStream inputStream = assetManager.open(name);
+		properties = new Properties();
+		properties.load(inputStream);
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+	return properties;
+}
 }

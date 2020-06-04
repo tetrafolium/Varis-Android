@@ -10,9 +10,9 @@ import retrofit2.http.Path;
  */
 public interface RawApiService {
 
-  @GET("/jobs/{jobId}/log")
-  Single<String> getLog(@Header("Authorization") String basicAuth,
-                        @Path("jobId") String jobId);
+@GET("/jobs/{jobId}/log")
+Single<String> getLog(@Header("Authorization") String basicAuth,
+                      @Path("jobId") String jobId);
 
-  @GET("/jobs/{jobId}/log") Single<String> getLog(@Path("jobId") String jobId);
+@GET("/jobs/{jobId}/log") Single<String> getLog(@Path("jobId") String jobId);
 }

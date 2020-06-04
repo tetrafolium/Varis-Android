@@ -9,102 +9,102 @@ import java.util.Stack;
  **/
 class AnsiParser {
 
-  private Stack<TextLeaf> mResult = new Stack<>();
-  private FormattingOptions mOptions = FormattingOptions.fromAnsiCodes();
+private Stack<TextLeaf> mResult = new Stack<>();
+private FormattingOptions mOptions = FormattingOptions.fromAnsiCodes();
 
-  /**
-   * Parses the given log for ANSI escape sequences and builds a list of text
-   * chunks, which share the same color and text formatting.
-   */
-  public static Stack<TextLeaf> parseText(final String text) {
-    return new AnsiParser().parse(text);
-  }
+/**
+ * Parses the given log for ANSI escape sequences and builds a list of text
+ * chunks, which share the same color and text formatting.
+ */
+public static Stack<TextLeaf> parseText(final String text) {
+	return new AnsiParser().parse(text);
+}
 
-  /**
-   * @see #parseText(String)
-   */
-  private Stack<TextLeaf> parse(final String text) {
-    // Remove character when followed by a BACKSPACE character
-    while (text.contains("\b")) {
-      text = text.replaceAll("^\b+|[^\b]\b", "");
-    }
+/**
+ * @see #parseText(String)
+ */
+private Stack<TextLeaf> parse(final String text) {
+	// Remove character when followed by a BACKSPACE character
+	while (text.contains("\b")) {
+		text = text.replaceAll("^\b+|[^\b]\b", "");
+	}
 
-    int controlStartPosition;
-    int lastControlPosition = 0;
-    int controlEndPosition;
-    while (true) {
-      controlStartPosition = text.indexOf("\033[", lastControlPosition);
-      if (controlStartPosition == -1) {
-        break;
-      }
+	int controlStartPosition;
+	int lastControlPosition = 0;
+	int controlEndPosition;
+	while (true) {
+		controlStartPosition = text.indexOf("\033[", lastControlPosition);
+		if (controlStartPosition == -1) {
+			break;
+		}
 
-      String textBeforeEscape =
-          text.substring(lastControlPosition, controlStartPosition);
-      emitText(textBeforeEscape);
+		String textBeforeEscape =
+			text.substring(lastControlPosition, controlStartPosition);
+		emitText(textBeforeEscape);
 
-      if (isResetLineEscape(text, controlStartPosition)) {
-        controlEndPosition = text.indexOf('K', controlStartPosition + 2);
-        removeCurrentLine();
-        mOptions = FormattingOptions.fromAnsiCodes();
-      } else {
-        controlEndPosition = text.indexOf('m', controlStartPosition + 2);
-        if (controlEndPosition == -1) {
-          break;
-        }
-        String matchingData =
-            text.substring(controlStartPosition + 2, controlEndPosition);
-        String[] ansiStates = matchingData.split(";");
-        mOptions = FormattingOptions.fromAnsiCodes(ansiStates);
-      }
+		if (isResetLineEscape(text, controlStartPosition)) {
+			controlEndPosition = text.indexOf('K', controlStartPosition + 2);
+			removeCurrentLine();
+			mOptions = FormattingOptions.fromAnsiCodes();
+		} else {
+			controlEndPosition = text.indexOf('m', controlStartPosition + 2);
+			if (controlEndPosition == -1) {
+				break;
+			}
+			String matchingData =
+				text.substring(controlStartPosition + 2, controlEndPosition);
+			String[] ansiStates = matchingData.split(";");
+			mOptions = FormattingOptions.fromAnsiCodes(ansiStates);
+		}
 
-      lastControlPosition = controlEndPosition + 1;
-    }
+		lastControlPosition = controlEndPosition + 1;
+	}
 
-    emitText(text.substring(lastControlPosition));
-    if (mResult.isEmpty()) {
-      mResult.push(new TextLeaf());
-    }
-    return mResult;
-  }
+	emitText(text.substring(lastControlPosition));
+	if (mResult.isEmpty()) {
+		mResult.push(new TextLeaf());
+	}
+	return mResult;
+}
 
-  private void emitText(final String text) {
-    if (!text.isEmpty()) {
-      mResult.push(new TextLeaf(text, mOptions));
-    }
-  }
+private void emitText(final String text) {
+	if (!text.isEmpty()) {
+		mResult.push(new TextLeaf(text, mOptions));
+	}
+}
 
-  private void removeCurrentLine() {
-    if (mResult.isEmpty()) {
-      return;
-    }
-    TextLeaf textLeaf = mResult.peek();
-    int i;
-    while (true) {
-      i = Math.max(textLeaf.getText().lastIndexOf("\r"),
-                   textLeaf.getText().lastIndexOf("\n"));
-      if (i != -1) {
-        break;
-      }
-      mResult.pop();
-      if (mResult.isEmpty()) {
-        break;
-      }
-      textLeaf = mResult.peek();
-    }
-    if (textLeaf.getText().length() > i && i > 0) {
-      String end = textLeaf.getText().substring(i - 1, i + 1);
-      textLeaf.setText(textLeaf.getText().substring(0, i));
-      if (end.equals("\r\n") || end.equals("\n\r")) {
-        textLeaf.setText(textLeaf.getText().substring(0, i - 1));
-      }
-    } else {
-      textLeaf.setText("");
-    }
-  }
+private void removeCurrentLine() {
+	if (mResult.isEmpty()) {
+		return;
+	}
+	TextLeaf textLeaf = mResult.peek();
+	int i;
+	while (true) {
+		i = Math.max(textLeaf.getText().lastIndexOf("\r"),
+		             textLeaf.getText().lastIndexOf("\n"));
+		if (i != -1) {
+			break;
+		}
+		mResult.pop();
+		if (mResult.isEmpty()) {
+			break;
+		}
+		textLeaf = mResult.peek();
+	}
+	if (textLeaf.getText().length() > i && i > 0) {
+		String end = textLeaf.getText().substring(i - 1, i + 1);
+		textLeaf.setText(textLeaf.getText().substring(0, i));
+		if (end.equals("\r\n") || end.equals("\n\r")) {
+			textLeaf.setText(textLeaf.getText().substring(0, i - 1));
+		}
+	} else {
+		textLeaf.setText("");
+	}
+}
 
-  private boolean isResetLineEscape(final String str,
-                                    final int controlStartPosition) {
-    final String substring = str.substring(controlStartPosition);
-    return substring.startsWith("\033[0K") || substring.startsWith("\033[K");
-  }
+private boolean isResetLineEscape(final String str,
+                                  final int controlStartPosition) {
+	final String substring = str.substring(controlStartPosition);
+	return substring.startsWith("\033[0K") || substring.startsWith("\033[K");
+}
 }

@@ -9,45 +9,49 @@ import android.support.annotation.NonNull;
  */
 public abstract class MvpPresenter<T extends MvpView> {
 
-  private T mView;
+private T mView;
 
-  /**
-   * Notifies on attach presenter to view
-   */
-  public abstract void onAttach();
+/**
+ * Notifies on attach presenter to view
+ */
+public abstract void onAttach();
 
-  /**
-   * Notifies on detach presenter from view
-   */
-  public abstract void onDetach();
+/**
+ * Notifies on detach presenter from view
+ */
+public abstract void onDetach();
 
-  /**
-   * Attaches presenter
-   */
-  public void attach(final @NonNull T view) {
-    setView(view);
-    onAttach();
-  }
+/**
+ * Attaches presenter
+ */
+public void attach(final @NonNull T view) {
+	setView(view);
+	onAttach();
+}
 
-  /**
-   * Detaches presenter
-   */
-  public void detach() {
-    onDetach();
-    mView = null;
-  }
+/**
+ * Detaches presenter
+ */
+public void detach() {
+	onDetach();
+	mView = null;
+}
 
-  /**
-   * Sets the view for the presenter
-   *
-   * @param view View
-   */
-  protected void setView(final @NonNull T view) { mView = view; }
+/**
+ * Sets the view for the presenter
+ *
+ * @param view View
+ */
+protected void setView(final @NonNull T view) {
+	mView = view;
+}
 
-  /**
-   * Gets the view
-   *
-   * @return View
-   */
-  public T getView() { return mView; }
+/**
+ * Gets the view
+ *
+ * @return View
+ */
+public T getView() {
+	return mView;
+}
 }

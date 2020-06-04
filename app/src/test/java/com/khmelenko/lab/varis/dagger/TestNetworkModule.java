@@ -22,36 +22,36 @@ import org.mockito.Mockito;
 @Module
 public class TestNetworkModule {
 
-  @Singleton
-  @Provides
-  public TravisRestClient provideTravisRestClient() {
-    TravisRestClient travisRestClient = mock(TravisRestClient.class);
-    TravisApiService apiService = mock(TravisApiService.class);
-    Mockito.when(travisRestClient.getApiService()).thenReturn(apiService);
-    return travisRestClient;
-  }
+@Singleton
+@Provides
+public TravisRestClient provideTravisRestClient() {
+	TravisRestClient travisRestClient = mock(TravisRestClient.class);
+	TravisApiService apiService = mock(TravisApiService.class);
+	Mockito.when(travisRestClient.getApiService()).thenReturn(apiService);
+	return travisRestClient;
+}
 
-  @Singleton
-  @Provides
-  public GitHubRestClient provideGitHubRestClient() {
-    GitHubRestClient gitHubRestClient = mock(GitHubRestClient.class);
-    GithubApiService githubApiService = mock(GithubApiService.class);
-    Mockito.when(gitHubRestClient.getApiService()).thenReturn(githubApiService);
-    return gitHubRestClient;
-  }
+@Singleton
+@Provides
+public GitHubRestClient provideGitHubRestClient() {
+	GitHubRestClient gitHubRestClient = mock(GitHubRestClient.class);
+	GithubApiService githubApiService = mock(GithubApiService.class);
+	Mockito.when(gitHubRestClient.getApiService()).thenReturn(githubApiService);
+	return gitHubRestClient;
+}
 
-  @Singleton
-  @Provides
-  public RawClient provideRawRestClient() {
-    RawClient rawClient = mock(RawClient.class);
-    RawApiService rawApiService = mock(RawApiService.class);
-    Mockito.when(rawClient.getApiService()).thenReturn(rawApiService);
-    return rawClient;
-  }
+@Singleton
+@Provides
+public RawClient provideRawRestClient() {
+	RawClient rawClient = mock(RawClient.class);
+	RawApiService rawApiService = mock(RawApiService.class);
+	Mockito.when(rawClient.getApiService()).thenReturn(rawApiService);
+	return rawClient;
+}
 
-  @Singleton
-  @Provides
-  public LogsParser provideLogsParser() {
-    return mock(LogsParser.class);
-  }
+@Singleton
+@Provides
+public LogsParser provideLogsParser() {
+	return mock(LogsParser.class);
+}
 }

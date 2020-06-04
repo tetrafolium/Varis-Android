@@ -19,23 +19,23 @@ import org.junit.Test;
  */
 public class TestMvpPresenter {
 
-  private MvpPresenter<MvpView> mPresenter;
-  private MvpView mView;
+private MvpPresenter<MvpView> mPresenter;
+private MvpView mView;
 
-  @Before
-  public void setup() {
-    mPresenter = spy(MvpPresenter.class);
-    mView = mock(SearchResultsView.class);
-  }
+@Before
+public void setup() {
+	mPresenter = spy(MvpPresenter.class);
+	mView = mock(SearchResultsView.class);
+}
 
-  @Test
-  public void testAttachDetach() {
-    mPresenter.attach(mView);
-    verify(mPresenter).onAttach();
-    assertNotNull(mPresenter.getView());
+@Test
+public void testAttachDetach() {
+	mPresenter.attach(mView);
+	verify(mPresenter).onAttach();
+	assertNotNull(mPresenter.getView());
 
-    mPresenter.detach();
-    verify(mPresenter).onDetach();
-    assertNull(mPresenter.getView());
-  }
+	mPresenter.detach();
+	verify(mPresenter).onDetach();
+	assertNull(mPresenter.getView());
+}
 }

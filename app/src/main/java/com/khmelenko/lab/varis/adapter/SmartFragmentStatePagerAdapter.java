@@ -15,33 +15,33 @@ import android.view.ViewGroup;
  * @author Dmytro Khmelenko (d.khmelenko@gmail.com)
  */
 public abstract class SmartFragmentStatePagerAdapter
-    extends FragmentStatePagerAdapter {
+	extends FragmentStatePagerAdapter {
 
-  // Sparse array to keep track of registered fragments in memory
-  private SparseArray<Fragment> mRegisteredFragments = new SparseArray<>();
+// Sparse array to keep track of registered fragments in memory
+private SparseArray<Fragment> mRegisteredFragments = new SparseArray<>();
 
-  public SmartFragmentStatePagerAdapter(final FragmentManager fragmentManager) {
-    super(fragmentManager);
-  }
+public SmartFragmentStatePagerAdapter(final FragmentManager fragmentManager) {
+	super(fragmentManager);
+}
 
-  @Override
-  public Object instantiateItem(final ViewGroup container, final int position) {
-    Fragment fragment = (Fragment)super.instantiateItem(container, position);
-    mRegisteredFragments.put(position, fragment);
-    return fragment;
-  }
+@Override
+public Object instantiateItem(final ViewGroup container, final int position) {
+	Fragment fragment = (Fragment) super.instantiateItem(container, position);
+	mRegisteredFragments.put(position, fragment);
+	return fragment;
+}
 
-  @Override
-  public void destroyItem(final ViewGroup container, final int position,
-                          final Object object) {
-    mRegisteredFragments.remove(position);
-    super.destroyItem(container, position, object);
-  }
+@Override
+public void destroyItem(final ViewGroup container, final int position,
+                        final Object object) {
+	mRegisteredFragments.remove(position);
+	super.destroyItem(container, position, object);
+}
 
-  /**
-   * Returns the fragment for the position (if instantiated)
-   */
-  public Fragment getRegisteredFragment(final int position) {
-    return mRegisteredFragments.get(position);
-  }
+/**
+ * Returns the fragment for the position (if instantiated)
+ */
+public Fragment getRegisteredFragment(final int position) {
+	return mRegisteredFragments.get(position);
+}
 }

@@ -12,10 +12,10 @@ import dagger.multibindings.IntoMap;
  */
 @Module(subcomponents = SearchResultsActivitySubcomponent.class)
 public abstract class SearchResultsActivityModule {
-  @Binds
-  @IntoMap
-  @ActivityKey(SearchResultsActivity.class)
-  abstract AndroidInjector.Factory<? extends Activity>
-  bindSearchResultsActivityInjectorFactory(
-      SearchResultsActivitySubcomponent.Builder builder);
+@Binds
+@IntoMap
+@ActivityKey(SearchResultsActivity.class)
+abstract AndroidInjector.Factory<? extends Activity>
+bindSearchResultsActivityInjectorFactory(
+	SearchResultsActivitySubcomponent.Builder builder);
 }

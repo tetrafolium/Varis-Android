@@ -19,13 +19,13 @@ import javax.inject.Singleton;
                       ApplicationModule.class})
 public interface TestComponent {
 
-  void inject(TestSearchResultsPresenter test);
+void inject(TestSearchResultsPresenter test);
 
-  void inject(TestRepositoriesPresenter test);
+void inject(TestRepositoriesPresenter test);
 
-  void inject(TestRepoDetailsPresenter test);
+void inject(TestRepoDetailsPresenter test);
 
-  void inject(TestBuildDetailsPresenter test);
+void inject(TestBuildDetailsPresenter test);
 
-  void inject(TestAuthPresenter test);
+void inject(TestAuthPresenter test);
 }
