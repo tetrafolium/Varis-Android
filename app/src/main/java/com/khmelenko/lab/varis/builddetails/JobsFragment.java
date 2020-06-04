@@ -51,14 +51,14 @@ public class JobsFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_jobs, container, false);
         ButterKnife.bind(this, view);
 
@@ -85,7 +85,7 @@ public class JobsFragment extends Fragment {
 
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(final Context activity) {
         super.onAttach(activity);
         try {
             mListener = (JobsListener) activity;
@@ -106,7 +106,7 @@ public class JobsFragment extends Fragment {
      *
      * @param jobs Jobs
      */
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(final List<Job> jobs) {
         mJobs.clear();
         mJobs.addAll(jobs);
 

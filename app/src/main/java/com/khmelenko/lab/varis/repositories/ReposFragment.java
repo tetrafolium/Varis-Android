@@ -59,13 +59,13 @@ public class ReposFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_repos, container, false);
         ButterKnife.bind(this, view);
@@ -113,7 +113,7 @@ public class ReposFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(final Context activity) {
         super.onAttach(activity);
         try {
             mListener = (ReposFragmentListener) activity;
@@ -134,7 +134,7 @@ public class ReposFragment extends Fragment {
      *
      * @param repos Repositories
      */
-    public void setRepos(List<Repo> repos) {
+    public void setRepos(final List<Repo> repos) {
         mRepos.clear();
         mRepos.addAll(repos);
         mRepoListAdapter.notifyDataSetChanged();
@@ -147,7 +147,7 @@ public class ReposFragment extends Fragment {
      *
      * @param isLoading True, if loading is in progress. False otherwise
      */
-    public void setLoadingProgress(boolean isLoading) {
+    public void setLoadingProgress(final boolean isLoading) {
         if (isLoading) {
             if (mProgressDialog == null) {
                 mProgressDialog = ProgressDialog.show(getActivity(), "", getString(R.string.loading_msg));
@@ -164,7 +164,7 @@ public class ReposFragment extends Fragment {
     /**
      * Handles the case when loading data failed
      */
-    public void handleLoadingFailed(String message) {
+    public void handleLoadingFailed(final String message) {
         checkIfEmpty();
 
         String msg = getString(R.string.error_failed_loading_repos, message);

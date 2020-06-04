@@ -40,7 +40,7 @@ public final class User {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         mId = id;
     }
 
@@ -48,7 +48,7 @@ public final class User {
         return mName;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         mName = name;
     }
 
@@ -56,7 +56,7 @@ public final class User {
         return mLogin;
     }
 
-    public void setLogin(String login) {
+    public void setLogin(final String login) {
         mLogin = login;
     }
 
@@ -64,7 +64,7 @@ public final class User {
         return mEmail;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(final String email) {
         mEmail = email;
     }
 
@@ -72,7 +72,7 @@ public final class User {
         return mGravatarId;
     }
 
-    public void setGravatarId(String gravatarId) {
+    public void setGravatarId(final String gravatarId) {
         mGravatarId = gravatarId;
     }
 
@@ -80,7 +80,7 @@ public final class User {
         return mSyncing;
     }
 
-    public void setSyncing(boolean syncing) {
+    public void setSyncing(final boolean syncing) {
         mSyncing = syncing;
     }
 
@@ -88,7 +88,7 @@ public final class User {
         return mSyncedAt;
     }
 
-    public void setSyncedAt(String syncedAt) {
+    public void setSyncedAt(final String syncedAt) {
         mSyncedAt = syncedAt;
     }
 
@@ -96,7 +96,7 @@ public final class User {
         return mCorrectScopes;
     }
 
-    public void setCorrectScopes(boolean correctScopes) {
+    public void setCorrectScopes(final boolean correctScopes) {
         mCorrectScopes = correctScopes;
     }
 
@@ -104,7 +104,7 @@ public final class User {
         return mCreatedAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(final String createdAt) {
         mCreatedAt = createdAt;
     }
 }

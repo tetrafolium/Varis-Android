@@ -30,7 +30,7 @@ public class AuthorizationRequest {
     @SerializedName("fingerprint")
     private String mFingerprint;
 
-    public AuthorizationRequest(List<String> scopes, String note) {
+    public AuthorizationRequest(final List<String> scopes, final String note) {
         mScopes = new ArrayList<>(scopes);
         mNote = note;
     }
@@ -47,7 +47,7 @@ public class AuthorizationRequest {
         return mNoteUrl;
     }
 
-    public void setNoteUrl(String noteUrl) {
+    public void setNoteUrl(final String noteUrl) {
         mNoteUrl = noteUrl;
     }
 
@@ -55,7 +55,7 @@ public class AuthorizationRequest {
         return mClientId;
     }
 
-    public void setClientId(String clientId) {
+    public void setClientId(final String clientId) {
         mClientId = clientId;
     }
 
@@ -63,7 +63,7 @@ public class AuthorizationRequest {
         return mClientSecret;
     }
 
-    public void setClientSecret(String clientSecret) {
+    public void setClientSecret(final String clientSecret) {
         mClientSecret = clientSecret;
     }
 
@@ -71,7 +71,7 @@ public class AuthorizationRequest {
         return mFingerprint;
     }
 
-    public void setFingerprint(String fingerprint) {
+    public void setFingerprint(final String fingerprint) {
         mFingerprint = fingerprint;
     }
 }

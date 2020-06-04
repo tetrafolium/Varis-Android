@@ -36,7 +36,7 @@ public final class SearchResultsActivity extends MvpActivity<SearchResultsPresen
     private String mSearchQuery;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
@@ -50,7 +50,7 @@ public final class SearchResultsActivity extends MvpActivity<SearchResultsPresen
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
+    protected void onNewIntent(final Intent intent) {
         setIntent(intent);
         handleIntent(intent);
     }
@@ -70,7 +70,7 @@ public final class SearchResultsActivity extends MvpActivity<SearchResultsPresen
      *
      * @param intent Intent
      */
-    private void handleIntent(Intent intent) {
+    private void handleIntent(final Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             mSearchQuery = query;
@@ -95,7 +95,7 @@ public final class SearchResultsActivity extends MvpActivity<SearchResultsPresen
     }
 
     @Override
-    public void onRepositorySelected(Repo repo) {
+    public void onRepositorySelected(final Repo repo) {
         Intent intent = new Intent(SearchResultsActivity.this, RepoDetailsActivity.class);
         intent.putExtra(RepoDetailsActivity.REPO_SLUG_KEY, repo.getSlug());
         startActivity(intent);
@@ -117,12 +117,12 @@ public final class SearchResultsActivity extends MvpActivity<SearchResultsPresen
     }
 
     @Override
-    public void setSearchResults(List<Repo> repos) {
+    public void setSearchResults(final List<Repo> repos) {
         mFragment.setRepos(repos);
     }
 
     @Override
-    public void showLoadingError(String message) {
+    public void showLoadingError(final String message) {
         mFragment.handleLoadingFailed(message);
     }
 }

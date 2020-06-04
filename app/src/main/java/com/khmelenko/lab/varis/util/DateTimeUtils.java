@@ -22,7 +22,7 @@ public final class DateTimeUtils {
      * @param dateTime Datetime
      * @return Formatted date time in local
      */
-    public static String formatDateTimeLocal(Date dateTime) {
+    public static String formatDateTimeLocal(final Date dateTime) {
         DateFormat formatter = SimpleDateFormat.getDateTimeInstance();
         String formatted = formatter.format(dateTime);
         return formatted;
@@ -35,7 +35,7 @@ public final class DateTimeUtils {
      * @return Datetime object
      * @throws ParseException if Parsing exception occurred
      */
-    public static Date parseXmlDateTime(String xmlDateTime) {
+    public static Date parseXmlDateTime(final String xmlDateTime) {
         Date parsedDate = new Date();
         try {
             xmlDateTime = xmlDateTime.replace("Z", "+0000");
@@ -54,7 +54,7 @@ public final class DateTimeUtils {
      * @param xmlDateTime XML date time
      * @return Formatted date time
      */
-    public static String parseAndFormatDateTime(String xmlDateTime) {
+    public static String parseAndFormatDateTime(final String xmlDateTime) {
         Date date = DateTimeUtils.parseXmlDateTime(xmlDateTime);
         String formattedDate = DateTimeUtils.formatDateTimeLocal(date);
         return formattedDate;

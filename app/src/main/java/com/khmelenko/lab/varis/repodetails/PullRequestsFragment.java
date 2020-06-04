@@ -62,8 +62,8 @@ public class PullRequestsFragment extends Fragment implements OnListItemListener
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list_refreshable, container, false);
         ButterKnife.bind(this, view);
 
@@ -86,7 +86,7 @@ public class PullRequestsFragment extends Fragment implements OnListItemListener
     /**
      * Fetches pull requests
      */
-    private List<RequestData> fetchPullRequests(Requests requests) {
+    private List<RequestData> fetchPullRequests(final Requests requests) {
         List<RequestData> pullRequest = new ArrayList<>();
         if (mRequests != null) {
             for (RequestData request : requests.getRequests()) {
@@ -111,7 +111,7 @@ public class PullRequestsFragment extends Fragment implements OnListItemListener
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(final Context context) {
         super.onAttach(context);
         try {
             mListener = (PullRequestsListener) context;
@@ -128,7 +128,7 @@ public class PullRequestsFragment extends Fragment implements OnListItemListener
     }
 
     @Override
-    public void onItemSelected(int position) {
+    public void onItemSelected(final int position) {
         if (mListener != null) {
             RequestData requestData = mPullRequests.get(position);
             mListener.onPullRequestSelected(requestData.getBuildId());
@@ -140,7 +140,7 @@ public class PullRequestsFragment extends Fragment implements OnListItemListener
      *
      * @param request Pull requests
      */
-    public void setPullRequests(Requests request) {
+    public void setPullRequests(final Requests request) {
         mSwipeRefreshLayout.setRefreshing(false);
         mProgressBar.setVisibility(View.GONE);
 

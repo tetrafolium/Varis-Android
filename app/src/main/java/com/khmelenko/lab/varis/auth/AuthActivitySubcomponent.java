@@ -11,5 +11,5 @@ import dagger.android.AndroidInjector;
 @Subcomponent
 public interface AuthActivitySubcomponent extends AndroidInjector<AuthActivity> {
     @Subcomponent.Builder
-    abstract class Builder extends AndroidInjector.Builder<AuthActivity> {}
+    abstract class Builder extends AndroidInjector.Builder<AuthActivity> { }
 }

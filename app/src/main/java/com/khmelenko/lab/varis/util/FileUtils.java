@@ -29,7 +29,7 @@ public final class FileUtils {
      * @param fileName Filename
      * @param data     Data for saving
      */
-    public static void writeInternalFile(String fileName, String data) {
+    public static void writeInternalFile(final String fileName, final String data) {
         Context context = TravisApp.getAppContext();
         writeInternalFile(fileName, data, context);
     }
@@ -41,7 +41,7 @@ public final class FileUtils {
      * @param data     Data for saving
      * @param context  Context
      */
-    public static void writeInternalFile(String fileName, String data, Context context) {
+    public static void writeInternalFile(final String fileName, final String data, final Context context) {
         try {
             FileOutputStream stream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
             OutputStreamWriter outputWriter = new OutputStreamWriter(stream);
@@ -58,7 +58,7 @@ public final class FileUtils {
      * @param fileName Filename
      * @return File content
      */
-    public static String readInternalFile(String fileName) {
+    public static String readInternalFile(final String fileName) {
         Context context = TravisApp.getAppContext();
         return readInternalFile(fileName, context);
     }
@@ -70,7 +70,7 @@ public final class FileUtils {
      * @param context  Context
      * @return Read data
      */
-    public static String readInternalFile(String fileName, Context context) {
+    public static String readInternalFile(final String fileName, final Context context) {
         String dataFromFile = "";
 
         File file = context.getFileStreamPath(fileName);
@@ -104,7 +104,7 @@ public final class FileUtils {
      *
      * @param fileName Filename
      */
-    public static void deleteInternalFile(String fileName) {
+    public static void deleteInternalFile(final String fileName) {
         Context context = TravisApp.getAppContext();
         deleteInternalFile(fileName, context);
     }
@@ -115,7 +115,7 @@ public final class FileUtils {
      * @param fileName File name
      * @param context  Context
      */
-    public static void deleteInternalFile(String fileName, Context context) {
+    public static void deleteInternalFile(final String fileName, final Context context) {
         try {
             context.deleteFile(fileName);
         } catch (Exception e) {

@@ -19,7 +19,7 @@ public class GitHubRestClient {
 
     private GithubApiService mGithubApiService;
 
-    public GitHubRestClient(Retrofit retrofit) {
+    public GitHubRestClient(final Retrofit retrofit) {
         mRetrofit = retrofit;
 
         // rest adapter for github API service

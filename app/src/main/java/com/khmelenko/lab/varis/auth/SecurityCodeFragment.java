@@ -41,8 +41,8 @@ public class SecurityCodeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+                             final Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_security_code, container, false);
         ButterKnife.bind(this, view);
@@ -61,7 +61,7 @@ public class SecurityCodeFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Context activity) {
+    public void onAttach(final Context activity) {
         super.onAttach(activity);
         try {
             mListener = (OnSecurityCodeAction) activity;

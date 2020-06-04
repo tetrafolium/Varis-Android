@@ -23,7 +23,7 @@ public class Requests {
         return mRequests;
     }
 
-    public void setRequests(List<RequestData> requests) {
+    public void setRequests(final List<RequestData> requests) {
         mRequests = requests;
     }
 
@@ -31,7 +31,7 @@ public class Requests {
         return mCommits;
     }
 
-    public void setCommits(List<Commit> commits) {
+    public void setCommits(final List<Commit> commits) {
         mCommits = commits;
     }
 
@@ -39,7 +39,7 @@ public class Requests {
         return mBuilds;
     }
 
-    public void setBuilds(List<Build> builds) {
+    public void setBuilds(final List<Build> builds) {
         mBuilds = builds;
     }
 }

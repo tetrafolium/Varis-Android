@@ -16,7 +16,7 @@ public final class Logs {
         return mLog;
     }
 
-    public void setLog(Log log) {
+    public void setLog(final Log log) {
         mLog = log;
     }
 }

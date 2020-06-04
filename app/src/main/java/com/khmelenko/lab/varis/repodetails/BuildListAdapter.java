@@ -22,19 +22,19 @@ public final class BuildListAdapter extends RecyclerView.Adapter<BuildViewHolder
     private BuildHistory mBuildHistory;
     private final OnListItemListener mListener;
 
-    public BuildListAdapter(BuildHistory buildHistory, OnListItemListener listener) {
+    public BuildListAdapter(final BuildHistory buildHistory, final OnListItemListener listener) {
         mBuildHistory = buildHistory;
         mListener = listener;
     }
 
     @Override
-    public BuildViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BuildViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_build_view, parent, false);
         return new BuildViewHolder(v, mListener);
     }
 
     @Override
-    public void onBindViewHolder(BuildViewHolder holder, int position) {
+    public void onBindViewHolder(final BuildViewHolder holder, final int position) {
         if (mBuildHistory != null) {
             Build build = mBuildHistory.getBuilds().get(position);
             Commit relatedCommit = null;
@@ -59,7 +59,7 @@ public final class BuildListAdapter extends RecyclerView.Adapter<BuildViewHolder
      *
      * @param buildHistory Build history
      */
-    public void setBuildHistory(BuildHistory buildHistory) {
+    public void setBuildHistory(final BuildHistory buildHistory) {
         mBuildHistory = buildHistory;
     }
 

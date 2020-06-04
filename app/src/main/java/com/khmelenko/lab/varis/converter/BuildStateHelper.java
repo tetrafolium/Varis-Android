@@ -30,7 +30,7 @@ public final class BuildStateHelper {
      * @param state Build state
      * @return Color
      */
-    public static int getBuildColor(String state) {
+    public static int getBuildColor(final String state) {
         Context context = TravisApp.getAppContext();
 
         int color = ContextCompat.getColor(context, R.color.secondary_text);
@@ -61,7 +61,7 @@ public final class BuildStateHelper {
      * @return Image drawable
      */
     @Nullable
-    public static Drawable getBuildImage(String state) {
+    public static Drawable getBuildImage(final String state) {
         Context context = TravisApp.getAppContext();
 
         switch (state) {
@@ -92,7 +92,7 @@ public final class BuildStateHelper {
      * @param state State
      * @return True, if state is passed. False otherwise
      */
-    public static boolean isPassed(@NonNull String state) {
+    public static boolean isPassed(final @NonNull String state) {
         return state.equals(STATE_PASSED);
     }
 
@@ -102,7 +102,7 @@ public final class BuildStateHelper {
      * @param state State
      * @return True, if the build is in progress state. False otherwise
      */
-    public static boolean isInProgress(@NonNull String state) {
+    public static boolean isInProgress(final @NonNull String state) {
         return state.equals(STATE_CREATED) || state.equals(STATE_STARTED);
     }
 }

@@ -38,7 +38,7 @@ public final class AuthActivity extends MvpActivity<AuthPresenter> implements
     PresenterKeeper<MvpPresenter> mPresenterKeeper;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
@@ -84,7 +84,7 @@ public final class AuthActivity extends MvpActivity<AuthPresenter> implements
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
         mPresenterKeeper.put(AuthPresenter.class, mPresenter);
     }
@@ -105,18 +105,18 @@ public final class AuthActivity extends MvpActivity<AuthPresenter> implements
     }
 
     @Override
-    public void onLogin(String userName, String password) {
+    public void onLogin(final String userName, final String password) {
         showProgress();
         getPresenter().login(userName, password);
     }
 
     @Override
-    public void onChangeServer(String newServer) {
+    public void onChangeServer(final String newServer) {
         getPresenter().updateServer(newServer);
     }
 
     @Override
-    public void onSecurityCodeInput(String securityCode) {
+    public void onSecurityCodeInput(final String securityCode) {
         showProgress();
         getPresenter().twoFactorAuth(securityCode);
     }
@@ -138,7 +138,7 @@ public final class AuthActivity extends MvpActivity<AuthPresenter> implements
     }
 
     @Override
-    public void showErrorMessage(String message) {
+    public void showErrorMessage(final String message) {
         String msg = getString(R.string.error_failed_auth, message);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
@@ -149,7 +149,7 @@ public final class AuthActivity extends MvpActivity<AuthPresenter> implements
     }
 
     @Override
-    public void setInputView(boolean securityCodeInput) {
+    public void setInputView(final boolean securityCodeInput) {
         if (securityCodeInput) {
             showSecurityCodeInput();
         } else {

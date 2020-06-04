@@ -27,7 +27,7 @@ public abstract class StorageModule {
 
     @Provides
     @Singleton
-    public static AppSettings provideAppSettings(Context context) {
+    public static AppSettings provideAppSettings(final Context context) {
         return new AppSettings(context);
     }
 }

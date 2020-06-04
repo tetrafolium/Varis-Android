@@ -18,12 +18,12 @@ import com.khmelenko.lab.varis.storage.SearchHistoryProvider;
  */
 public class SearchResultsAdapter extends CursorAdapter {
 
-    public SearchResultsAdapter(Context context, Cursor cursor) {
+    public SearchResultsAdapter(final Context context, final Cursor cursor) {
         super(context, cursor, false);
     }
 
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(final View view, final Context context, final Cursor cursor) {
         TextView text = view.findViewById(R.id.item_search_result_text);
         int columnIndex = cursor.getColumnIndex(SearchHistoryProvider.HEADER_COLUMN);
         String textValue = cursor.getString(columnIndex);
@@ -31,7 +31,7 @@ public class SearchResultsAdapter extends CursorAdapter {
     }
 
     @Override
-    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+    public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         return inflater.inflate(R.layout.item_search_result, parent, false);
     }

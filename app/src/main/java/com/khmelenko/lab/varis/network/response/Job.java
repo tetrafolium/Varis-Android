@@ -53,7 +53,7 @@ public final class Job {
         return mId;
     }
 
-    public void setId(long id) {
+    public void setId(final long id) {
         mId = id;
     }
 
@@ -61,7 +61,7 @@ public final class Job {
         return mRepositoryId;
     }
 
-    public void setRepositoryId(long repositoryId) {
+    public void setRepositoryId(final long repositoryId) {
         mRepositoryId = repositoryId;
     }
 
@@ -69,7 +69,7 @@ public final class Job {
         return mBuildId;
     }
 
-    public void setBuildId(long buildId) {
+    public void setBuildId(final long buildId) {
         mBuildId = buildId;
     }
 
@@ -77,7 +77,7 @@ public final class Job {
         return mCommitId;
     }
 
-    public void setCommitId(long commitId) {
+    public void setCommitId(final long commitId) {
         mCommitId = commitId;
     }
 
@@ -85,7 +85,7 @@ public final class Job {
         return mLogId;
     }
 
-    public void setLogId(long logId) {
+    public void setLogId(final long logId) {
         mLogId = logId;
     }
 
@@ -93,7 +93,7 @@ public final class Job {
         return mState;
     }
 
-    public void setState(String state) {
+    public void setState(final String state) {
         mState = state;
     }
 
@@ -101,7 +101,7 @@ public final class Job {
         return mNumber;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(final String number) {
         mNumber = number;
     }
 
@@ -109,7 +109,7 @@ public final class Job {
         return mStartedAt;
     }
 
-    public void setStartedAt(String startedAt) {
+    public void setStartedAt(final String startedAt) {
         mStartedAt = startedAt;
     }
 
@@ -117,7 +117,7 @@ public final class Job {
         return mFinishedAt;
     }
 
-    public void setFinishedAt(String finishedAt) {
+    public void setFinishedAt(final String finishedAt) {
         mFinishedAt = finishedAt;
     }
 
@@ -125,7 +125,7 @@ public final class Job {
         return mQueue;
     }
 
-    public void setQueue(String queue) {
+    public void setQueue(final String queue) {
         mQueue = queue;
     }
 
@@ -133,7 +133,7 @@ public final class Job {
         return mAllowFailure;
     }
 
-    public void setAllowFailure(boolean allowFailure) {
+    public void setAllowFailure(final boolean allowFailure) {
         mAllowFailure = allowFailure;
     }
 }
