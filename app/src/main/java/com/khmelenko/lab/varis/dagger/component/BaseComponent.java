@@ -17,11 +17,9 @@ import com.khmelenko.lab.varis.repositories.search.SearchResultsActivityModule;
 import com.khmelenko.lab.varis.storage.AppSettings;
 import com.khmelenko.lab.varis.storage.CacheStorage;
 import com.khmelenko.lab.varis.util.PresenterKeeper;
-
-import javax.inject.Singleton;
-
 import dagger.Component;
 import dagger.android.support.AndroidSupportInjectionModule;
+import javax.inject.Singleton;
 
 /**
  * Base component
@@ -29,25 +27,27 @@ import dagger.android.support.AndroidSupportInjectionModule;
  * @author Dmytro Khmelenko (d.khmelenko@gmail.com)
  */
 @Singleton
-@Component(modules = {NetworkModule.class, StorageModule.class, ApplicationModule.class,
-                      AuthActivityModule.class, BuildDetailsActivityModule.class, MainActivityModule.class,
-                      RepoDetailsActivityModule.class, SearchResultsActivityModule.class, AndroidSupportInjectionModule.class
-                     })
+@Component(modules = {NetworkModule.class, StorageModule.class,
+                      ApplicationModule.class, AuthActivityModule.class,
+                      BuildDetailsActivityModule.class,
+                      MainActivityModule.class, RepoDetailsActivityModule.class,
+                      SearchResultsActivityModule.class,
+                      AndroidSupportInjectionModule.class})
 public interface BaseComponent {
 
-    void inject(TravisApp app);
+  void inject(TravisApp app);
 
-    TravisRestClient restClient();
+  TravisRestClient restClient();
 
-    RawClient rawClient();
+  RawClient rawClient();
 
-    GitHubRestClient gitHubClient();
+  GitHubRestClient gitHubClient();
 
-    CacheStorage cache();
+  CacheStorage cache();
 
-    AppSettings appSettings();
+  AppSettings appSettings();
 
-    PresenterKeeper<MvpPresenter> presenterKeeper();
+  PresenterKeeper<MvpPresenter> presenterKeeper();
 
-    LogsParser logsParser();
+  LogsParser logsParser();
 }

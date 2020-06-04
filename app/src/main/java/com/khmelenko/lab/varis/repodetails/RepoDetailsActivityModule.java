@@ -1,7 +1,6 @@
 package com.khmelenko.lab.varis.repodetails;
 
 import android.app.Activity;
-
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ActivityKey;
@@ -13,9 +12,10 @@ import dagger.multibindings.IntoMap;
  */
 @Module(subcomponents = RepoDetailsActivitySubcomponent.class)
 public abstract class RepoDetailsActivityModule {
-    @Binds
-    @IntoMap
-    @ActivityKey(RepoDetailsActivity.class)
-    abstract AndroidInjector.Factory<? extends Activity>
-    bindRepoDetailsActivityInjectorFactory(RepoDetailsActivitySubcomponent.Builder builder);
+  @Binds
+  @IntoMap
+  @ActivityKey(RepoDetailsActivity.class)
+  abstract AndroidInjector.Factory<? extends Activity>
+  bindRepoDetailsActivityInjectorFactory(
+      RepoDetailsActivitySubcomponent.Builder builder);
 }

@@ -8,5 +8,4 @@ import javax.inject.Scope;
  * @author Dmytro Khmelenko (d.khmelenko@gmail.com)
  */
 @Scope
-public @interface ActivityScope {
-}
+public @interface ActivityScope {}

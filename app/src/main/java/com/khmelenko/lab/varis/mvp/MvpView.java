@@ -7,13 +7,13 @@ package com.khmelenko.lab.varis.mvp;
  */
 public interface MvpView {
 
-    /**
-     * Shows progress
-     */
-    void showProgress();
+  /**
+   * Shows progress
+   */
+  void showProgress();
 
-    /**
-     * Hides progress
-     */
-    void hideProgress();
+  /**
+   * Hides progress
+   */
+  void hideProgress();
 }

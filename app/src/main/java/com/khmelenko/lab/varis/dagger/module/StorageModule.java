@@ -1,15 +1,11 @@
 package com.khmelenko.lab.varis.dagger.module;
 
-
 import android.content.Context;
-
 import com.khmelenko.lab.varis.storage.AppSettings;
 import com.khmelenko.lab.varis.storage.CacheStorage;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
+import javax.inject.Singleton;
 
 /**
  * Storage module
@@ -19,16 +15,15 @@ import dagger.Provides;
 @Module
 public abstract class StorageModule {
 
-    @Provides
-    @Singleton
-    public static CacheStorage provideCache() {
-        return CacheStorage.newInstance();
-    }
+  @Provides
+  @Singleton
+  public static CacheStorage provideCache() {
+    return CacheStorage.newInstance();
+  }
 
-    @Provides
-    @Singleton
-    public static AppSettings provideAppSettings(final Context context) {
-        return new AppSettings(context);
-    }
+  @Provides
+  @Singleton
+  public static AppSettings provideAppSettings(final Context context) {
+    return new AppSettings(context);
+  }
 }
-

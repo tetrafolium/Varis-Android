@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.khmelenko.lab.varis.R;
 import com.khmelenko.lab.varis.storage.SearchHistoryProvider;
 
@@ -18,21 +17,25 @@ import com.khmelenko.lab.varis.storage.SearchHistoryProvider;
  */
 public class SearchResultsAdapter extends CursorAdapter {
 
-    public SearchResultsAdapter(final Context context, final Cursor cursor) {
-        super(context, cursor, false);
-    }
+  public SearchResultsAdapter(final Context context, final Cursor cursor) {
+    super(context, cursor, false);
+  }
 
-    @Override
-    public void bindView(final View view, final Context context, final Cursor cursor) {
-        TextView text = view.findViewById(R.id.item_search_result_text);
-        int columnIndex = cursor.getColumnIndex(SearchHistoryProvider.HEADER_COLUMN);
-        String textValue = cursor.getString(columnIndex);
-        text.setText(textValue);
-    }
+  @Override
+  public void bindView(final View view, final Context context,
+                       final Cursor cursor) {
+    TextView text = view.findViewById(R.id.item_search_result_text);
+    int columnIndex =
+        cursor.getColumnIndex(SearchHistoryProvider.HEADER_COLUMN);
+    String textValue = cursor.getString(columnIndex);
+    text.setText(textValue);
+  }
 
-    @Override
-    public View newView(final Context context, final Cursor cursor, final ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        return inflater.inflate(R.layout.item_search_result, parent, false);
-    }
+  @Override
+  public View newView(final Context context, final Cursor cursor,
+                      final ViewGroup parent) {
+    LayoutInflater inflater = (LayoutInflater)context.getSystemService(
+        Context.LAYOUT_INFLATER_SERVICE);
+    return inflater.inflate(R.layout.item_search_result, parent, false);
+  }
 }

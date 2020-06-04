@@ -4,7 +4,6 @@ import com.khmelenko.lab.varis.log.LogEntryComponent;
 import com.khmelenko.lab.varis.mvp.MvpView;
 import com.khmelenko.lab.varis.network.response.BuildDetails;
 import com.khmelenko.lab.varis.network.response.Job;
-
 import java.util.List;
 
 /**
@@ -14,48 +13,48 @@ import java.util.List;
  */
 public interface BuildDetailsView extends MvpView {
 
-    /**
-     * Shows loading error
-     *
-     * @param message Error message
-     */
-    void showLoadingError(String message);
+  /**
+   * Shows loading error
+   *
+   * @param message Error message
+   */
+  void showLoadingError(String message);
 
-    /**
-     * Updates build details
-     *
-     * @param buildDetails Build details
-     */
-    void updateBuildDetails(BuildDetails buildDetails);
+  /**
+   * Updates build details
+   *
+   * @param buildDetails Build details
+   */
+  void updateBuildDetails(BuildDetails buildDetails);
 
-    /**
-     * Shows an error on loading Log
-     */
-    void showLogError();
+  /**
+   * Shows an error on loading Log
+   */
+  void showLogError();
 
-    /**
-     * Sets content of the log
-     *
-     * @param log Parsed log data
-     */
-    void setLog(LogEntryComponent log);
+  /**
+   * Sets content of the log
+   *
+   * @param log Parsed log data
+   */
+  void setLog(LogEntryComponent log);
 
-    /**
-     * Shows the list of build jobs
-     *
-     * @param jobs Build jobs
-     */
-    void showBuildJobs(List<Job> jobs);
+  /**
+   * Shows the list of build jobs
+   *
+   * @param jobs Build jobs
+   */
+  void showBuildJobs(List<Job> jobs);
 
-    /**
-     * Shows build logs
-     */
-    void showBuildLogs();
+  /**
+   * Shows build logs
+   */
+  void showBuildLogs();
 
-    /**
-     * Shows additional available actions for build
-     *
-     * @param details Build details
-     */
-    void showAdditionalActionsForBuild(BuildDetails details);
+  /**
+   * Shows additional available actions for build
+   *
+   * @param details Build details
+   */
+  void showAdditionalActionsForBuild(BuildDetails details);
 }

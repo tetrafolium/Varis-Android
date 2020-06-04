@@ -5,10 +5,10 @@ package com.khmelenko.lab.varis.log;
  */
 public interface LogEntryComponent {
 
-    /**
-     * Transforms the entry to html format
-     *
-     * @return Html formatted string
-     */
-    String toHtml();
+  /**
+   * Transforms the entry to html format
+   *
+   * @return Html formatted string
+   */
+  String toHtml();
 }

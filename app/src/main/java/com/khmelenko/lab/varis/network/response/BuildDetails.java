@@ -1,7 +1,6 @@
 package com.khmelenko.lab.varis.network.response;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 /**
@@ -11,36 +10,21 @@ import java.util.List;
  */
 public final class BuildDetails {
 
-    @SerializedName("build")
-    private Build mBuild;
+  @SerializedName("build") private Build mBuild;
 
-    @SerializedName("commit")
-    private Commit mCommit;
+  @SerializedName("commit") private Commit mCommit;
 
-    @SerializedName("jobs")
-    private List<Job> mJobs;
+  @SerializedName("jobs") private List<Job> mJobs;
 
-    public Build getBuild() {
-        return mBuild;
-    }
+  public Build getBuild() { return mBuild; }
 
-    public void setBuild(final Build build) {
-        mBuild = build;
-    }
+  public void setBuild(final Build build) { mBuild = build; }
 
-    public Commit getCommit() {
-        return mCommit;
-    }
+  public Commit getCommit() { return mCommit; }
 
-    public void setCommit(final Commit commit) {
-        mCommit = commit;
-    }
+  public void setCommit(final Commit commit) { mCommit = commit; }
 
-    public List<Job> getJobs() {
-        return mJobs;
-    }
+  public List<Job> getJobs() { return mJobs; }
 
-    public void setJobs(final List<Job> jobs) {
-        mJobs = jobs;
-    }
+  public void setJobs(final List<Job> jobs) { mJobs = jobs; }
 }
