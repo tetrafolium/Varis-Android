@@ -36,9 +36,9 @@ public class AnsiParserTest {
         TextLeaf headerLeaf = new TextLeaf("Build system information");
         headerLeaf.getOptions().setTextColor("#96CBFE");
         assertEquals(AnsiParser.parseText("\u001B[0Ktravis_fold:start:system_info\n" +
-                        "\u001B[0K\u001B[34mBuild system information\u001B[0m\n" +
-                        "Build language: android\n"), new TextLeaf("travis_fold:start:system_info"),
-                headerLeaf, new TextLeaf("\nBuild language: android\n"));
+                                          "\u001B[0K\u001B[34mBuild system information\u001B[0m\n" +
+                                          "Build language: android\n"), new TextLeaf("travis_fold:start:system_info"),
+                     headerLeaf, new TextLeaf("\nBuild language: android\n"));
     }
 
     @Test

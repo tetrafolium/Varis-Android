@@ -25,8 +25,8 @@ import dagger.android.AndroidInjection;
  * @author Dmytro Khmelenko
  */
 public final class SearchResultsActivity extends MvpActivity<SearchResultsPresenter> implements
-                                                                                     SearchResultsView,
-                                                                                     ReposFragment.ReposFragmentListener {
+    SearchResultsView,
+    ReposFragment.ReposFragmentListener {
 
     @Inject
     SearchResultsPresenter mPresenter;

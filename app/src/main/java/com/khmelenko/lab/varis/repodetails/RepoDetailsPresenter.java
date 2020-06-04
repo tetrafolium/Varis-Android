@@ -46,16 +46,16 @@ public class RepoDetailsPresenter extends MvpPresenter<RepoDetailsView> {
      */
     public void loadBuildsHistory() {
         Disposable subscription = mTravisRestClient.getApiService()
-                .getBuilds(mRepoSlug)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((buildHistory, throwable) -> {
-                    if (throwable == null) {
-                        getView().updateBuildHistory(buildHistory);
-                    } else {
-                        getView().showBuildHistoryLoadingError(throwable.getMessage());
-                    }
-                });
+                                  .getBuilds(mRepoSlug)
+                                  .subscribeOn(Schedulers.io())
+                                  .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((buildHistory, throwable) -> {
+            if (throwable == null) {
+                getView().updateBuildHistory(buildHistory);
+            } else {
+                getView().showBuildHistoryLoadingError(throwable.getMessage());
+            }
+        });
         mSubscriptions.add(subscription);
     }
 
@@ -64,16 +64,16 @@ public class RepoDetailsPresenter extends MvpPresenter<RepoDetailsView> {
      */
     public void loadBranches() {
         Disposable subscription = mTravisRestClient.getApiService()
-                .getBranches(mRepoSlug)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((branches, throwable) -> {
-                    if (throwable == null) {
-                        getView().updateBranches(branches);
-                    } else {
-                        getView().showBranchesLoadingError(throwable.getMessage());
-                    }
-                });
+                                  .getBranches(mRepoSlug)
+                                  .subscribeOn(Schedulers.io())
+                                  .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((branches, throwable) -> {
+            if (throwable == null) {
+                getView().updateBranches(branches);
+            } else {
+                getView().showBranchesLoadingError(throwable.getMessage());
+            }
+        });
         mSubscriptions.add(subscription);
     }
 
@@ -82,20 +82,20 @@ public class RepoDetailsPresenter extends MvpPresenter<RepoDetailsView> {
      */
     public void loadRequests() {
         Disposable subscription = Single.zip(mTravisRestClient.getApiService().getRequests(mRepoSlug),
-                mTravisRestClient.getApiService().getPullRequestBuilds(mRepoSlug),
-                (requests, buildHistory) -> {
-                    requests.setBuilds(buildHistory.getBuilds());
-                    return requests;
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((requests, throwable) -> {
-                    if (throwable == null) {
-                        getView().updatePullRequests(requests);
-                    } else {
-                        getView().showPullRequestsLoadingError(throwable.getMessage());
-                    }
-                });
+                                             mTravisRestClient.getApiService().getPullRequestBuilds(mRepoSlug),
+        (requests, buildHistory) -> {
+            requests.setBuilds(buildHistory.getBuilds());
+            return requests;
+        })
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((requests, throwable) -> {
+            if (throwable == null) {
+                getView().updatePullRequests(requests);
+            } else {
+                getView().showPullRequestsLoadingError(throwable.getMessage());
+            }
+        });
         mSubscriptions.add(subscription);
     }
 

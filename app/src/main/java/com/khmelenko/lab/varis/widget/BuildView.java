@@ -73,7 +73,7 @@ public class BuildView extends LinearLayout {
      */
     private void initializeViews(Context context) {
         LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                                  .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.view_build, this);
         ButterKnife.bind(this, view);
     }
@@ -118,7 +118,7 @@ public class BuildView extends LinearLayout {
     public void setState(IBuildState buildState) {
         if (buildState != null) {
             setTitle(getContext()
-                    .getString(R.string.build_build_number, buildState.getNumber(), buildState.getState()));
+                     .getString(R.string.build_build_number, buildState.getNumber(), buildState.getState()));
             setStateIndicator(buildState.getState());
             setFinishedAt(buildState.getFinishedAt());
             setDuration(buildState.getDuration());

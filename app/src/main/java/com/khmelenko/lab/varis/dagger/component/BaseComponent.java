@@ -30,8 +30,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 @Singleton
 @Component(modules = {NetworkModule.class, StorageModule.class, ApplicationModule.class,
-        AuthActivityModule.class, BuildDetailsActivityModule.class, MainActivityModule.class,
-        RepoDetailsActivityModule.class, SearchResultsActivityModule.class, AndroidSupportInjectionModule.class})
+                      AuthActivityModule.class, BuildDetailsActivityModule.class, MainActivityModule.class,
+                      RepoDetailsActivityModule.class, SearchResultsActivityModule.class, AndroidSupportInjectionModule.class
+                     })
 public interface BaseComponent {
 
     void inject(TravisApp app);

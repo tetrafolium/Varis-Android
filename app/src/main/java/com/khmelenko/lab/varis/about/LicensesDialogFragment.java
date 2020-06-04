@@ -27,8 +27,8 @@ public class LicensesDialogFragment extends DialogFragment {
         WebView view = (WebView) LayoutInflater.from(getActivity()).inflate(R.layout.dialog_licenses, null);
         view.loadUrl("file:///android_asset/opensource_licenses.html");
         return new AlertDialog.Builder(getActivity())
-                .setTitle(getString(R.string.dialog_licenses_title))
-                .setView(view, 0, 25, 0, 0)
-                .create();
+               .setTitle(getString(R.string.dialog_licenses_title))
+               .setView(view, 0, 25, 0, 0)
+               .create();
     }
 }

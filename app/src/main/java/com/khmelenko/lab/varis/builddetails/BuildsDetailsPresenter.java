@@ -90,38 +90,38 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
         }
 
         Disposable subscription = responseSingle.subscribeOn(Schedulers.io())
-                .map(s -> mRawClient.getLogUrl(mJobId))
-                .onErrorResumeNext(new Function<Throwable, SingleSource<String>>() {
-                    @Override
-                    public SingleSource<String> apply(@NonNull Throwable throwable) throws Exception {
-                        String redirectUrl = "";
-                        if (throwable instanceof HttpException) {
-                            HttpException httpException = (HttpException) throwable;
-                            Headers headers = httpException.response().headers();
-                            for (String header : headers.names()) {
-                                if (header.equals("Location")) {
-                                    redirectUrl = headers.get(header);
-                                    break;
-                                }
-                            }
-                            return Single.just(redirectUrl);
-                        } else {
-                            return Single.error(throwable);
+                                  .map(s -> mRawClient.getLogUrl(mJobId))
+        .onErrorResumeNext(new Function<Throwable, SingleSource<String>>() {
+            @Override
+            public SingleSource<String> apply(@NonNull Throwable throwable) throws Exception {
+                String redirectUrl = "";
+                if (throwable instanceof HttpException) {
+                    HttpException httpException = (HttpException) throwable;
+                    Headers headers = httpException.response().headers();
+                    for (String header : headers.names()) {
+                        if (header.equals("Location")) {
+                            redirectUrl = headers.get(header);
+                            break;
                         }
                     }
-                })
-                .retry(LOAD_LOG_MAX_ATTEMPT)
-                .map(mRawClient::singleStringRequest)
-                .map(response -> mLogsParser.parseLog(response.blockingGet()))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((log, throwable) -> {
-                    if (throwable == null) {
-                        getView().setLog(log);
-                    } else {
-                        getView().showLogError();
-                        getView().showLoadingError(throwable.getMessage());
-                    }
-                });
+                    return Single.just(redirectUrl);
+                } else {
+                    return Single.error(throwable);
+                }
+            }
+        })
+        .retry(LOAD_LOG_MAX_ATTEMPT)
+        .map(mRawClient::singleStringRequest)
+        .map(response -> mLogsParser.parseLog(response.blockingGet()))
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((log, throwable) -> {
+            if (throwable == null) {
+                getView().setLog(log);
+            } else {
+                getView().showLogError();
+                getView().showLoadingError(throwable.getMessage());
+            }
+        });
 
         mSubscriptions.add(subscription);
     }
@@ -141,32 +141,32 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
 
         if (!StringUtils.isEmpty(intentUrl)) {
             buildDetailsSingle = mRawClient.singleRequest(intentUrl)
-                    .doOnSuccess(response -> {
-                        String redirectUrl = intentUrl;
-                        if (response.isRedirect()) {
-                            redirectUrl = response.header("Location", "");
-                        }
-                        parseIntentUrl(redirectUrl);
-                    })
-                    .flatMap(new Function<okhttp3.Response, SingleSource<BuildDetails>>() {
-                        @Override
-                        public SingleSource<BuildDetails> apply(@NonNull okhttp3.Response response) throws Exception {
-                            return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
-                        }
-                    });
+            .doOnSuccess(response -> {
+                String redirectUrl = intentUrl;
+                if (response.isRedirect()) {
+                    redirectUrl = response.header("Location", "");
+                }
+                parseIntentUrl(redirectUrl);
+            })
+            .flatMap(new Function<okhttp3.Response, SingleSource<BuildDetails>>() {
+                @Override
+                public SingleSource<BuildDetails> apply(@NonNull okhttp3.Response response) throws Exception {
+                    return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
+                }
+            });
         } else {
             buildDetailsSingle = mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
         }
 
         Disposable subscription = buildDetailsSingle.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((buildDetails, throwable) -> {
-                    if (throwable == null) {
-                        handleBuildDetails(buildDetails);
-                    } else {
-                        handleLoadingFailed(throwable);
-                    }
-                });
+                                  .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((buildDetails, throwable) -> {
+            if (throwable == null) {
+                handleBuildDetails(buildDetails);
+            } else {
+                handleLoadingFailed(throwable);
+            }
+        });
 
         mSubscriptions.add(subscription);
 
@@ -203,23 +203,23 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
     public void restartBuild() {
         RequestBody emptyBody = RequestBody.create(MediaType.parse("application/json"), "");
         Disposable subscription = mTravisRestClient.getApiService()
-                .restartBuild(mBuildId, emptyBody)
-                .onErrorReturn(throwable -> new Object())
-                .flatMap(new Function<Object, SingleSource<BuildDetails>>() {
-                    @Override
-                    public SingleSource<BuildDetails> apply(@NonNull Object o) throws Exception {
-                        return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((buildDetails, throwable) -> {
-                    if (throwable == null) {
-                        handleBuildDetails(buildDetails);
-                    } else {
-                        handleLoadingFailed(throwable);
-                    }
-                });
+                                  .restartBuild(mBuildId, emptyBody)
+                                  .onErrorReturn(throwable -> new Object())
+        .flatMap(new Function<Object, SingleSource<BuildDetails>>() {
+            @Override
+            public SingleSource<BuildDetails> apply(@NonNull Object o) throws Exception {
+                return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
+            }
+        })
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((buildDetails, throwable) -> {
+            if (throwable == null) {
+                handleBuildDetails(buildDetails);
+            } else {
+                handleLoadingFailed(throwable);
+            }
+        });
 
         mSubscriptions.add(subscription);
     }
@@ -230,23 +230,23 @@ public class BuildsDetailsPresenter extends MvpPresenter<BuildDetailsView> {
     public void cancelBuild() {
         RequestBody emptyBody = RequestBody.create(MediaType.parse("application/json"), "");
         Disposable subscription = mTravisRestClient.getApiService()
-                .cancelBuild(mBuildId, emptyBody)
-                .onErrorReturn(throwable -> new Object())
-                .flatMap(new Function<Object, SingleSource<BuildDetails>>() {
-                    @Override
-                    public SingleSource<BuildDetails> apply(@NonNull Object o) throws Exception {
-                        return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((buildDetails, throwable) -> {
-                    if (throwable == null) {
-                        handleBuildDetails(buildDetails);
-                    } else {
-                        handleLoadingFailed(throwable);
-                    }
-                });
+                                  .cancelBuild(mBuildId, emptyBody)
+                                  .onErrorReturn(throwable -> new Object())
+        .flatMap(new Function<Object, SingleSource<BuildDetails>>() {
+            @Override
+            public SingleSource<BuildDetails> apply(@NonNull Object o) throws Exception {
+                return mTravisRestClient.getApiService().getBuild(mRepoSlug, mBuildId);
+            }
+        })
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((buildDetails, throwable) -> {
+            if (throwable == null) {
+                handleBuildDetails(buildDetails);
+            } else {
+                handleLoadingFailed(throwable);
+            }
+        });
 
         mSubscriptions.add(subscription);
     }

@@ -72,7 +72,7 @@ public class TestBuildDetailsPresenter {
         component.inject(this);
 
         mBuildsDetailsPresenter = spy(new BuildsDetailsPresenter(mTravisRestClient, mRawClient, mCacheStorage,
-                mAppSettings, mLogsParser));
+                                      mAppSettings, mLogsParser));
         mBuildDetailsView = mock(BuildDetailsView.class);
         mBuildsDetailsPresenter.attach(mBuildDetailsView);
     }
@@ -222,7 +222,7 @@ public class TestBuildDetailsPresenter {
 
         when(mRawClient.singleRequest(intentUrl)).thenReturn(Single.just(response));
         when(mTravisRestClient.getApiService().getBuild(any(String.class), any(Long.class)))
-                .thenReturn(Single.error(new Exception(errorMsg)));
+        .thenReturn(Single.error(new Exception(errorMsg)));
 
         mBuildsDetailsPresenter.startLoadingData(intentUrl, slug, buildId);
         verify(mBuildDetailsView).hideProgress();
@@ -235,9 +235,9 @@ public class TestBuildDetailsPresenter {
         BuildDetails buildDetails = new BuildDetails();
 
         when(mTravisRestClient.getApiService().restartBuild(any(Long.class), any(RequestBody.class)))
-                .thenReturn(Single.just(new Object()));
+        .thenReturn(Single.just(new Object()));
         when(mTravisRestClient.getApiService().getBuild(any(String.class), any(Long.class)))
-                .thenReturn(Single.just(buildDetails));
+        .thenReturn(Single.just(buildDetails));
 
         mBuildsDetailsPresenter.restartBuild();
 
@@ -250,9 +250,9 @@ public class TestBuildDetailsPresenter {
         Exception exception = new Exception(errorMsg);
 
         when(mTravisRestClient.getApiService().restartBuild(any(Long.class), any(RequestBody.class)))
-                .thenReturn(Single.error(exception));
+        .thenReturn(Single.error(exception));
         when(mTravisRestClient.getApiService().getBuild(any(String.class), any(Long.class)))
-                .thenReturn(Single.error(exception));
+        .thenReturn(Single.error(exception));
 
         mBuildsDetailsPresenter.restartBuild();
         verify(mBuildDetailsView).showLoadingError(errorMsg);
@@ -263,9 +263,9 @@ public class TestBuildDetailsPresenter {
         BuildDetails buildDetails = new BuildDetails();
 
         when(mTravisRestClient.getApiService().cancelBuild(any(Long.class), any(RequestBody.class)))
-                .thenReturn(Single.just(new Object()));
+        .thenReturn(Single.just(new Object()));
         when(mTravisRestClient.getApiService().getBuild(any(String.class), any(Long.class)))
-                .thenReturn(Single.just(buildDetails));
+        .thenReturn(Single.just(buildDetails));
 
         mBuildsDetailsPresenter.cancelBuild();
 
@@ -278,9 +278,9 @@ public class TestBuildDetailsPresenter {
         Exception exception = new Exception(errorMsg);
 
         when(mTravisRestClient.getApiService().cancelBuild(any(Long.class), any(RequestBody.class)))
-                .thenReturn(Single.error(exception));
+        .thenReturn(Single.error(exception));
         when(mTravisRestClient.getApiService().getBuild(any(String.class), any(Long.class)))
-                .thenReturn(Single.error(exception));
+        .thenReturn(Single.error(exception));
 
         mBuildsDetailsPresenter.cancelBuild();
         verify(mBuildDetailsView).showLoadingError(errorMsg);
@@ -319,13 +319,13 @@ public class TestBuildDetailsPresenter {
     private Response intentResponse() {
         final String expectedUrl = "https://sample.org";
         Request request = new Request.Builder()
-                .url(expectedUrl)
-                .build();
+        .url(expectedUrl)
+        .build();
         return new Response.Builder()
-                .request(request)
-                .message("no body")
-                .protocol(Protocol.HTTP_1_1)
-                .code(200)
-                .build();
+               .request(request)
+               .message("no body")
+               .protocol(Protocol.HTTP_1_1)
+               .code(200)
+               .build();
     }
 }

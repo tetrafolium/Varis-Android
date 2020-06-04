@@ -82,24 +82,24 @@ public class AuthFragment extends Fragment {
         mServerSelector.setOnCheckedChangeListener((radioGroup, buttonId) -> {
             String server = Constants.OPEN_SOURCE_TRAVIS_URL;
             switch (buttonId) {
-                case R.id.auth_server_opensource:
-                    server = Constants.OPEN_SOURCE_TRAVIS_URL;
-                    break;
-                case R.id.auth_server_pro:
-                    server = Constants.PRIVATE_TRAVIS_URL;
-                    break;
+            case R.id.auth_server_opensource:
+                server = Constants.OPEN_SOURCE_TRAVIS_URL;
+                break;
+            case R.id.auth_server_pro:
+                server = Constants.PRIVATE_TRAVIS_URL;
+                break;
             }
 
             mListener.onChangeServer(server);
         });
 
         switch (mCurrentServer) {
-            case Constants.OPEN_SOURCE_TRAVIS_URL:
-                mServerSelector.check(R.id.auth_server_opensource);
-                break;
-            case Constants.PRIVATE_TRAVIS_URL:
-                mServerSelector.check(R.id.auth_server_pro);
-                break;
+        case Constants.OPEN_SOURCE_TRAVIS_URL:
+            mServerSelector.check(R.id.auth_server_opensource);
+            break;
+        case Constants.PRIVATE_TRAVIS_URL:
+            mServerSelector.check(R.id.auth_server_pro);
+            break;
         }
     }
 
@@ -138,7 +138,7 @@ public class AuthFragment extends Fragment {
             mListener = (OnLoginActionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnLoginActionListener");
+                                         + " must implement OnLoginActionListener");
         }
     }
 

@@ -99,7 +99,7 @@ public class BuildHistoryFragment extends Fragment implements OnListItemListener
             mListener = (BuildHistoryListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement BuildHistoryListener");
+                                         + " must implement BuildHistoryListener");
         }
     }
 

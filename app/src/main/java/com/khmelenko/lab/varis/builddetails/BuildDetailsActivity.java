@@ -38,9 +38,9 @@ import dagger.android.AndroidInjection;
  * @author Dmytro Khmelenko
  */
 public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresenter> implements
-                                                                                    BuildDetailsView,
-                                                                                    JobsFragment.JobsListener,
-                                                                                    RawLogFragment.OnRawLogFragmentListener {
+    BuildDetailsView,
+    JobsFragment.JobsListener,
+    RawLogFragment.OnRawLogFragmentListener {
 
     public static final String EXTRA_REPO_SLUG = "RepoSlug";
     public static final String EXTRA_BUILD_ID = "BuildId";
@@ -121,14 +121,14 @@ public final class BuildDetailsActivity extends MvpActivity<BuildsDetailsPresent
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.build_activity_action_restart:
-                getPresenter().restartBuild();
-                handleBuildAction();
-                return true;
-            case R.id.build_activity_action_cancel:
-                getPresenter().cancelBuild();
-                handleBuildAction();
-                return true;
+        case R.id.build_activity_action_restart:
+            getPresenter().restartBuild();
+            handleBuildAction();
+            return true;
+        case R.id.build_activity_action_cancel:
+            getPresenter().cancelBuild();
+            handleBuildAction();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

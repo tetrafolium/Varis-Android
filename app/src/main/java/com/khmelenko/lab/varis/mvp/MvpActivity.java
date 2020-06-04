@@ -83,10 +83,10 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
                                @NonNull String fragmentTag) {
         if (!fragment.isAdded()) {
             getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(containerViewId, fragment, fragmentTag)
-                    .disallowAddToBackStack()
-                    .commit();
+            .beginTransaction()
+            .add(containerViewId, fragment, fragmentTag)
+            .disallowAddToBackStack()
+            .commit();
         }
     }
 
@@ -103,10 +103,10 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
                                    @NonNull String fragmentTag,
                                    @Nullable String backStackStateName) {
         getSupportFragmentManager()
-                .beginTransaction()
-                .replace(containerViewId, fragment, fragmentTag)
-                .addToBackStack(backStackStateName)
-                .commit();
+        .beginTransaction()
+        .replace(containerViewId, fragment, fragmentTag)
+        .addToBackStack(backStackStateName)
+        .commit();
     }
 
     /**
@@ -120,9 +120,9 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
                                    @NonNull Fragment fragment,
                                    @NonNull String fragmentTag) {
         getSupportFragmentManager()
-                .beginTransaction()
-                .replace(containerViewId, fragment, fragmentTag)
-                .commit();
+        .beginTransaction()
+        .replace(containerViewId, fragment, fragmentTag)
+        .commit();
     }
 
     /**
@@ -132,9 +132,9 @@ public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActiv
      */
     protected void detachFragment(Fragment fragment) {
         getSupportFragmentManager()
-                .beginTransaction()
-                .detach(fragment)
-                .commit();
+        .beginTransaction()
+        .detach(fragment)
+        .commit();
     }
 
     /**

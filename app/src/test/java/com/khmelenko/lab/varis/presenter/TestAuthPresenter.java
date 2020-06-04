@@ -93,7 +93,7 @@ public class TestAuthPresenter {
         authorization.setToken(gitHubToken);
         authorization.setId(1L);
         when(mGitHubRestClient.getApiService().createNewAuthorization(eq(auth), any(AuthorizationRequest.class)))
-                .thenReturn(Single.just(authorization));
+        .thenReturn(Single.just(authorization));
 
         final String accessToken = "token";
         AccessTokenRequest request = new AccessTokenRequest();
@@ -103,7 +103,7 @@ public class TestAuthPresenter {
         when(mTravisRestClient.getApiService().auth(request)).thenReturn(Single.just(token));
 
         when(mGitHubRestClient.getApiService().deleteAuthorization(auth, String.valueOf(authorization.getId())))
-                .thenReturn(null);
+        .thenReturn(null);
 
         mAuthPresenter.login(login, password);
 
@@ -120,7 +120,7 @@ public class TestAuthPresenter {
         final String errorMsg = "error";
         Exception exception = new Exception(errorMsg);
         when(mGitHubRestClient.getApiService().createNewAuthorization(eq(auth), any(AuthorizationRequest.class)))
-                .thenReturn(Single.error(exception));
+        .thenReturn(Single.error(exception));
 
         mAuthPresenter.login(login, password);
 
@@ -139,7 +139,7 @@ public class TestAuthPresenter {
         authorization.setToken(gitHubToken);
         authorization.setId(1L);
         when(mGitHubRestClient.getApiService().createNewAuthorization(eq(auth), any(AuthorizationRequest.class)))
-                .thenReturn(Single.just(authorization));
+        .thenReturn(Single.just(authorization));
 
         AccessTokenRequest request = new AccessTokenRequest();
         request.setGithubToken(gitHubToken);
@@ -162,21 +162,21 @@ public class TestAuthPresenter {
         // rules for throwing a request for 2-factor auth
         final String expectedUrl = "https://sample.org";
         Request rawRequest = new Request.Builder()
-                .url(expectedUrl)
-                .build();
+        .url(expectedUrl)
+        .build();
         okhttp3.Response rawResponse = new okhttp3.Response.Builder()
-                .request(rawRequest)
-                .message("no body")
-                .protocol(Protocol.HTTP_1_1)
-                .code(401)
-                .header(GithubApiService.TWO_FACTOR_HEADER, "required")
-                .build();
+        .request(rawRequest)
+        .message("no body")
+        .protocol(Protocol.HTTP_1_1)
+        .code(401)
+        .header(GithubApiService.TWO_FACTOR_HEADER, "required")
+        .build();
 
         Response response = Response.error(ResponseBody.create(null, ""), rawResponse);
         HttpException exception = new HttpException(response);
 
         when(mGitHubRestClient.getApiService().createNewAuthorization(eq(auth), any(AuthorizationRequest.class)))
-                .thenReturn(Single.error(exception));
+        .thenReturn(Single.error(exception));
 
         mAuthPresenter.login(login, password);
 
@@ -189,7 +189,7 @@ public class TestAuthPresenter {
         authorization.setToken(gitHubToken);
         authorization.setId(1L);
         when(mGitHubRestClient.getApiService().createNewAuthorization(eq(auth), eq(securityCode), any(AuthorizationRequest.class)))
-                .thenReturn(Single.just(authorization));
+        .thenReturn(Single.just(authorization));
 
         final String accessToken = "token";
         AccessTokenRequest request = new AccessTokenRequest();
@@ -199,7 +199,7 @@ public class TestAuthPresenter {
         when(mTravisRestClient.getApiService().auth(request)).thenReturn(Single.just(token));
 
         when(mGitHubRestClient.getApiService().deleteAuthorization(auth, String.valueOf(authorization.getId())))
-                .thenReturn(null);
+        .thenReturn(null);
 
         mAuthPresenter.twoFactorAuth(securityCode);
 

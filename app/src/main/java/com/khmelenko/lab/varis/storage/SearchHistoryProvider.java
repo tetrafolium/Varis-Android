@@ -38,15 +38,15 @@ public class SearchHistoryProvider extends SearchRecentSuggestionsProvider {
         Uri uri = Uri.parse("content://".concat(SearchHistoryProvider.AUTHORITY.concat("/suggestions")));
 
         String[] selection = SearchRecentSuggestions.QUERIES_PROJECTION_1LINE;
-        String[] selectionArgs = new String[]{"%" + query + "%"};
+        String[] selectionArgs = new String[] {"%" + query + "%"};
 
         Cursor cursor = context.getContentResolver().query(
-                uri,
-                selection,
-                "display1 LIKE ?",
-                selectionArgs,
-                "date DESC"
-        );
+                            uri,
+                            selection,
+                            "display1 LIKE ?",
+                            selectionArgs,
+                            "date DESC"
+                        );
 
         return cursor;
     }

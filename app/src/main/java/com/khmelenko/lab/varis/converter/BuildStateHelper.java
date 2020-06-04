@@ -35,20 +35,20 @@ public final class BuildStateHelper {
 
         int color = ContextCompat.getColor(context, R.color.secondary_text);
         switch (state) {
-            case STATE_CREATED:
-            case STATE_STARTED:
-                color = ContextCompat.getColor(context, R.color.build_state_started);
-                break;
-            case STATE_PASSED:
-                color = ContextCompat.getColor(context, R.color.build_state_passed);
-                break;
-            case STATE_CANCELED:
-            case STATE_FAILED:
-                color = ContextCompat.getColor(context, R.color.build_state_failed);
-                break;
-            case STATE_ERRORED:
-                color = ContextCompat.getColor(context, R.color.build_state_errored);
-                break;
+        case STATE_CREATED:
+        case STATE_STARTED:
+            color = ContextCompat.getColor(context, R.color.build_state_started);
+            break;
+        case STATE_PASSED:
+            color = ContextCompat.getColor(context, R.color.build_state_passed);
+            break;
+        case STATE_CANCELED:
+        case STATE_FAILED:
+            color = ContextCompat.getColor(context, R.color.build_state_failed);
+            break;
+        case STATE_ERRORED:
+            color = ContextCompat.getColor(context, R.color.build_state_errored);
+            break;
         }
 
         return color;
@@ -65,24 +65,24 @@ public final class BuildStateHelper {
         Context context = TravisApp.getAppContext();
 
         switch (state) {
-            case STATE_CREATED:
-                return ContextCompat.getDrawable(context, R.drawable.ic_build_state_created_16dp);
-            case STATE_STARTED:
-                AnimatedVectorDrawableCompat drawable = AnimatedVectorDrawableCompat
-                        .create(context, R.drawable.ic_build_state_started_animated_16dp);
-                if (drawable != null) {
-                    drawable.start();
-                }
-                return drawable;
-            case STATE_PASSED:
-                return ContextCompat.getDrawable(context, R.drawable.ic_build_state_passed_16dp);
-            case STATE_CANCELED:
-            case STATE_ERRORED:
-                return ContextCompat.getDrawable(context, R.drawable.ic_build_state_errored_16dp);
-            case STATE_FAILED:
-                return ContextCompat.getDrawable(context, R.drawable.ic_build_state_failed_16dp);
-            default:
-                return null;
+        case STATE_CREATED:
+            return ContextCompat.getDrawable(context, R.drawable.ic_build_state_created_16dp);
+        case STATE_STARTED:
+            AnimatedVectorDrawableCompat drawable = AnimatedVectorDrawableCompat
+                                                    .create(context, R.drawable.ic_build_state_started_animated_16dp);
+            if (drawable != null) {
+                drawable.start();
+            }
+            return drawable;
+        case STATE_PASSED:
+            return ContextCompat.getDrawable(context, R.drawable.ic_build_state_passed_16dp);
+        case STATE_CANCELED:
+        case STATE_ERRORED:
+            return ContextCompat.getDrawable(context, R.drawable.ic_build_state_errored_16dp);
+        case STATE_FAILED:
+            return ContextCompat.getDrawable(context, R.drawable.ic_build_state_failed_16dp);
+        default:
+            return null;
         }
     }
 

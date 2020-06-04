@@ -43,24 +43,24 @@ public class RawClient {
      */
     public void updateEndpoint(String newEndpoint) {
         mRetrofit = new Retrofit.Builder()
-                .baseUrl(newEndpoint)
-                .addConverterFactory(new Converter.Factory() {
-                    @Override
-                    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
-                        if (String.class.equals(type)) {
-                            return new Converter<ResponseBody, String>() {
-                                @Override
-                                public String convert(ResponseBody value) throws IOException {
-                                    return value.string();
-                                }
-                            };
+        .baseUrl(newEndpoint)
+        .addConverterFactory(new Converter.Factory() {
+            @Override
+            public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+                if (String.class.equals(type)) {
+                    return new Converter<ResponseBody, String>() {
+                        @Override
+                        public String convert(ResponseBody value) throws IOException {
+                            return value.string();
                         }
-                        return null;
-                    }
-                })
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(mHttpClient)
-                .build();
+                    };
+                }
+                return null;
+            }
+        })
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .client(mHttpClient)
+        .build();
         mRawApiService = mRetrofit.create(RawApiService.class);
     }
 
@@ -82,8 +82,8 @@ public class RawClient {
     public Single<Response> singleRequest(String url) {
 
         Request request = new Request.Builder()
-                .url(url)
-                .build();
+        .url(url)
+        .build();
 
         return Single.create(e -> {
             Response response = mHttpClient.newCall(request).execute();
@@ -100,8 +100,8 @@ public class RawClient {
     public Single<String> singleStringRequest(String url) {
 
         Request request = new Request.Builder()
-                .url(url)
-                .build();
+        .url(url)
+        .build();
 
         return Single.create(e -> {
             Response response = mHttpClient.newCall(request).execute();
