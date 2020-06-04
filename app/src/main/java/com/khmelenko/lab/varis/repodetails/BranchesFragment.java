@@ -98,7 +98,7 @@ public class BranchesFragment extends Fragment implements OnListItemListener {
             mListener = (BranchesListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement BranchesListener");
+                                         + " must implement BranchesListener");
         }
     }
 

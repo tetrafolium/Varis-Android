@@ -68,12 +68,12 @@ public class JobsFragment extends Fragment {
         mJobsRecyclerView.setLayoutManager(layoutManager);
 
         mJobsListAdapter = new JobsListAdapter(getContext(), mJobs,
-                position -> {
-                    if (mJobs != null && !mJobs.isEmpty()) {
-                        Job job = mJobs.get(position);
-                        mListener.onJobSelected(job);
-                    }
-                });
+        position -> {
+            if (mJobs != null && !mJobs.isEmpty()) {
+                Job job = mJobs.get(position);
+                mListener.onJobSelected(job);
+            }
+        });
         mJobsRecyclerView.setAdapter(mJobsListAdapter);
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -91,7 +91,7 @@ public class JobsFragment extends Fragment {
             mListener = (JobsListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement JobsListener");
+                                         + " must implement JobsListener");
         }
     }
 

@@ -24,8 +24,8 @@ public class GitHubRestClient {
 
         // rest adapter for github API service
         Retrofit newRetrofit = mRetrofit.newBuilder()
-                .baseUrl(GITHUB_URL)
-                .build();
+                               .baseUrl(GITHUB_URL)
+                               .build();
         mGithubApiService = newRetrofit.create(GithubApiService.class);
     }
 

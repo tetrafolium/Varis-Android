@@ -26,7 +26,7 @@ public final class PackageUtils {
         String versionName = "";
         try {
             PackageInfo packageInfo = context.getPackageManager()
-                    .getPackageInfo(context.getPackageName(), 0);
+                                      .getPackageInfo(context.getPackageName(), 0);
             versionName = packageInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

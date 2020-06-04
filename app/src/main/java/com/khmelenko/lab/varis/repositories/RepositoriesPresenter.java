@@ -69,26 +69,26 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView> {
         String accessToken = mAppSettings.getAccessToken();
         if (StringUtils.isEmpty(accessToken)) {
             Disposable subscription = mTravisRestClient.getApiService()
-                    .getRepos("")
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(reposHandler());
+                                      .getRepos("")
+                                      .subscribeOn(Schedulers.io())
+                                      .observeOn(AndroidSchedulers.mainThread())
+                                      .subscribe(reposHandler());
 
             mSubscriptions.add(subscription);
         } else {
             Disposable subscription = mTravisRestClient.getApiService()
-                    .getUser()
-                    .doOnSuccess(this::cacheUserData)
-                    .flatMap(new Function<User, SingleSource<List<Repo>>>() {
-                        @Override
-                        public SingleSource<List<Repo>> apply(@NonNull User user) throws Exception {
-                            String loginName = mUser.getLogin();
-                            return mTravisRestClient.getApiService().getUserRepos(loginName);
-                        }
-                    })
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(reposHandler());
+                                      .getUser()
+                                      .doOnSuccess(this::cacheUserData)
+            .flatMap(new Function<User, SingleSource<List<Repo>>>() {
+                @Override
+                public SingleSource<List<Repo>> apply(@NonNull User user) throws Exception {
+                    String loginName = mUser.getLogin();
+                    return mTravisRestClient.getApiService().getUserRepos(loginName);
+                }
+            })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(reposHandler());
             mSubscriptions.add(subscription);
         }
     }

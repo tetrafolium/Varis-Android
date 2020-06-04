@@ -110,34 +110,34 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
     private Single<Authorization> getAuthorizationJob(boolean twoFactorAuth) {
         if (twoFactorAuth) {
             return mGitHubRestClient.getApiService()
-                    .createNewAuthorization(mBasicAuth, mSecurityCode, prepareAuthorizationRequest());
+                   .createNewAuthorization(mBasicAuth, mSecurityCode, prepareAuthorizationRequest());
         } else {
             return mGitHubRestClient.getApiService()
-                    .createNewAuthorization(mBasicAuth, prepareAuthorizationRequest());
+                   .createNewAuthorization(mBasicAuth, prepareAuthorizationRequest());
         }
     }
 
     private void doLogin(Single<Authorization> authorizationJob) {
         Disposable subscription = authorizationJob
-                .flatMap(this::doAuthorization)
-                .doOnSuccess(this::saveAccessToken)
-                .doAfterSuccess(accessToken -> cleanUpAfterAuthorization())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((authorization, throwable) -> {
-                    getView().hideProgress();
+                                  .flatMap(this::doAuthorization)
+                                  .doOnSuccess(this::saveAccessToken)
+                                  .doAfterSuccess(accessToken -> cleanUpAfterAuthorization())
+                                  .subscribeOn(Schedulers.io())
+                                  .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((authorization, throwable) -> {
+            getView().hideProgress();
 
-                    if (throwable == null) {
-                        getView().finishView();
-                    } else {
-                        if (throwable instanceof HttpException && isTwoFactorAuthRequired((HttpException) throwable)) {
-                            mSecurityCodeInput = true;
-                            getView().showTwoFactorAuth();
-                        } else {
-                            getView().showErrorMessage(throwable.getMessage());
-                        }
-                    }
-                });
+            if (throwable == null) {
+                getView().finishView();
+            } else {
+                if (throwable instanceof HttpException && isTwoFactorAuthRequired((HttpException) throwable)) {
+                    mSecurityCodeInput = true;
+                    getView().showTwoFactorAuth();
+                } else {
+                    getView().showErrorMessage(throwable.getMessage());
+                }
+            }
+        });
 
         mSubscriptions.add(subscription);
     }
@@ -147,16 +147,16 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
         Single<Object> cleanUpJob;
         if (!TextUtils.isEmpty(mSecurityCode)) {
             cleanUpJob = mGitHubRestClient.getApiService()
-                    .deleteAuthorization(mBasicAuth, mSecurityCode, String.valueOf(mAuthorization.getId()));
+                         .deleteAuthorization(mBasicAuth, mSecurityCode, String.valueOf(mAuthorization.getId()));
         } else {
             cleanUpJob = mGitHubRestClient.getApiService()
-                    .deleteAuthorization(mBasicAuth, String.valueOf(mAuthorization.getId()));
+                         .deleteAuthorization(mBasicAuth, String.valueOf(mAuthorization.getId()));
         }
         Disposable task = cleanUpJob
-                .onErrorReturn(throwable -> new Object())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+                          .onErrorReturn(throwable -> new Object())
+                          .subscribeOn(Schedulers.io())
+                          .observeOn(AndroidSchedulers.mainThread())
+                          .subscribe();
         mSubscriptions.add(task);
     }
 
@@ -194,7 +194,7 @@ public class AuthPresenter extends MvpPresenter<AuthView> {
      */
     private AuthorizationRequest prepareAuthorizationRequest() {
         List<String> scopes = Arrays.asList("read:org", "user:email", "repo_deployment",
-                "repo:status", "write:repo_hook", "repo");
+                                            "repo:status", "write:repo_hook", "repo");
         String note = String.format("varis_client_%1$s", StringUtils.getRandomString());
         return new AuthorizationRequest(scopes, note);
     }

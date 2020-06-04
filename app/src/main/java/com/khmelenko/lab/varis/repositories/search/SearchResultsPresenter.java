@@ -58,15 +58,15 @@ public class SearchResultsPresenter extends MvpPresenter<SearchResultsView> {
             reposSingle = mTravisRestClient.getApiService().getRepos();
         }
         Disposable subscription = reposSingle.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((repos, throwable) -> {
-                    getView().hideProgress();
-                    if (throwable == null) {
-                        getView().setSearchResults(repos);
-                    } else {
-                        getView().showLoadingError(throwable.getMessage());
-                    }
-                });
+                                  .observeOn(AndroidSchedulers.mainThread())
+        .subscribe((repos, throwable) -> {
+            getView().hideProgress();
+            if (throwable == null) {
+                getView().setSearchResults(repos);
+            } else {
+                getView().showLoadingError(throwable.getMessage());
+            }
+        });
         mSubscriptions.add(subscription);
     }
 

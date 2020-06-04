@@ -43,9 +43,9 @@ public class TravisRestClient {
      */
     public void updateTravisEndpoint(String newEndpoint) {
         Retrofit retrofit = mRetrofit.newBuilder()
-                .baseUrl(newEndpoint)
-                .client(getHttpClient())
-                .build();
+                            .baseUrl(newEndpoint)
+                            .client(getHttpClient())
+                            .build();
 
         mApiService = retrofit.create(TravisApiService.class);
     }
@@ -54,25 +54,25 @@ public class TravisRestClient {
         final String userAgent = String.format("TravisClient/%1$s", PackageUtils.getAppVersion());
 
         return mOkHttpClient.newBuilder()
-                .addInterceptor(new Interceptor() {
-                    @Override
-                    public Response intercept(Chain chain) throws IOException {
-                        Request original = chain.request();
+        .addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request original = chain.request();
 
-                        Request.Builder request = original.newBuilder()
-                                .header("User-Agent", userAgent)
-                                .header("Accept", "application/vnd.travis-ci.2+json");
+                Request.Builder request = original.newBuilder()
+                                          .header("User-Agent", userAgent)
+                                          .header("Accept", "application/vnd.travis-ci.2+json");
 
-                        String accessToken = mAppSettings.getAccessToken();
-                        if (!TextUtils.isEmpty(accessToken)) {
-                            String headerValue = String.format("token %1$s", accessToken);
-                            request.addHeader("Authorization", headerValue);
-                        }
+                String accessToken = mAppSettings.getAccessToken();
+                if (!TextUtils.isEmpty(accessToken)) {
+                    String headerValue = String.format("token %1$s", accessToken);
+                    request.addHeader("Authorization", headerValue);
+                }
 
-                        return chain.proceed(request.build());
-                    }
-                })
-                .build();
+                return chain.proceed(request.build());
+            }
+        })
+        .build();
     }
 
     /**

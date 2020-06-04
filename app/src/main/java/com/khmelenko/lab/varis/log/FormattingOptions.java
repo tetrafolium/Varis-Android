@@ -67,11 +67,11 @@ final class FormattingOptions {
     @Override
     public String toString() {
         return "FormattingOptions{" +
-                "textColor=" + mTextColor +
-                ", background=" + mBackground +
-                ", bold=" + mBold +
-                ", italic=" + mItalic +
-                ", underline=" + mUnderline +
-                '}';
+               "textColor=" + mTextColor +
+               ", background=" + mBackground +
+               ", bold=" + mBold +
+               ", italic=" + mItalic +
+               ", underline=" + mUnderline +
+               '}';
     }
 }

@@ -29,10 +29,10 @@ import dagger.android.AndroidInjection;
  * @author Dmytro Khmelenko
  */
 public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter> implements
-                                                                                 RepoDetailsView,
-                                                                                 BuildHistoryFragment.BuildHistoryListener,
-                                                                                 BranchesFragment.BranchesListener,
-                                                                                 PullRequestsFragment.PullRequestsListener {
+    RepoDetailsView,
+    BuildHistoryFragment.BuildHistoryListener,
+    BranchesFragment.BranchesListener,
+    PullRequestsFragment.PullRequestsListener {
 
     private static final int BUILD_DETAILS_REQUEST_CODE = 0;
 
@@ -67,28 +67,28 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
         @Override
         public Fragment getItem(int position) {
             switch (position) {
-                case INDEX_BUILD_HISTORY:
-                    return BuildHistoryFragment.newInstance();
-                case INDEX_BRANCHES:
-                    return BranchesFragment.newInstance();
-                case INDEX_PULL_REQUESTS:
-                    return PullRequestsFragment.newInstance();
-                default:
-                    return null;
+            case INDEX_BUILD_HISTORY:
+                return BuildHistoryFragment.newInstance();
+            case INDEX_BRANCHES:
+                return BranchesFragment.newInstance();
+            case INDEX_PULL_REQUESTS:
+                return PullRequestsFragment.newInstance();
+            default:
+                return null;
             }
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case INDEX_BUILD_HISTORY:
-                    return getString(R.string.repo_details_tab_build_history);
-                case INDEX_BRANCHES:
-                    return getString(R.string.repo_details_tab_branches);
-                case INDEX_PULL_REQUESTS:
-                    return getString(R.string.repo_details_tab_pull_requests);
-                default:
-                    return null;
+            case INDEX_BUILD_HISTORY:
+                return getString(R.string.repo_details_tab_build_history);
+            case INDEX_BRANCHES:
+                return getString(R.string.repo_details_tab_branches);
+            case INDEX_PULL_REQUESTS:
+                return getString(R.string.repo_details_tab_pull_requests);
+            default:
+                return null;
             }
         }
 
@@ -147,28 +147,28 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     @Override
     public void updateBuildHistory(BuildHistory buildHistory) {
         BuildHistoryFragment fragment =
-                (BuildHistoryFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BUILD_HISTORY);
+            (BuildHistoryFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BUILD_HISTORY);
         fragment.setBuildHistory(buildHistory);
     }
 
     @Override
     public void updateBranches(Branches branches) {
         BranchesFragment fragment =
-                (BranchesFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BRANCHES);
+            (BranchesFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BRANCHES);
         fragment.setBranches(branches);
     }
 
     @Override
     public void updatePullRequests(Requests requests) {
         PullRequestsFragment fragment =
-                (PullRequestsFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_PULL_REQUESTS);
+            (PullRequestsFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_PULL_REQUESTS);
         fragment.setPullRequests(requests);
     }
 
     @Override
     public void showBuildHistoryLoadingError(String message) {
         BuildHistoryFragment fragment =
-                (BuildHistoryFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BUILD_HISTORY);
+            (BuildHistoryFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BUILD_HISTORY);
         fragment.setBuildHistory(null);
 
         String msg = getString(R.string.error_failed_loading_build_history, message);
@@ -178,7 +178,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     @Override
     public void showBranchesLoadingError(String message) {
         BranchesFragment fragment =
-                (BranchesFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BRANCHES);
+            (BranchesFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_BRANCHES);
         fragment.setBranches(null);
 
         String msg = getString(R.string.error_failed_loading_branches, message);
@@ -188,7 +188,7 @@ public final class RepoDetailsActivity extends MvpActivity<RepoDetailsPresenter>
     @Override
     public void showPullRequestsLoadingError(String message) {
         PullRequestsFragment fragment =
-                (PullRequestsFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_PULL_REQUESTS);
+            (PullRequestsFragment) mAdapterViewPager.getRegisteredFragment(PagerAdapter.INDEX_PULL_REQUESTS);
         fragment.setPullRequests(null);
 
         String msg = getString(R.string.error_failed_loading_pull_requests, message);

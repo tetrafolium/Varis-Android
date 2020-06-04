@@ -46,7 +46,7 @@ import dagger.android.AndroidInjection;
  * @author Dmytro Khmelenko
  */
 public final class MainActivity extends MvpActivity<RepositoriesPresenter> implements RepositoriesView,
-                                                                                      ReposFragment.ReposFragmentListener {
+    ReposFragment.ReposFragmentListener {
 
     private static final int AUTH_ACTIVITY_CODE = 0;
     private static final int REPO_DETAILS_CODE = 1;
@@ -135,24 +135,24 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
         view.setNavigationItemSelectedListener(menuItem -> {
 
             switch (menuItem.getItemId()) {
-                case R.id.drawer_login:
-                    Intent loginIntent = new Intent(MainActivity.this, AuthActivity.class);
-                    startActivityForResult(loginIntent, AUTH_ACTIVITY_CODE);
-                    break;
-                case R.id.drawer_logout:
-                    getPresenter().userLogout();
+            case R.id.drawer_login:
+                Intent loginIntent = new Intent(MainActivity.this, AuthActivity.class);
+                startActivityForResult(loginIntent, AUTH_ACTIVITY_CODE);
+                break;
+            case R.id.drawer_logout:
+                getPresenter().userLogout();
 
-                    finish();
-                    startActivity(getIntent());
-                    break;
-                case R.id.drawer_licenses:
-                    LicensesDialogFragment dialog = LicensesDialogFragment.newInstance();
-                    dialog.show(getSupportFragmentManager(), "LicensesDialog");
-                    break;
-                case R.id.drawer_about:
-                    Intent aboutIntent = new Intent(MainActivity.this, AboutActivity.class);
-                    startActivity(aboutIntent);
-                    break;
+                finish();
+                startActivity(getIntent());
+                break;
+            case R.id.drawer_licenses:
+                LicensesDialogFragment dialog = LicensesDialogFragment.newInstance();
+                dialog.show(getSupportFragmentManager(), "LicensesDialog");
+                break;
+            case R.id.drawer_about:
+                Intent aboutIntent = new Intent(MainActivity.this, AboutActivity.class);
+                startActivity(aboutIntent);
+                break;
             }
             menuItem.setChecked(false);
             mDrawerLayout.closeDrawers();
@@ -165,19 +165,19 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case AUTH_ACTIVITY_CODE:
-                    // clear previous data
-                    mFragment.clearData();
+            case AUTH_ACTIVITY_CODE:
+                // clear previous data
+                mFragment.clearData();
+                showProgress();
+                getPresenter().reloadRepos();
+                break;
+            case REPO_DETAILS_CODE:
+                boolean reloadRequired = data.getBooleanExtra(RepoDetailsActivity.RELOAD_REQUIRED_KEY, false);
+                if (reloadRequired) {
                     showProgress();
                     getPresenter().reloadRepos();
-                    break;
-                case REPO_DETAILS_CODE:
-                    boolean reloadRequired = data.getBooleanExtra(RepoDetailsActivity.RELOAD_REQUIRED_KEY, false);
-                    if (reloadRequired) {
-                        showProgress();
-                        getPresenter().reloadRepos();
-                    }
-                    break;
+                }
+                break;
             }
         }
     }
@@ -185,9 +185,9 @@ public final class MainActivity extends MvpActivity<RepositoriesPresenter> imple
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case android.R.id.home:
-                mDrawerLayout.openDrawer(GravityCompat.START);
-                return true;
+        case android.R.id.home:
+            mDrawerLayout.openDrawer(GravityCompat.START);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

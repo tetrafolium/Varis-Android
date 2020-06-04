@@ -119,7 +119,7 @@ public class ReposFragment extends Fragment {
             mListener = (ReposFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement MainFragmentListener");
+                                         + " must implement MainFragmentListener");
         }
     }
 

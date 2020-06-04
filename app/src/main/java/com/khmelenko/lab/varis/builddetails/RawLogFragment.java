@@ -67,7 +67,7 @@ public class RawLogFragment extends Fragment {
             mListener = (OnRawLogFragmentListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement OnRawLogFragmentListener");
+                                         + " must implement OnRawLogFragmentListener");
         }
     }
 

@@ -51,21 +51,21 @@ public abstract class NetworkModule {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .followRedirects(false)
-                .followSslRedirects(false)
-                .build();
+               .addInterceptor(interceptor)
+               .followRedirects(false)
+               .followSslRedirects(false)
+               .build();
     }
 
     @Provides
     @Singleton
     public static Retrofit retrofit(OkHttpClient okHttpClient, AppSettings appSettings) {
         return new Retrofit.Builder()
-                .baseUrl(appSettings.getServerUrl())
-                .addConverterFactory(GsonConverterFactory.create(constructGsonConverter()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .build();
+               .baseUrl(appSettings.getServerUrl())
+               .addConverterFactory(GsonConverterFactory.create(constructGsonConverter()))
+               .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+               .client(okHttpClient)
+               .build();
     }
 
     @Provides
@@ -81,8 +81,8 @@ public abstract class NetworkModule {
      */
     private static Gson constructGsonConverter() {
         return new GsonBuilder()
-                .setDateFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'")
-                .registerTypeAdapterFactory(new ItemTypeAdapterFactory())
-                .create();
+               .setDateFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'")
+               .registerTypeAdapterFactory(new ItemTypeAdapterFactory())
+               .create();
     }
 }

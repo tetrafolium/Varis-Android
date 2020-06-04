@@ -21,19 +21,19 @@ public interface GithubApiService {
 
     @POST("/authorizations")
     Single<Authorization> createNewAuthorization(@Header("Authorization") String basicAuth,
-                                                @Body AuthorizationRequest authorizationRequest);
+            @Body AuthorizationRequest authorizationRequest);
 
     @POST("/authorizations")
     Single<Authorization> createNewAuthorization(@Header("Authorization") String basicAuth,
-                                         @Header(TWO_FACTOR_HEADER) String twoFactorCode,
-                                         @Body AuthorizationRequest authorizationRequest);
+            @Header(TWO_FACTOR_HEADER) String twoFactorCode,
+            @Body AuthorizationRequest authorizationRequest);
 
     @DELETE("/authorizations/{authorizationId}")
     Single<Object> deleteAuthorization(@Header("Authorization") String basicAuth,
-                               @Path("authorizationId") String authorizationId);
+                                       @Path("authorizationId") String authorizationId);
 
     @DELETE("/authorizations/{authorizationId}")
     Single<Object> deleteAuthorization(@Header("Authorization") String basicAuth,
-                               @Header(TWO_FACTOR_HEADER) String twoFactorCode,
-                               @Path("authorizationId") String authorizationId);
+                                       @Header(TWO_FACTOR_HEADER) String twoFactorCode,
+                                       @Path("authorizationId") String authorizationId);
 }

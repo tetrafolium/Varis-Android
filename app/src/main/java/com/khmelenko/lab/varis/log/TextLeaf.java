@@ -58,8 +58,8 @@ final class TextLeaf implements LogEntryComponent {
     @Override
     public String toString() {
         return "TextLeaf{" +
-                "options=" + mOptions +
-                ", text='" + mText + '\'' +
-                '}';
+               "options=" + mOptions +
+               ", text='" + mText + '\'' +
+               '}';
     }
 }

@@ -28,9 +28,9 @@ public class LogsParser {
      */
     private List<LogEntryComponent> preProcessTextLeafs(List<TextLeaf> logEntryComponents) {
         return Observable.fromIterable(logEntryComponents)
-                .flatMap(logEntryComponent -> Observable.fromIterable(splitAtTravisCommands(logEntryComponent)))
-                .toList()
-                .blockingGet();
+               .flatMap(logEntryComponent -> Observable.fromIterable(splitAtTravisCommands(logEntryComponent)))
+               .toList()
+               .blockingGet();
     }
 
     /**

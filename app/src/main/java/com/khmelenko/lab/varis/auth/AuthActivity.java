@@ -22,9 +22,9 @@ import dagger.android.AndroidInjection;
  * @author Dmytro Khmelenko
  */
 public final class AuthActivity extends MvpActivity<AuthPresenter> implements
-                                                                   AuthView,
-                                                                   AuthFragment.OnLoginActionListener,
-                                                                   SecurityCodeFragment.OnSecurityCodeAction {
+    AuthView,
+    AuthFragment.OnLoginActionListener,
+    SecurityCodeFragment.OnSecurityCodeAction {
 
     private static final String AUTH_FRAGMENT_TAG = "AuthFragment";
     private static final String SECURITY_CODE_FRAGMENT_TAG = "SecurityCodeFragment";

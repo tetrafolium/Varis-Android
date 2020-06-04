@@ -78,7 +78,7 @@ public final class PullRequestsListAdapter extends RecyclerView.Adapter<BuildVie
         holder.mBuildView.setCommit(relatedCommit);
         holder.mBuildView.setState(relatedBuild);
         holder.mBuildView.setTitle(
-                holder.mBuildView.getContext().getString(R.string.pull_request_number, request.getPullRequestNumber()));
+            holder.mBuildView.getContext().getString(R.string.pull_request_number, request.getPullRequestNumber()));
     }
 
     @Override

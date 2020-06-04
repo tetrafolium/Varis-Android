@@ -49,6 +49,6 @@ public final class ItemTypeAdapterFactory implements TypeAdapterFactory {
 
                 return delegate.fromJsonTree(jsonElement);
             }
-        }.nullSafe();
+        } .nullSafe();
     }
 }

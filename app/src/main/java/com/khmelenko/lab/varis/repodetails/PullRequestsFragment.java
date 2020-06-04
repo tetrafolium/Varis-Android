@@ -117,7 +117,7 @@ public class PullRequestsFragment extends Fragment implements OnListItemListener
             mListener = (PullRequestsListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement PullRequestsListener");
+                                         + " must implement PullRequestsListener");
         }
     }
 
