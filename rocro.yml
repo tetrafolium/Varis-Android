@@ -26,7 +26,7 @@ inspecode:
     thresholds: { num-issues: 0 }
 
   infer:
-    thresholds: { num-issues: 999 }
+    thresholds: { num-issues: 5 }
 
   jscpd:
     thresholds: { num-issues: 49 }
