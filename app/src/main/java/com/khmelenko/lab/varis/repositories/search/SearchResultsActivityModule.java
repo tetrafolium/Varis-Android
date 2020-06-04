@@ -1,7 +1,6 @@
 package com.khmelenko.lab.varis.repositories.search;
 
 import android.app.Activity;
-
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ActivityKey;
@@ -13,9 +12,10 @@ import dagger.multibindings.IntoMap;
  */
 @Module(subcomponents = SearchResultsActivitySubcomponent.class)
 public abstract class SearchResultsActivityModule {
-    @Binds
-    @IntoMap
-    @ActivityKey(SearchResultsActivity.class)
-    abstract AndroidInjector.Factory<? extends Activity>
-    bindSearchResultsActivityInjectorFactory(SearchResultsActivitySubcomponent.Builder builder);
+  @Binds
+  @IntoMap
+  @ActivityKey(SearchResultsActivity.class)
+  abstract AndroidInjector.Factory<? extends Activity>
+  bindSearchResultsActivityInjectorFactory(
+      SearchResultsActivitySubcomponent.Builder builder);
 }

@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.graphics.drawable.AnimatedVectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
-
 import com.khmelenko.lab.varis.R;
 import com.khmelenko.lab.varis.TravisApp;
 
@@ -17,92 +16,97 @@ import com.khmelenko.lab.varis.TravisApp;
  */
 public final class BuildStateHelper {
 
-    private static final String STATE_CREATED = "created";
-    private static final String STATE_STARTED = "started";
-    private static final String STATE_PASSED = "passed";
-    private static final String STATE_CANCELED = "canceled";
-    private static final String STATE_FAILED = "failed";
-    private static final String STATE_ERRORED = "errored";
+  private static final String STATE_CREATED = "created";
+  private static final String STATE_STARTED = "started";
+  private static final String STATE_PASSED = "passed";
+  private static final String STATE_CANCELED = "canceled";
+  private static final String STATE_FAILED = "failed";
+  private static final String STATE_ERRORED = "errored";
 
-    /**
-     * Gets the color according to the build state
-     *
-     * @param state Build state
-     * @return Color
-     */
-    public static int getBuildColor(final String state) {
-        Context context = TravisApp.getAppContext();
+  /**
+   * Gets the color according to the build state
+   *
+   * @param state Build state
+   * @return Color
+   */
+  public static int getBuildColor(final String state) {
+    Context context = TravisApp.getAppContext();
 
-        int color = ContextCompat.getColor(context, R.color.secondary_text);
-        switch (state) {
-        case STATE_CREATED:
-        case STATE_STARTED:
-            color = ContextCompat.getColor(context, R.color.build_state_started);
-            break;
-        case STATE_PASSED:
-            color = ContextCompat.getColor(context, R.color.build_state_passed);
-            break;
-        case STATE_CANCELED:
-        case STATE_FAILED:
-            color = ContextCompat.getColor(context, R.color.build_state_failed);
-            break;
-        case STATE_ERRORED:
-            color = ContextCompat.getColor(context, R.color.build_state_errored);
-            break;
-        }
-
-        return color;
+    int color = ContextCompat.getColor(context, R.color.secondary_text);
+    switch (state) {
+    case STATE_CREATED:
+    case STATE_STARTED:
+      color = ContextCompat.getColor(context, R.color.build_state_started);
+      break;
+    case STATE_PASSED:
+      color = ContextCompat.getColor(context, R.color.build_state_passed);
+      break;
+    case STATE_CANCELED:
+    case STATE_FAILED:
+      color = ContextCompat.getColor(context, R.color.build_state_failed);
+      break;
+    case STATE_ERRORED:
+      color = ContextCompat.getColor(context, R.color.build_state_errored);
+      break;
     }
 
-    /**
-     * Gets the image drawable according to the build state
-     *
-     * @param state Build state
-     * @return Image drawable
-     */
-    @Nullable
-    public static Drawable getBuildImage(final String state) {
-        Context context = TravisApp.getAppContext();
+    return color;
+  }
 
-        switch (state) {
-        case STATE_CREATED:
-            return ContextCompat.getDrawable(context, R.drawable.ic_build_state_created_16dp);
-        case STATE_STARTED:
-            AnimatedVectorDrawableCompat drawable = AnimatedVectorDrawableCompat
-                                                    .create(context, R.drawable.ic_build_state_started_animated_16dp);
-            if (drawable != null) {
-                drawable.start();
-            }
-            return drawable;
-        case STATE_PASSED:
-            return ContextCompat.getDrawable(context, R.drawable.ic_build_state_passed_16dp);
-        case STATE_CANCELED:
-        case STATE_ERRORED:
-            return ContextCompat.getDrawable(context, R.drawable.ic_build_state_errored_16dp);
-        case STATE_FAILED:
-            return ContextCompat.getDrawable(context, R.drawable.ic_build_state_failed_16dp);
-        default:
-            return null;
-        }
-    }
+  /**
+   * Gets the image drawable according to the build state
+   *
+   * @param state Build state
+   * @return Image drawable
+   */
+  @Nullable
+  public static Drawable getBuildImage(final String state) {
+    Context context = TravisApp.getAppContext();
 
-    /**
-     * Checks whether the state passed or not
-     *
-     * @param state State
-     * @return True, if state is passed. False otherwise
-     */
-    public static boolean isPassed(final @NonNull String state) {
-        return state.equals(STATE_PASSED);
+    switch (state) {
+    case STATE_CREATED:
+      return ContextCompat.getDrawable(context,
+                                       R.drawable.ic_build_state_created_16dp);
+    case STATE_STARTED:
+      AnimatedVectorDrawableCompat drawable =
+          AnimatedVectorDrawableCompat.create(
+              context, R.drawable.ic_build_state_started_animated_16dp);
+      if (drawable != null) {
+        drawable.start();
+      }
+      return drawable;
+    case STATE_PASSED:
+      return ContextCompat.getDrawable(context,
+                                       R.drawable.ic_build_state_passed_16dp);
+    case STATE_CANCELED:
+    case STATE_ERRORED:
+      return ContextCompat.getDrawable(context,
+                                       R.drawable.ic_build_state_errored_16dp);
+    case STATE_FAILED:
+      return ContextCompat.getDrawable(context,
+                                       R.drawable.ic_build_state_failed_16dp);
+    default:
+      return null;
     }
+  }
 
-    /**
-     * Checks whether the build is in progress or not
-     *
-     * @param state State
-     * @return True, if the build is in progress state. False otherwise
-     */
-    public static boolean isInProgress(final @NonNull String state) {
-        return state.equals(STATE_CREATED) || state.equals(STATE_STARTED);
-    }
+  /**
+   * Checks whether the state passed or not
+   *
+   * @param state State
+   * @return True, if state is passed. False otherwise
+   */
+  public static boolean isPassed(final @NonNull String state) {
+    return state.equals(STATE_PASSED);
+  }
+
+  /**
+   * Checks whether the build is in progress or not
+   *
+   * @param state State
+   * @return True, if the build is in progress state. False otherwise
+   */
+  public static boolean isInProgress(final @NonNull String state) {
+    return state.equals(STATE_CREATED) || state.equals(STATE_STARTED);
+  }
 }

@@ -9,25 +9,17 @@ import com.google.gson.annotations.SerializedName;
  */
 public final class Request {
 
-    @SerializedName("request")
-    private RequestData mRequestData;
+  @SerializedName("request") private RequestData mRequestData;
 
-    @SerializedName("commit")
-    private Commit mCommit;
+  @SerializedName("commit") private Commit mCommit;
 
-    public RequestData getRequestData() {
-        return mRequestData;
-    }
+  public RequestData getRequestData() { return mRequestData; }
 
-    public void setRequestData(final RequestData request) {
-        mRequestData = request;
-    }
+  public void setRequestData(final RequestData request) {
+    mRequestData = request;
+  }
 
-    public Commit getCommit() {
-        return mCommit;
-    }
+  public Commit getCommit() { return mCommit; }
 
-    public void setCommit(final Commit commit) {
-        mCommit = commit;
-    }
+  public void setCommit(final Commit commit) { mCommit = commit; }
 }

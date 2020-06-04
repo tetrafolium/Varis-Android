@@ -7,10 +7,10 @@ package com.khmelenko.lab.varis.adapter;
  */
 public interface OnListItemListener {
 
-    /**
-     * Handles item selection
-     *
-     * @param position Item position
-     */
-    void onItemSelected(int position);
+  /**
+   * Handles item selection
+   *
+   * @param position Item position
+   */
+  void onItemSelected(int position);
 }

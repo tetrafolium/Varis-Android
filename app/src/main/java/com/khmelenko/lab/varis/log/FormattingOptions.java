@@ -5,73 +5,50 @@ package com.khmelenko.lab.varis.log;
  */
 final class FormattingOptions {
 
-    private String mTextColor;
-    private String mBackground;
-    private boolean mBold;
-    private boolean mItalic;
-    private boolean mUnderline;
+  private String mTextColor;
+  private String mBackground;
+  private boolean mBold;
+  private boolean mItalic;
+  private boolean mUnderline;
 
-    // denied constructor
-    private FormattingOptions() {
+  // denied constructor
+  private FormattingOptions() {}
 
+  public static FormattingOptions fromAnsiCodes(final String... ansiStates) {
+    FormattingOptions options = new FormattingOptions();
+    for (String ansiCode : ansiStates) {
+      AnsiCodes.applyAnsiCode(options, ansiCode);
     }
+    return options;
+  }
 
-    public static FormattingOptions fromAnsiCodes(final String... ansiStates) {
-        FormattingOptions options = new FormattingOptions();
-        for (String ansiCode : ansiStates) {
-            AnsiCodes.applyAnsiCode(options, ansiCode);
-        }
-        return options;
-    }
+  public String getTextColor() { return mTextColor; }
 
-    public String getTextColor() {
-        return mTextColor;
-    }
+  public void setTextColor(final String textColor) { mTextColor = textColor; }
 
-    public void setTextColor(final String textColor) {
-        mTextColor = textColor;
-    }
+  public String getBackground() { return mBackground; }
 
-    public String getBackground() {
-        return mBackground;
-    }
+  public void setBackground(final String background) {
+    mBackground = background;
+  }
 
-    public void setBackground(final String background) {
-        mBackground = background;
-    }
+  public boolean isBold() { return mBold; }
 
-    public boolean isBold() {
-        return mBold;
-    }
+  public void setBold(final boolean bold) { mBold = bold; }
 
-    public void setBold(final boolean bold) {
-        mBold = bold;
-    }
+  public boolean isItalic() { return mItalic; }
 
-    public boolean isItalic() {
-        return mItalic;
-    }
+  public void setItalic(final boolean italic) { mItalic = italic; }
 
-    public void setItalic(final boolean italic) {
-        mItalic = italic;
-    }
+  public boolean isUnderline() { return mUnderline; }
 
-    public boolean isUnderline() {
-        return mUnderline;
-    }
+  public void setUnderline(final boolean underline) { mUnderline = underline; }
 
-    public void setUnderline(final boolean underline) {
-        mUnderline = underline;
-    }
-
-    @Override
-    public String toString() {
-        return "FormattingOptions{"
-               + "textColor=" + mTextColor
-               + ", background=" + mBackground
-               + ", bold=" + mBold
-               + ", italic=" + mItalic
-               + ", underline=" + mUnderline
-               + '}';
-    }
+  @Override
+  public String toString() {
+    return "FormattingOptions{"
+        + "textColor=" + mTextColor + ", background=" + mBackground +
+        ", bold=" + mBold + ", italic=" + mItalic +
+        ", underline=" + mUnderline + '}';
+  }
 }

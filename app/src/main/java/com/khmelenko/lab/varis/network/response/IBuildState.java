@@ -9,43 +9,43 @@ import java.util.List;
  */
 public interface IBuildState {
 
-    long getId();
+  long getId();
 
-    void setId(long id);
+  void setId(long id);
 
-    long getRepositoryId();
+  long getRepositoryId();
 
-    void setRepositoryId(long repositoryId);
+  void setRepositoryId(long repositoryId);
 
-    long getCommitId();
+  long getCommitId();
 
-    void setCommitId(long commitId);
+  void setCommitId(long commitId);
 
-    String getNumber();
+  String getNumber();
 
-    void setNumber(String number);
+  void setNumber(String number);
 
-    String getState();
+  String getState();
 
-    void setState(String state);
+  void setState(String state);
 
-    String getStartedAt();
+  String getStartedAt();
 
-    void setStartedAt(String startedAt);
+  void setStartedAt(String startedAt);
 
-    String getFinishedAt();
+  String getFinishedAt();
 
-    void setFinishedAt(String finishedAt);
+  void setFinishedAt(String finishedAt);
 
-    long getDuration();
+  long getDuration();
 
-    void setDuration(long duration);
+  void setDuration(long duration);
 
-    boolean isPullRequest();
+  boolean isPullRequest();
 
-    void setPullRequest(boolean pullRequest);
+  void setPullRequest(boolean pullRequest);
 
-    List<Long> getJobIds();
+  List<Long> getJobIds();
 
-    void setJobIds(List<Long> jobIds);
+  void setJobIds(List<Long> jobIds);
 }

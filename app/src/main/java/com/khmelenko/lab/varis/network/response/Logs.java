@@ -9,14 +9,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public final class Logs {
 
-    @SerializedName("log")
-    private Log mLog;
+  @SerializedName("log") private Log mLog;
 
-    public Log getLog() {
-        return mLog;
-    }
+  public Log getLog() { return mLog; }
 
-    public void setLog(final Log log) {
-        mLog = log;
-    }
+  public void setLog(final Log log) { mLog = log; }
 }

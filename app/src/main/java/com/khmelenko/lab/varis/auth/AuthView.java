@@ -9,27 +9,27 @@ import com.khmelenko.lab.varis.mvp.MvpView;
  */
 public interface AuthView extends MvpView {
 
-    /**
-     * Finishes the view
-     */
-    void finishView();
+  /**
+   * Finishes the view
+   */
+  void finishView();
 
-    /**
-     * Shows error message
-     *
-     * @param message Error message
-     */
-    void showErrorMessage(String message);
+  /**
+   * Shows error message
+   *
+   * @param message Error message
+   */
+  void showErrorMessage(String message);
 
-    /**
-     * Shows two-factor authentication
-     */
-    void showTwoFactorAuth();
+  /**
+   * Shows two-factor authentication
+   */
+  void showTwoFactorAuth();
 
-    /**
-     * Set appropriate view for showing input
-     *
-     * @param securityCodeInput True, if security code exists
-     */
-    void setInputView(boolean securityCodeInput);
+  /**
+   * Set appropriate view for showing input
+   *
+   * @param securityCodeInput True, if security code exists
+   */
+  void setInputView(boolean securityCodeInput);
 }

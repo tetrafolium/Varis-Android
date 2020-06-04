@@ -9,14 +9,11 @@ import com.google.gson.annotations.SerializedName;
  */
 public class AccessToken {
 
-    @SerializedName("access_token")
-    private String mAccessToken;
+  @SerializedName("access_token") private String mAccessToken;
 
-    public String getAccessToken() {
-        return mAccessToken;
-    }
+  public String getAccessToken() { return mAccessToken; }
 
-    public void setAccessToken(final String accessToken) {
-        mAccessToken = accessToken;
-    }
+  public void setAccessToken(final String accessToken) {
+    mAccessToken = accessToken;
+  }
 }

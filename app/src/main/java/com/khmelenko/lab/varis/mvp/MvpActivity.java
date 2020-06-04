@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.widget.Toast;
-
 import com.khmelenko.lab.varis.R;
 
 /**
@@ -17,136 +16,132 @@ import com.khmelenko.lab.varis.R;
  *
  * @author Dmytro Khmelenko (d.khmelenko@gmail.com)
  */
-public abstract class MvpActivity<T extends MvpPresenter> extends AppCompatActivity {
+public abstract class MvpActivity<T extends MvpPresenter>
+    extends AppCompatActivity {
 
-    static {
-        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+  static { AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); }
+
+  private ProgressDialog mProgressDialog;
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    attachPresenter();
+  }
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    showLoadingProgress(false);
+    getPresenter().detach();
+  }
+
+  /**
+   * Shows the progress of the loading
+   *
+   * @param isLoading True, if loading is in progress. False otherwise
+   */
+  protected void showLoadingProgress(final boolean isLoading) {
+    if (isLoading) {
+      mProgressDialog =
+          ProgressDialog.show(this, "", getString(R.string.loading_msg));
+    } else {
+      if (mProgressDialog != null) {
+        mProgressDialog.dismiss();
+      }
     }
+  }
 
-    private ProgressDialog mProgressDialog;
+  /**
+   * Shows a toast message
+   *
+   * @param message Message
+   */
+  protected void showToast(final String message) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+  }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        attachPresenter();
+  /**
+   * Shows a toast message
+   *
+   * @param resId Message
+   */
+  protected void showToast(final @StringRes int resId) {
+    Toast.makeText(this, resId, Toast.LENGTH_SHORT).show();
+  }
+
+  /**
+   * Adds new fragment
+   *
+   * @param containerViewId ID of the container view for fragment
+   * @param fragment        Fragment instance
+   * @param fragmentTag     Fragment tag
+   */
+  protected void addFragment(final @IdRes int containerViewId,
+                             final @NonNull Fragment fragment,
+                             final @NonNull String fragmentTag) {
+    if (!fragment.isAdded()) {
+      getSupportFragmentManager()
+          .beginTransaction()
+          .add(containerViewId, fragment, fragmentTag)
+          .disallowAddToBackStack()
+          .commit();
     }
+  }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        showLoadingProgress(false);
-        getPresenter().detach();
-    }
-
-    /**
-     * Shows the progress of the loading
-     *
-     * @param isLoading True, if loading is in progress. False otherwise
-     */
-    protected void showLoadingProgress(final boolean isLoading) {
-        if (isLoading) {
-            mProgressDialog = ProgressDialog.show(this, "", getString(R.string.loading_msg));
-        } else {
-            if (mProgressDialog != null) {
-                mProgressDialog.dismiss();
-            }
-        }
-    }
-
-    /**
-     * Shows a toast message
-     *
-     * @param message Message
-     */
-    protected void showToast(final String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Shows a toast message
-     *
-     * @param resId Message
-     */
-    protected void showToast(final @StringRes int resId) {
-        Toast.makeText(this, resId, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Adds new fragment
-     *
-     * @param containerViewId ID of the container view for fragment
-     * @param fragment        Fragment instance
-     * @param fragmentTag     Fragment tag
-     */
-    protected void addFragment(final @IdRes int containerViewId,
-                               final @NonNull Fragment fragment,
-                               final @NonNull String fragmentTag) {
-        if (!fragment.isAdded()) {
-            getSupportFragmentManager()
-            .beginTransaction()
-            .add(containerViewId, fragment, fragmentTag)
-            .disallowAddToBackStack()
-            .commit();
-        }
-    }
-
-    /**
-     * Replaces fragment
-     *
-     * @param containerViewId    ID of the container view for fragment
-     * @param fragment           Fragment instance
-     * @param fragmentTag        Fragment tag
-     * @param backStackStateName Name in back stack
-     */
-    protected void replaceFragment(final @IdRes int containerViewId,
-                                   final @NonNull Fragment fragment,
-                                   final @NonNull String fragmentTag,
-                                   final @Nullable String backStackStateName) {
-        getSupportFragmentManager()
+  /**
+   * Replaces fragment
+   *
+   * @param containerViewId    ID of the container view for fragment
+   * @param fragment           Fragment instance
+   * @param fragmentTag        Fragment tag
+   * @param backStackStateName Name in back stack
+   */
+  protected void replaceFragment(final @IdRes int containerViewId,
+                                 final @NonNull Fragment fragment,
+                                 final @NonNull String fragmentTag,
+                                 final @Nullable String backStackStateName) {
+    getSupportFragmentManager()
         .beginTransaction()
         .replace(containerViewId, fragment, fragmentTag)
         .addToBackStack(backStackStateName)
         .commit();
-    }
+  }
 
-    /**
-     * Replaces fragment
-     *
-     * @param containerViewId ID of the container view for fragment
-     * @param fragment        Fragment instance
-     * @param fragmentTag     Fragment tag
-     */
-    protected void replaceFragment(final @IdRes int containerViewId,
-                                   final @NonNull Fragment fragment,
-                                   final @NonNull String fragmentTag) {
-        getSupportFragmentManager()
+  /**
+   * Replaces fragment
+   *
+   * @param containerViewId ID of the container view for fragment
+   * @param fragment        Fragment instance
+   * @param fragmentTag     Fragment tag
+   */
+  protected void replaceFragment(final @IdRes int containerViewId,
+                                 final @NonNull Fragment fragment,
+                                 final @NonNull String fragmentTag) {
+    getSupportFragmentManager()
         .beginTransaction()
         .replace(containerViewId, fragment, fragmentTag)
         .commit();
-    }
+  }
 
-    /**
-     * Detaches fragment
-     *
-     * @param fragment Fragment
-     */
-    protected void detachFragment(final Fragment fragment) {
-        getSupportFragmentManager()
-        .beginTransaction()
-        .detach(fragment)
-        .commit();
-    }
+  /**
+   * Detaches fragment
+   *
+   * @param fragment Fragment
+   */
+  protected void detachFragment(final Fragment fragment) {
+    getSupportFragmentManager().beginTransaction().detach(fragment).commit();
+  }
 
-    /**
-     * Gets attached presenter
-     *
-     * @return Presenter
-     */
-    protected abstract T getPresenter();
+  /**
+   * Gets attached presenter
+   *
+   * @return Presenter
+   */
+  protected abstract T getPresenter();
 
-    /**
-     * Does presenter attachment
-     */
-    protected abstract void attachPresenter();
-
+  /**
+   * Does presenter attachment
+   */
+  protected abstract void attachPresenter();
 }

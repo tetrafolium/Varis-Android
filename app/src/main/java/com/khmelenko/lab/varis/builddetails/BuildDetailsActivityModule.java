@@ -1,7 +1,6 @@
 package com.khmelenko.lab.varis.builddetails;
 
 import android.app.Activity;
-
 import dagger.Binds;
 import dagger.Module;
 import dagger.android.ActivityKey;
@@ -13,9 +12,10 @@ import dagger.multibindings.IntoMap;
  */
 @Module(subcomponents = BuildDetailsActivitySubcomponent.class)
 public abstract class BuildDetailsActivityModule {
-    @Binds
-    @IntoMap
-    @ActivityKey(BuildDetailsActivity.class)
-    abstract AndroidInjector.Factory<? extends Activity>
-    bindBuildDetailsActivityInjectorFactory(BuildDetailsActivitySubcomponent.Builder builder);
+  @Binds
+  @IntoMap
+  @ActivityKey(BuildDetailsActivity.class)
+  abstract AndroidInjector.Factory<? extends Activity>
+  bindBuildDetailsActivityInjectorFactory(
+      BuildDetailsActivitySubcomponent.Builder builder);
 }
