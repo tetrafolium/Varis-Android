@@ -1,7 +1,7 @@
 package com.khmelenko.lab.varis.converter;
 
 /**
- * Provides time related convertion methods
+ * Provides time related conversion methods
  *
  * @author Dmytro Khmelenko
  */
